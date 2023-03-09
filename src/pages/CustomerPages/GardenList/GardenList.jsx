@@ -9,6 +9,7 @@ function GardenList(){
         <Container>
             <h1 className={cx('garden')}>This is Garden List page</h1>
             <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Primary</Button>
         </Container>
     )
 }
