@@ -1,0 +1,37 @@
+.nav{
+    background-color: green;
+    height: 100vh;
+}
+
+.title{
+    text-align: center;
+}
+
+
+.sensor{
+    border: 1px solid green;
+    border-radius: 20px;
+    height: 20vh;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    .value-dis{
+        font-size: 40px;
+    }
+}
+.value-notify{
+    border: 1px solid green;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    .value{
+        margin: 20px;
+        border: 1px solid green;
+        border-radius: 20px;
+        text-align: center;
+        h4{
+            padding: 10px;
+        }
+    }
+}

@@ -4,6 +4,9 @@ import Login from "../pages/AuthorizationPages/Login/Login"
 import PassRetrival from "../pages/AuthorizationPages/PassRetrival/PassRetrival";
 import Register from "../pages/AuthorizationPages/Register/Register";
 import GardenDetail from "../pages/CustomerPages/GardenDetail/GardenDetail";
+import GardenDashboard from "../pages/CustomerPages/GardenDashboard/GardenDashboard";
+import ManageSensor from "../pages/CustomerPages/ManageSensor/ManageSensor";
+import InputValue from "../pages/CustomerPages/InputValue/InputValue";
 
 const routes = [
     //Authorize
@@ -13,7 +16,10 @@ const routes = [
     {path: '/register', component: Register},
     //Customer
     {path: '/', component: GardenList},
-    {path: '/garden-detail', component: GardenDetail}
+    {path: '/garden-detail', component: GardenDetail},
+    {path: '/GardenDashboard', component:GardenDashboard },
+    {path: '/InputValue', component: InputValue},
+    {path: '/ManageSensor', component: ManageSensor}
 ]
 
 export default routes;
