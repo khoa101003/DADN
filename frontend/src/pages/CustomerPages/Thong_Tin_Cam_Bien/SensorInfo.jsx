@@ -7,7 +7,7 @@ import {Row, Col, Stack} from 'react-bootstrap'
 
 const cx = classnames.bind(styles);
 
-function Notification() {
+function SensorInfo() {
   return (
     <div className={cx('container')}>
         <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
@@ -75,4 +75,4 @@ function Notification() {
   )
 }
 
-export default Notification
+export default SensorInfo

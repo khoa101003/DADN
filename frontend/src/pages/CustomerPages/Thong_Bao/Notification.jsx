@@ -11,7 +11,7 @@ function Notification() {
   return (
     <div className={cx('container')}>
         <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
-        <h1 className="text-center">Thông tin cảm biến</h1>
+        <h1 className="text-center">Thông báo</h1>
         
         <h5>Tìm kiếm: </h5>
         <Form className={cx("search-form")}>
