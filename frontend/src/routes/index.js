@@ -20,7 +20,9 @@ const routes = [
     {path: '/garden-detail', component: GardenDetail},
     {path: '/GardenDashboard', component:GardenDashboard },
     {path: '/InputValue', component: InputValue},
-    {path: '/ManageSensor', component: ManageSensor}
+    { path: '/ManageSensor', component: ManageSensor },
+    { path: 'admin', component: ManageUser },
+    { path: 'admin/request', component: ManageRequest }
 ]
 
 export default routes;
