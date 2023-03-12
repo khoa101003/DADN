@@ -4,16 +4,19 @@ import Login from "../pages/AuthorizationPages/Login/Login"
 import PassRetrival from "../pages/AuthorizationPages/PassRetrival/PassRetrival";
 import Register from "../pages/AuthorizationPages/Register/Register";
 import GardenDetail from "../pages/CustomerPages/GardenDetail/GardenDetail";
-
+import ManageUser from "../pages/AdminPages/ManageUser";
+import ManageRequest from "../pages/AdminPages/ManageRequest";
 const routes = [
     //Authorize
-    {path: '/login-as', component: LoginAs},
-    {path: '/login', component: Login},
-    {path: '/pass-retri', component: PassRetrival},
-    {path: '/register', component: Register},
+    { path: '/login-as', component: LoginAs },
+    { path: '/login', component: Login },
+    { path: '/pass-retri', component: PassRetrival },
+    { path: '/register', component: Register },
     //Customer
-    {path: '/', component: GardenList},
-    {path: '/garden-detail', component: GardenDetail}
+    { path: '/', component: GardenList },
+    { path: '/garden-detail', component: GardenDetail },
+    { path: '/admin', component: ManageUser },
+    { path: '/admin/request', component: ManageRequest }
 ]
 
 export default routes;
