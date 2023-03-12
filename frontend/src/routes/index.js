@@ -1,6 +1,6 @@
 import SensorHistory from "../pages/CustomerPages/Lich_Su_Hoat_Dong/SensorHistory.jsx";
-import SensorInfo from "../pages/CustomerPages/Thong_Tin_Cam_Bien/SensorInfo.jsx";
-import Notification from "../pages/CustomerPages/Thong_Bao/Notification.jsx";
+import SensorInfoPage from "../pages/CustomerPages/Thong_Tin_Cam_Bien/SensorInfoPage.jsx";
+import NotificationPage from "../pages/CustomerPages/Thong_Bao/NotificationPage.jsx";
 import GardenList from "../pages/CustomerPages/GardenList/GardenList"
 import LoginAs from "../pages/AuthorizationPages/LoginAs/LoginAs";
 import Login from "../pages/AuthorizationPages/Login/Login"
@@ -16,7 +16,12 @@ const routes = [
     {path: '/register', component: Register},
     //Customer
     {path: '/', component: GardenList},
-    {path: '/garden-detail', component: GardenDetail}
+    {path: '/garden-detail', component: GardenDetail},
+    {path: '/sensor-history', component: SensorHistory},
+    {path: '/SensorInfoPage', component: SensorInfoPage},
+    {path: '/NotificationPage', component: NotificationPage}
+
 ]
 
 export default routes;
+

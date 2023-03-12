@@ -1,13 +1,15 @@
 import classnames from 'classnames/bind'
-import styles from './Notification.module.scss'
-
+import styles from './NotificationPage.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Row, Col, Stack} from 'react-bootstrap'
+import NotificationNormal from './NotificationNormal';
+import NotificationUrgent from './NotificationUrgent';
+import NotificationReaded from './NotificationReaded';
 
 const cx = classnames.bind(styles);
 
-function Notification() {
+function NotificationPage() {
   return (
     <div className={cx('container')}>
         <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
@@ -52,19 +54,11 @@ function Notification() {
         </Row>
         <hr />
 
-        <Row>
-          <Col md={{span: 1}} className="d-flex justify-content-center">
-            <img src='./images/Icon_do_am_khong_khi.svg' alt="Độ ẩm không khí" className={cx('icon')}/>
-          </Col>
-          <Col md={{span: 4}}>Thông báo độ ẩm không khí</Col>
-          <Col md={{span: 3}}>8:48 PM 22/2/2023</Col>
-          <Col md={{span: 3}}>Chưa đọc</Col>
-          <Col md={{span: 1}} className="d-flex justify-content-center">
-            <img src='./images/Icon_delete.svg' alt="Xóa" className={cx('icon')} />
-          </Col>
-        </Row>
+        <NotificationUrgent />
+        <NotificationNormal />
+        <NotificationReaded />
     </div>
   )
 }
 
-export default Notification
+export default NotificationPage
