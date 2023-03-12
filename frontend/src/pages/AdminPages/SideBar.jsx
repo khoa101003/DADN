@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import logo from "../../assets/admin-logo.png";
-import user from "../../assets/users.png";
-import request from "../../assets/request.png";
-import device from "../../assets/frame.png";
-import active_user from "../../assets/users-active.png";
-import active_request from "../../assets/request-active.png";
-import active_device from "../../assets/frame-active.png";
+import logo from "../assets/admin-logo.png";
+import user from "../assets/users.png";
+import request from "../assets/request.png";
+import device from "../assets/frame.png";
+import active_user from "../assets/users-active.png";
+import active_request from "../assets/request-active.png";
+import active_device from "../assets/frame-active.png";
+import coconut from "../assets/coconut.webp";
 import classNames from 'classnames/bind';
 
-import styles from './SideBar.css';
+import styles from './SideBar.module.scss';
 const cx = classNames.bind(styles);
 
 function SideBar() {
@@ -31,7 +32,7 @@ function SideBar() {
         setDeviceLogo((deviceLogo) => active_device);
     }
     return (
-        <div className="col-xl-3 col-md-3 side-bar container p-auto">
+        <div className="col-xl-2 col-md-2 side-bar container p-auto">
             <img className="admin-logo img-fluid mx-auto d-block py-5" src={logo}></img>
             <div className="my-5 mx-5">
                 <h6 onClick={handleMangeUser} className="d-flex align-items-center">

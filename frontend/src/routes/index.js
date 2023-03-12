@@ -11,18 +11,16 @@ import ManageUser from "../pages/AdminPages/ManageUser";
 import ManageRequest from "../pages/AdminPages/ManageRequest";
 const routes = [
     //Authorize
-    {path: '/login-as', component: LoginAs},
-    {path: '/login', component: Login},
-    {path: '/pass-retri', component: PassRetrival},
-    {path: '/register', component: Register},
+    { path: '/login-as', component: LoginAs },
+    { path: '/login', component: Login },
+    { path: '/pass-retri', component: PassRetrival },
+    { path: '/register', component: Register },
     //Customer
     {path: '/', component: GardenList},
     {path: '/garden-detail', component: GardenDetail},
     {path: '/GardenDashboard', component:GardenDashboard },
     {path: '/InputValue', component: InputValue},
-    { path: '/ManageSensor', component: ManageSensor },
-    { path: 'admin', component: ManageUser },
-    {path: 'admin/request', component: ManageRequest}
+    {path: '/ManageSensor', component: ManageSensor}
 ]
 
 export default routes;
