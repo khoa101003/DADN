@@ -6,7 +6,6 @@ import device from "../assets/frame.png";
 import active_user from "../assets/users-active.png";
 import active_request from "../assets/request-active.png";
 import active_device from "../assets/frame-active.png";
-import coconut from "../assets/coconut.webp";
 import classNames from 'classnames/bind';
 
 import styles from './SideBar.module.scss';
