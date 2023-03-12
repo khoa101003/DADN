@@ -46,7 +46,7 @@ const ManageSensor = () => {
     const filterItem = (filters) => {
         const newItem = data.filter((item) => {
             for(let key in filters){
-                if(item[key] === undefined || item[key] != filters[key])
+                if(item[key] === undefined || item[key] !== filters[key])
                 return false;
             }
             return true;

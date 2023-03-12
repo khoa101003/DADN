@@ -70,8 +70,8 @@ const handleClick = () => {
                         })
                     }
                 </Form.Select>
-                <Button onClick={handleClick} className={cx('button')}>Lọc</Button>
-                <Button onClick={handleReset} className={cx('button')}>Xóa</Button>
+                <Button variant='success' onClick={handleClick} className={cx('button')}>Lọc</Button>
+                <Button variant='success' onClick={handleReset} className={cx('button')}>Xóa</Button>
             </Row>
                 
             </Form>
