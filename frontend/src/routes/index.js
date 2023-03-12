@@ -7,7 +7,8 @@ import GardenDetail from "../pages/CustomerPages/GardenDetail/GardenDetail";
 import GardenDashboard from "../pages/CustomerPages/GardenDashboard/GardenDashboard";
 import ManageSensor from "../pages/CustomerPages/ManageSensor/ManageSensor";
 import InputValue from "../pages/CustomerPages/InputValue/InputValue";
-
+import ManageUser from "../pages/AdminPages/ManageUser";
+import ManageRequest from "../pages/AdminPages/ManageRequest";
 const routes = [
     //Authorize
     {path: '/login-as', component: LoginAs},
@@ -19,7 +20,9 @@ const routes = [
     {path: '/garden-detail', component: GardenDetail},
     {path: '/GardenDashboard', component:GardenDashboard },
     {path: '/InputValue', component: InputValue},
-    {path: '/ManageSensor', component: ManageSensor}
+    { path: '/ManageSensor', component: ManageSensor },
+    { path: 'admin', component: ManageUser },
+    {path: 'admin/request', component: ManageRequest}
 ]
 
 export default routes;
