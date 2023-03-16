@@ -1,6 +1,6 @@
 import classnames from 'classnames/bind'
 import styles from './SensorHistory.module.scss'
-import { Table, Container, Stack, Dropdown, DropdownButton } from 'react-bootstrap'
+import { Button, Form, Table, Container, Dropdown, DropdownButton, Col, Row } from 'react-bootstrap'
 import SideBar from '../../../components/GlobalStyles/SideBar'
 
 const cx = classnames.bind(styles);
@@ -11,8 +11,8 @@ function SensorHistory(){
             <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
             <h1 className="text-center">Lịch sử hoạt động</h1>
 
-            <Stack direction='horizontal' gap={4}>
-                <div>
+            <Row>
+                <Col xs={2}>
                     <Dropdown.Header>Chọn loại thiết bị</Dropdown.Header>
                     <DropdownButton id="equipment-type" title="Sensor nhiệt độ">
                         <Dropdown.Item href="#/action-1">Sensor độ ẩm đất</Dropdown.Item>
@@ -20,8 +20,8 @@ function SensorHistory(){
                         <Dropdown.Item href="#/action-3">Sensor ánh sáng</Dropdown.Item>
                         <Dropdown.Item href="#/action-4">Sensor nhiệt độ</Dropdown.Item>
                     </DropdownButton>
-                </div>
-                <div>
+                </Col>
+                <Col xs={2}>
                     <Dropdown.Header>Chọn thiết bị</Dropdown.Header>
                     <DropdownButton id="equipment-list" title="Sensor 1">
                         <Dropdown.Item href="#/action-1">Sensor 1</Dropdown.Item>
@@ -29,8 +29,23 @@ function SensorHistory(){
                         <Dropdown.Item href="#/action-3">Sensor 3</Dropdown.Item>
                         <Dropdown.Item href="#/action-4">Sensor 4</Dropdown.Item>
                     </DropdownButton>
-                </div>
-            </Stack>
+                </Col>
+                <Col xs={3}>
+                    <Form.Group controlId="date">
+                    <Form.Label>Ngày bắt đầu</Form.Label>
+                    <Form.Control size='sm' type="date"></Form.Control>
+                    </Form.Group>
+                </Col>
+                <Col xs={3}>
+                    <Form.Group controlId="date">
+                    <Form.Label>Ngày kết thúc</Form.Label>
+                    <Form.Control size='sm' type="date"></Form.Control>
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Button type='submit' size='lg' variant='secondary'>Tải về</Button>
+                </Col>
+            </Row>
 
             <Table striped bordered hover className={cx('tbl')}>
                 <thead>

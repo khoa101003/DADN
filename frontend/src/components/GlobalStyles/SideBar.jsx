@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import logo from "../assets/admin-logo.png";
-import user from "../assets/users.png";
-import request from "../assets/request.png";
-import device from "../assets/frame.png";
-import active_user from "../assets/users-active.png";
-import active_request from "../assets/request-active.png";
-import active_device from "../assets/frame-active.png";
+import logo from "../../assets/admin-logo.png";
+import user from "../../assets/users.png";
+import request from "../../assets/request.png";
+import device from "../../assets/frame.png";
+import active_user from "../../assets/users-active.png";
+import active_request from "../../assets/request-active.png";
+import active_device from "../../assets/frame-active.png";
 import classNames from 'classnames/bind';
 
 import styles from './SideBar.module.scss';

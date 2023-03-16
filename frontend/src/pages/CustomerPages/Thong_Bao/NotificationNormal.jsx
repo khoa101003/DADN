@@ -12,9 +12,11 @@ function Notification() {
     const showModalSuccess = () => {
         setShowSuccess(true)
         setShowConfirm(false)
+    }
+    const hideModalSuccess = () => {
+        setShowSuccess(false)
         setVisiable(false)
     }
-    const hideModalSuccess = () => setShowSuccess(false)
 
     const [showDetail, setShowDetail] = useState(false)
     const [isRead, setIsRead] = useState(false)

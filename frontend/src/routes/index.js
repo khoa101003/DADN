@@ -7,6 +7,8 @@ import Login from "../pages/AuthorizationPages/Login/Login"
 import PassRetrival from "../pages/AuthorizationPages/PassRetrival/PassRetrival";
 import Register from "../pages/AuthorizationPages/Register/Register";
 import GardenDetail from "../pages/CustomerPages/GardenDetail/GardenDetail";
+import SensorHistory_copy from "../pages/CustomerPages/Lich_Su_Hoat_Dong/SensorHistory-copy.jsx";
+import StatisticPage from "../pages/CustomerPages/Thong_Ke_Lich_SU/StatisticPage.jsx";
 
 const routes = [
     //Authorize
@@ -17,9 +19,10 @@ const routes = [
     //Customer
     {path: '/', component: GardenList},
     {path: '/garden-detail', component: GardenDetail},
-    {path: '/sensor-history', component: SensorHistory},
+    {path: '/sensor-history', component: SensorHistory_copy},
     {path: '/SensorInfoPage', component: SensorInfoPage},
-    {path: '/NotificationPage', component: NotificationPage}
+    {path: '/NotificationPage', component: NotificationPage},
+    {path: '/StatisticPage', component: StatisticPage},
 
 ]
 
