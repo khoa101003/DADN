@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import {Row, Col, Stack, Pagination} from 'react-bootstrap'
 import SensorInfo from './SensorInfo';
 import { useState } from 'react';
+import SideBar from '../../../components/GlobalStyles/SideBar';
 
 const cx = classnames.bind(styles);
 
@@ -53,7 +54,9 @@ function SensorInfoPage() {
   }
 
   return (
-    <div className={cx('container')}>
+    <div className="row mx-auto container">
+      <SideBar />
+      <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
         <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
         <h1 className="text-center">Thông tin cảm biến</h1>
         
@@ -116,6 +119,7 @@ function SensorInfoPage() {
           <Pagination.Last onClick={onLast}/>
         </Pagination>
         <Button className='my-2 me-5 float-end' variant='secondary' as='a' href=''>Thiết lập</Button>
+      </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 
 function LineChart({ chartData }) {
   const containerStyle = {
-    width: '80%',
+    width: '90%',
   }
 
   return (
@@ -12,12 +12,21 @@ function LineChart({ chartData }) {
         data={chartData}
         options={{
           plugins: {
-            title: {
-              display: true,
-              text: "Nhiệt độ (oC)"
-            },
             legend: {
               display: true
+            }
+          },
+          // Change font size
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 8,
+                }
+              }
+            },
+            y: {
+              min: 25
             }
           }
         }}

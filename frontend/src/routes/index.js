@@ -8,7 +8,6 @@ import PassRetrival from "../pages/AuthorizationPages/PassRetrival/PassRetrival"
 import Register from "../pages/AuthorizationPages/Register/Register";
 import GardenDetail from "../pages/CustomerPages/GardenDetail/GardenDetail";
 
-import SensorHistory_copy from "../pages/CustomerPages/Lich_Su_Hoat_Dong/SensorHistory-copy.jsx";
 import StatisticPage from "../pages/CustomerPages/Thong_Ke_Lich_SU/StatisticPage.jsx";
 
 
@@ -28,7 +27,7 @@ const routes = [
     {path: '/', component: GardenList},
     {path: '/garden-detail', component: GardenDetail},
 
-    {path: '/sensor-history', component: SensorHistory_copy},
+    {path: '/SensorHistory', component: SensorHistory},
     {path: '/SensorInfoPage', component: SensorInfoPage},
     {path: '/NotificationPage', component: NotificationPage},
     {path: '/StatisticPage', component: StatisticPage},
