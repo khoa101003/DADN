@@ -8,7 +8,7 @@ import active_request from "../../assets/request-active.png";
 import active_device from "../../assets/frame-active.png";
 import classNames from 'classnames/bind';
 
-import styles from './SideBar.css';
+import styles from './SideBar.scss';
 const cx = classNames.bind(styles);
 
 function SideBar() {
@@ -36,19 +36,19 @@ function SideBar() {
             <div className="my-5 mx-5">
                 <h6 onClick={handleMangeUser} className="d-flex align-items-center">
                     <img src={userLogo} className="pe-3 admin-user-icon"></img>
-                    Quản lý khách hàng
+                    Quản lý sensor
                 </h6>
             </div>
             <div className="my-5 mx-5">
                 <h6 onClick={handleManageRequest} className="d-flex align-items-center">
                     <img src={requestLogo} className="pe-3 admin-request-icon"></img>
-                    Yêu cầu
+                    Quản lý khu vườn
                 </h6>
             </div>
             <div className="my-5 mx-5">
                 <h6 onClick={handleMangeDevice} className="d-flex align-items-center">
                     <img src={deviceLogo} className="pe-3 admin-cloud-icon"></img>
-                    Quản lí thiết bị
+                    Thông báo
                 </h6>
             </div>
             <hr className="w-75 mx-auto" />
