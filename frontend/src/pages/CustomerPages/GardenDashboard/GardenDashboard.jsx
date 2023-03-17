@@ -2,6 +2,7 @@ import classnames from 'classnames/bind'
 import styles from './GardenDashboard.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import SideBar from '../../../components/GlobalStyles/SideBar';
 
 const cx = classnames.bind(styles);
 const data = {
@@ -24,12 +25,8 @@ const GardenDashboard = () => {
     return (
         <Container>
             <Row>
-                <Col xs='2'>
-                    <div className={cx('nav')}>
-
-                    </div>
-                </Col>
-                <Col xs='10'>
+                <SideBar />
+                <Col xs='8' >
                     <h1 className={cx('title')}>Giám sát khu vườn</h1>
                     <Row className='my-4'>
                         <Col>

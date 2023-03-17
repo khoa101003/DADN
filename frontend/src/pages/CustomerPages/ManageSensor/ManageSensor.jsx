@@ -4,6 +4,7 @@ import DisplayItem from "./DisplayItem";
 import FilterItem from "./FilterItem";
 import classnames from 'classnames/bind'
 import styles from './ManageSensor.module.scss'
+import SideBar from "../../../components/GlobalStyles/SideBar";
 
 const cx = classnames.bind(styles);
 const data = [
@@ -38,6 +39,14 @@ const data = [
         row: "3",
         time: "2023-03-10",
         status: "Bình thường"
+    },
+    {
+        id: "5",
+        type: "Ánh sáng",
+        garden: "Khu C",
+        row: "2",
+        time: "2023-03-10",
+        status: "Đang hỏng"
     }
 ]
 const ManageSensor = () => {
@@ -56,11 +65,7 @@ const ManageSensor = () => {
     return (
         <Container>
             <Row>
-                <Col xs='2'>
-                    <div className={cx('nav')}>
-
-                    </div>
-                </Col>
+                <SideBar />
                 <Col>
                     <FilterItem 
                         filterItem={filterItem}

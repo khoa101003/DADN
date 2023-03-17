@@ -2,6 +2,7 @@ import classnames from 'classnames/bind'
 import styles from './InputValue.module.scss'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import SideBar from '../../../components/GlobalStyles/SideBar';
 const cx = classnames.bind(styles);
 
 const data = {
@@ -19,12 +20,8 @@ const InputValue = () => {
     return (
         <Container>
         <Row>
-            <Col xs='2'>
-                <div className={cx('nav')}>
-
-                </div>
-            </Col>
-            <Col xs='10'>
+            <SideBar />
+            <Col xs='9'>
                 <h1 className={cx('title')}>Thiết lập ngưỡng giá trị</h1>
                 <div className={cx('input-form')}>
                     <Form onSubmit={handleSubmit}>
