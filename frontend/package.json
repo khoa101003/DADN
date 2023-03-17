@@ -18,6 +18,10 @@
     "mdb-react-ui-kit": "^5.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
+<<<<<<< HEAD
+=======
+    "react-bootstrap-sweetalert": "^5.2.0",
+>>>>>>> b8f9d4669c335386b63949a87c0aebf0ed71db82
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
