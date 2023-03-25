@@ -1,12 +1,16 @@
 import classnames from 'classnames/bind'
 import styles from './GardenList.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
+// import SideBar from '../../../components/GlobalStyles/SideBar';
+
 
 const cx = classnames.bind(styles);
 
 //component style
 const ButtonStyled = {
-    width: "100%"
+    width: "100%",
+    height: "30px",
+    fontSize: "15px"
 }
 
 //fake data
@@ -48,7 +52,7 @@ function GardenList(){
             <Row >
                 <Col xs='2'>
                     <div className={cx('nav')}>
-
+                        {/* <SideBar /> */}
                     </div>
                 </Col>
                 <Col xs='10'>

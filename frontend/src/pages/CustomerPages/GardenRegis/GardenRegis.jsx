@@ -4,6 +4,8 @@ import { Button, Container, Row, Col, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import SideBar from '../../../components/GlobalStyles/SideBar';
+
 
 const cx = classnames.bind(styles);
 
@@ -20,7 +22,7 @@ function GardenRegis(){
             <Row>
                 <Col xs='2'>
                     <div className={cx('nav')}>
-
+                        <SideBar />
                     </div>
                 </Col>
                 <Col xs='10'>

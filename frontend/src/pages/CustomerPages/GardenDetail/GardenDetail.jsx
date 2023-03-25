@@ -1,6 +1,7 @@
 import classnames from 'classnames/bind'
 import styles from './GardenDetail.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
+import SideBar from '../../../components/GlobalStyles/SideBar';
 import { Link } from 'react-router-dom';
 
 const cx = classnames.bind(styles);
@@ -8,7 +9,8 @@ const cx = classnames.bind(styles);
 //component style
 const ButtonStyled = {
     width: "100%",
-    height: "60px"
+    height: "60px",
+    fontSize: "25px"
 }
 
 
@@ -19,7 +21,7 @@ function GardenDetail(){
             <Row>
                 <Col xs='2'>
                     <div className={cx('nav')}>
-
+                        {/* <SideBar /> */}
                     </div>
                 </Col>
                 <Col xs='10'>
