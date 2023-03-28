@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { MDBContainer } from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classNames from 'classnames/bind';
 
 import styles from './Login.module.scss'
@@ -13,16 +13,25 @@ const LinkStyled1 = {
 }
 const LinkStyled2 = {
     color: "green",
-    margin: "10%"
+    margin: "10%",
+    fontSize: "medium"
 }
 
 const inputStyled = {
     width: "90%"
 }
 
+const labelStyle = {
+    fontSize: "medium"
+}
+
 const cx= classNames.bind(styles);
 
 function Login(){
+    const navigate = useNavigate()
+    const handleSubmit = ()=>{
+        navigate('/')
+    }
     return(
         <div className={cx('wrapped')}>
             <Container>
@@ -45,22 +54,22 @@ function Login(){
                             <div className={cx('login-form')}>
                                 <Form className='d-flex align-items-center flex-column'>
                                     <Form.Group className="mb-3" controlId="username" style={inputStyled}>
-                                        <Form.Label>Tên đăng nhập</Form.Label>
-                                        <Form.Control type="text" placeholder="type your username" />
+                                        <Form.Label style={labelStyle}>Tên đăng nhập</Form.Label>
+                                        <Form.Control size="lg" type="text" placeholder="type your username" />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="password" style={inputStyled}>
-                                        <Form.Label>Mật khẩu</Form.Label>
-                                        <Form.Control type="password" placeholder="type your password" />
+                                        <Form.Label style={labelStyle}>Mật khẩu</Form.Label>
+                                        <Form.Control size="lg" type="password" placeholder="type your password" />
                                     </Form.Group>
-                                    <Link style={LinkStyled1}>Quên mật khẩu?</Link>
-                                    <Button variant="success" type="submit" className={cx('btn')}>
+                                    <Link style={LinkStyled1} to='/pass-retri'>Quên mật khẩu?</Link>
+                                    <Button variant="success" type="submit" className={cx('btn')} onClick={handleSubmit}>
                                         Đăng nhập
                                     </Button>
                                 </Form>
                             </div>
 
-                            <Link style={LinkStyled2}>
+                            <Link style={LinkStyled2} to='/register'>
                                 Yêu cầu đăng ký tài khoản!
                             </Link>
 

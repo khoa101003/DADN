@@ -8,9 +8,12 @@ const cx = classnames.bind(styles);
 
 //component style
 const ButtonStyled = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
     height: "60px",
-    fontSize: "25px"
+    fontSize: "25px",
 }
 
 
@@ -19,12 +22,8 @@ function GardenDetail(){
     return(
         <Container className='justify-content-center'>
             <Row>
-                <Col xs='2'>
-                    <div className={cx('nav')}>
-                        {/* <SideBar /> */}
-                    </div>
-                </Col>
-                <Col xs='10'>
+                <SideBar />
+                <Col xs='9'>
                     <h1 className={cx('title')}>Mảnh vườn 1</h1>
                     <div className={cx('sensor-val')}>
 
@@ -84,10 +83,10 @@ function GardenDetail(){
 
                         <Col xs={{span:7, offset: 1}}>
                             <Row className={cx('control')}>
-                                <Col xs='6'><Button variant="success" style={ButtonStyled}>Thông tin cảm biến</Button></Col>
-                                <Col xs='6'><Button variant="success" style={ButtonStyled}>Quản lí tưới cây</Button></Col>
-                                <Col xs='6'><Button variant="success" style={ButtonStyled}>Lịch sử hoạt động</Button></Col>
-                                <Col xs='6'><Button variant="success" style={ButtonStyled}>Giám sát khu vườn</Button></Col>
+                                <Col xs='6'><Button variant="success" style={ButtonStyled} href='/SensorInfoPage'>Thông tin cảm biến</Button></Col>
+                                <Col xs='6'><Button variant="success" style={ButtonStyled} href='/controlPump'>Quản lí tưới cây</Button></Col>
+                                <Col xs='6'><Button variant="success" style={ButtonStyled} href='/SensorHistory'>Lịch sử hoạt động</Button></Col>
+                                <Col xs='6'><Button variant="success" style={ButtonStyled} href='/GardenDashboard'>Giám sát khu vườn</Button></Col>
                             </Row>
                         </Col>
                     </Row>
@@ -95,7 +94,7 @@ function GardenDetail(){
                     <div className={cx('edit-del')}>
                         <Row>
                             <Col xs={{span: 2, offset: 3}}>
-                                <Button variant="primary" style={{width: "100%"}}>Sửa thông tin</Button>
+                                <Button variant="primary" style={{width: "100%"}} href='/garden-mod'>Sửa thông tin</Button>
                             </Col>
                             <Col xs={{span: 2, offset: 1}}>
                                 <Button variant="danger" style={{width: "100%"}}>Xóa</Button>

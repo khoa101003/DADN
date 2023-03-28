@@ -12,6 +12,10 @@ const inputStyled = {
 const btnStyled = {
     width: "45%"
 }
+const labelStyle = {
+    fontSize: "medium"
+}
+
 
 const cx= classNames.bind(styles);
 
@@ -45,23 +49,23 @@ function Register(){
                             <div className={cx('login-form')}>
                                 <Form className='d-flex align-items-center flex-column mb-5'>
                                     <Form.Group className="mb-3" controlId="email" style={inputStyled}>
-                                        <Form.Label>Nhập địa chỉ email</Form.Label>
-                                        <Form.Control type="text" placeholder="type your email address" />
+                                        <Form.Label style={labelStyle}>Nhập địa chỉ email</Form.Label>
+                                        <Form.Control size="lg" type="text" placeholder="type your email address" />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="phonenum" style={inputStyled}>
-                                        <Form.Label>Nhập số điện thoại</Form.Label>
-                                        <Form.Control type="text" placeholder="type your phone number" />
+                                        <Form.Label style={labelStyle}>Nhập số điện thoại</Form.Label>
+                                        <Form.Control size="lg" type="text" placeholder="type your phone number" />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="username" style={inputStyled}>
-                                        <Form.Label>Tên đăng nhập</Form.Label>
-                                        <Form.Control type="text" placeholder="type your username" />
+                                        <Form.Label style={labelStyle}>Tên đăng nhập</Form.Label>
+                                        <Form.Control size="lg" type="text" placeholder="type your username" />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="password" style={inputStyled}>
-                                        <Form.Label>Mật khẩu</Form.Label>
-                                        <Form.Control type="password" placeholder="type your password" />
+                                        <Form.Label style={labelStyle}>Mật khẩu</Form.Label>
+                                        <Form.Control size="lg" type="password" placeholder="type your password" />
                                     </Form.Group>
                                     
                                     <div className={cx('btn')}>
