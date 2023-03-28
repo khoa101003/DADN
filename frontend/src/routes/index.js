@@ -22,10 +22,10 @@ import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
 
 const routes = [
     //Authorize
-    { path: '/login-as', component: LoginAs },
-    { path: '/login', component: Login },
-    { path: '/pass-retri', component: PassRetrival },
-    { path: '/register', component: Register },
+    {  path: '/login-as', component: LoginAs  },
+    {  path: '/login', component: Login  },
+    {  path: '/pass-retri', component: PassRetrival  },
+    {  path: '/register', component: Register  },
     //Customer
     {path: '/', component: GardenList},
     {path: '/garden-detail', component: GardenDetail},
@@ -49,4 +49,3 @@ const routes = [
 ]
 
 export default routes;
-

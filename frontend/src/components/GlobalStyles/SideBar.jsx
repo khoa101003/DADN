@@ -8,7 +8,7 @@ import active_request from "../../assets/request-active.png";
 import active_device from "../../assets/frame-active.png";
 import classNames from 'classnames/bind';
 
-import styles from './SideBar.scss?inline';
+import styles from './SideBar.scss';
 const cx = classNames.bind(styles);
 
 function SideBar() {
