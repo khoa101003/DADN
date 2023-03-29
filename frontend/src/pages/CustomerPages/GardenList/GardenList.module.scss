@@ -4,7 +4,9 @@
 }
 
 .title{
+    margin-top: 5vh;
     text-align: center;
+    font-size: 40px;
 }
 
 .garden{
@@ -20,5 +22,10 @@
         width: 60%;
         text-align: center;
         margin: auto 0;
+        font-size: 20px;
     }
+}
+
+.garden:hover{
+    cursor: pointer;
 }

@@ -12,6 +12,10 @@ import styles from './SideBar.scss';
 const cx = classNames.bind(styles);
 
 function SideBar() {
+    const sbstyle = {
+        backgroundColor: '#007155',
+        height: '100vh'
+    }
     const [userLogo, setUserLogo] = useState(active_user);
     const [requestLogo, setRequestLogo] = useState(request);
     const [deviceLogo, setDeviceLogo] = useState(device);
@@ -31,7 +35,7 @@ function SideBar() {
         setDeviceLogo((deviceLogo) => active_device);
     }
     return (
-        <div className="col-xl-3 col-md-3 side-bar container p-auto">
+        <div className="col-xl-3 col-md-3 side-bar container p-auto" style={sbstyle} >
             <img className="admin-logo img-fluid mx-auto d-block py-5" src={logo}></img>
             <div className="my-5 mx-5">
                 <h6 onClick={handleMangeUser} className="d-flex align-items-center">

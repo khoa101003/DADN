@@ -1,39 +1,56 @@
 import classnames from 'classnames/bind'
 import styles from './GardenList.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
+import SideBar from '../../../components/GlobalStyles/SideBar';
+import { useEffect, useState } from 'react';
+
+import { getGardenList } from '../../../api/gardenApi';
+
 
 const cx = classnames.bind(styles);
 
 //component style
 const ButtonStyled = {
-    width: "100%"
+    width: "100%",
+    height: "30px",
+    fontSize: "15px"
 }
 
 //fake data
-const gardens = [
-    {
-        name: "Mảnh vườn 1"
-    },
-    {
-        name: "Mảnh vườn 2"
-    },
-    {
-        name: "Mảnh vườn x"
-    },
-    {
-        name: "Mảnh vườn y"
-    },
-    {
-        name: "Mảnh vườn z"
-    }
-]
+// const gardens = [
+//     {
+//         name: "Mảnh vườn 1"
+//     },
+//     {
+//         name: "Mảnh vườn 2"
+//     },
+//     {
+//         name: "Mảnh vườn x"
+//     },
+//     {
+//         name: "Mảnh vườn y"
+//     },
+//     {
+//         name: "Mảnh vườn z"
+//     }
+// ]
 
 function GardenList(){
+    const [gardens,setGardens] = useState([])
+
+    const loadData = async () =>{
+        return await getGardenList().then((res)=>setGardens(res))
+    }
+
+    useEffect(()=>{
+        loadData()
+    },[])
 
     const Garden = ({garden})=>{
         return(
-            <Col xs='6' className='my-3'>
-                <div className={cx('garden')}>
+            <Col xs='6' className='my-3' >
+                <div className={cx('garden')} onClick={detail}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 15 15"><path fill="green" fill-rule="evenodd" d="M7 4.5A4.5 4.5 0 0 1 11.5 0H15v3.5A4.5 4.5 0 0 1 10.5 8H8v7H7v-4H4.5A4.5 4.5 0 0 1 0 6.5V3h3.5c1.414 0 2.675.652 3.5 1.671V4.5Zm1.146 1.646l3-3l.708.708l-3 3l-.708-.708Zm-2 3.708l-3-3l.708-.708l3 3l-.708.708Z" clip-rule="evenodd"/></svg>
                     <p>{garden.name}</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><path fill="blue" d="M6 22q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h8l6 6v3.1l-8 7.975V22H6Zm8 0v-2.125l5.15-5.175l2.15 2.1l-5.175 5.2H14Zm8.025-5.9L19.9 13.975l.7-.7q.3-.3.725-.3t.7.3l.7.725q.275.3.275.713t-.275.687l-.7.7ZM13 9h5l-5-5v5Z"/></svg>
@@ -43,19 +60,24 @@ function GardenList(){
         )
     }
 
+    const navigate = useNavigate()
+    const newRegis = ()=>{
+        navigate('/garden-regis')
+    }
+
+    const detail = ()=>{
+        navigate('/garden-detail')
+    }
+
     return(
         <Container>
             <Row >
-                <Col xs='2'>
-                    <div className={cx('nav')}>
-
-                    </div>
-                </Col>
-                <Col xs='10'>
+                <SideBar />
+                <Col xs='9'>
                     <h1 className={cx('title')}>Danh sách mảnh vườn</h1>
                     <Row>
                         <Col xs={{ span: 2, offset: 10 }}>
-                            <Button variant="success" style={ButtonStyled}>Đăng kí mới</Button>
+                            <Button variant="success" style={ButtonStyled} onClick={newRegis}>Đăng kí mới</Button>
                         </Col>
                     </Row>
                     <Row className='my-4'>
