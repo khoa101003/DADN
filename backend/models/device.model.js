@@ -14,6 +14,13 @@ const Device = new Schema({
     price: Number,
     status: Boolean,
     start_date: { type: Date, default: Date.now },
+    sensor_type: String,
+    threshold: {
+        min: Number,
+        max: Number
+    },
+    water: Number,
+    time: Number
 });
 
 module.exports = mongoose.model('device', Device)
