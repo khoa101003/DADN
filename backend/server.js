@@ -15,6 +15,17 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/a', (req, res) => {
+  const axios = require("axios");
+
+  let payload = {last_value:"ON" };
+
+  let ress = axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom', payload);
+
+  let data = ress.data;
+  console.log(data);
+})
+
 require('./route/garden.route')(app)
 
 const port = 3030

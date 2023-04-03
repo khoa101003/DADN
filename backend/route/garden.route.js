@@ -6,3 +6,4 @@ module.exports = app =>{
     router.get('/', gardenController.getName)
     app.use('/api/garden',router)
 }
+
