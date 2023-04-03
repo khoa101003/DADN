@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const Garden = new Schema({
-    id: {type: ObjectId},
-    name: {type: String}
+    id: ObjectId,
+    name: String,
+    owner: String
 });
 
 module.exports = mongoose.model('garden', Garden)
