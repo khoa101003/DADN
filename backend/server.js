@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 })
 
 require('./route/garden.route')(app)
+require('./route/axios.route')(app)
 
 const port = 3030
 
