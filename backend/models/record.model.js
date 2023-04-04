@@ -7,18 +7,20 @@ const Record = new Schema({
     name: String,
     owner: String, // Record nay thuoc ve thiet bi nao
     type: String,
+    // data.time.max = last value  adafruit (time)
     time: {
         min: { type: Date, default: Date.now },
-        max: { type: Date, default: Date.now }
+        max: { type: Date, default: Date.now } //*
     },
-    value_list: [
+    // data.valueList.push({log_time, value})*
+    valueList: [
         {
             log_time: { type: Date, default: Date.now },
             value: Number // value = 1/0: on/off. Còn khác giá trị này thì là sensor
             // Muốn kiểm tra giá trị thì dùng thêm trường type ở trên
         }
     ],
-    current: Number, // render trên web
+    curValue: Number, // render trên web
 });
 
 module.exports = mongoose.model('record', Record)

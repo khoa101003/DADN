@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 
 async function connect() {
-    const URL = 'mongodb://localhost:27017/smartgarden'
+    const URL = 'mongodb://0.0.0.0:27017/smartgarden' 
     
     try{
         await mongoose.connect(URL)
