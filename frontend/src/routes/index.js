@@ -19,6 +19,7 @@ import InputValue from "../pages/CustomerPages/InputValue/InputValue";
 import ManageUser from "../pages/AdminPages/ManageUser";
 import ManageRequest from "../pages/AdminPages/ManageRequest";
 import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
+import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
 
 const routes = [
     //Authorize
@@ -43,6 +44,7 @@ const routes = [
     {path: '/InputValue', component: InputValue},
     { path: '/ManageSensor', component: ManageSensor },
     { path: '/controlPump', component: ControlPump },
+    { path: '/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },
     { path: 'admin/request', component: ManageRequest }
 

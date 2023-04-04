@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {Row, Col, Container, Button, ToggleButton, ButtonGroup} from 'react-bootstrap'
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import RowSchedule from './RowSchedule';
 import classnames from 'classnames/bind'
 import styles from './ControlPump.module.scss'
+import { switchPump } from '../../../api/controlPump';
 
 const cx = classnames.bind(styles);
 const data = [
@@ -58,6 +59,9 @@ const ControlPump = () => {
     const handleClickManual = () => {
         setPumpManual((state) => setPumpManual(!state))
     }
+    useEffect(() => {
+        switchPump(pumpManual);
+    },[pumpManual])
     return (
         <Container>
             <Row>
