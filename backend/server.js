@@ -12,19 +12,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  // const obj = {
+  //   arr:[
+  //     {
+  //       log:"123",
+  //       value:"11"
+  //     }
+  //   ]
+  // }
+  // obj.arr.push({log:"9999",value:"1234"});
+  // res.send(obj);
 })
 
-app.get('/a', (req, res) => {
-  const axios = require("axios");
-
-  let payload = {last_value:"ON" };
-
-  let ress = axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom', payload);
-
-  let data = ress.data;
-  console.log(data);
-})
 
 require('./route/garden.route')(app)
 require('./route/axios.route')(app)
