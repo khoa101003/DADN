@@ -9,7 +9,7 @@ function ViewUserModal(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => {
         setShow(true);
-        props.par.current.setAttribute("class", "text-muted");
+        // props.par.current.setAttribute("class", "text-muted");
     }
     
     return (

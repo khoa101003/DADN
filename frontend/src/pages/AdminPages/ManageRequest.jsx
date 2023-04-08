@@ -11,7 +11,7 @@ function ManageRequest() {
     return (
         <div className="row container mx-auto">
             <SideBar />
-            <div className="col-xl-9 col-md-9 mt-5 mx-auto">
+            <div className="col-xl-9 col-md-9 mt-5 px-5 mx-auto">
                 <h1 className="text-center fw-bold">Yêu cầu của khách hàng</h1>
                 <div className="row my-5">
                     <div className="col-4 text-center">
