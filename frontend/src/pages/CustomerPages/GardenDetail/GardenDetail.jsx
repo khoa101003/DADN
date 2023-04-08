@@ -22,7 +22,7 @@ function GardenDetail(){
     return(
         <Container className='justify-content-center'>
             <Row>
-                <SideBar />
+                <SideBar position="garden" />
                 <Col xs='9'>
                     <h1 className={cx('title')}>Mảnh vườn 1</h1>
                     <div className={cx('sensor-val')}>

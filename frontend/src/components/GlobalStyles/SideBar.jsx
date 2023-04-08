@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/admin-logo.png";
 import user from "../../assets/users.png";
 import request from "../../assets/request.png";
@@ -12,11 +13,37 @@ import styles from './SideBar.module.scss';
 import { NavLink } from "react-bootstrap";
 const cx = classNames.bind(styles);
 
-function SideBar() {
+function SideBar(props) {
     const sbstyle = {
         backgroundColor: '#007155',
+
+        height: '100vh'
+    }
+    const logoutStyle = {
+        cursor: 'pointer'
+    }
+    const [userLogo, setUserLogo] = useState(user);
+    const [requestLogo, setRequestLogo] = useState(request);
+    const [deviceLogo, setDeviceLogo] = useState(device);
+    //position: sensor,garden,notify
+    useEffect(()=>{
+        if(props.position=="sensor") setUserLogo(active_user);
+        if(props.position=="garden") setRequestLogo(active_request);
+        if(props.position=="notify") setDeviceLogo(active_device);
+    },[])
+    const navigate = useNavigate()
+    function handleMangeUser() {
+        navigate('/SensorInfoPage')
+    }
+    function handleManageRequest() {
+        navigate('/')
+    }
+    function handleMangeDevice() {
+        navigate('/NotificationPage')
+
         height: '100vh',
         textDecoration: "none"
+
     }
 
     const linkStyle = {
@@ -76,7 +103,7 @@ function SideBar() {
                 </Link>
             </div>
             <hr className="w-75 mx-auto" />
-            <div className="logout text-center mt-5">Đăng xuất</div>
+            <div className="logout text-center mt-5" style={logoutStyle} onClick={()=>navigate('/login-as')}>Đăng xuất</div>
         </div>
     );
 }

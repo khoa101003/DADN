@@ -26,7 +26,7 @@ function GardenModify(){
     return(
         <Container className='justify-content-center'>
             <Row>
-                <SideBar />
+                <SideBar position="garden" />
                 <Col xs='9'>
                     
                     <Form className='mt-5'>
