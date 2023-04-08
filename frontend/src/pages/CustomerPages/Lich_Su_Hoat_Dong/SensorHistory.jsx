@@ -2,17 +2,21 @@ import classnames from 'classnames/bind'
 import styles from './SensorHistory.module.scss'
 import { Button, Form, Table, Container, Dropdown, DropdownButton, Col, Row } from 'react-bootstrap'
 import SideBar from '../../../components/GlobalStyles/SideBar'
-
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 const cx = classnames.bind(styles);
 
-function SensorHistory(){
+function SensorHistory() {
+    const {data} = axios.get()
     return(
         <div className="row mx-auto container">
             <SideBar />
-            <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-                <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
+            <div className='col-xl-9 col-md-9 mt-5 px-5 mx-auto'>
+                <a href="" className={cx("return")}>
+                    
+                    {'<-- Trở lại'}
+                </a>
                 <h1 className="text-center">Lịch sử hoạt động</h1>
-
                 <Row>
                     <Col xs={2}>
                         <Dropdown.Header>Chọn loại thiết bị</Dropdown.Header>
@@ -75,7 +79,7 @@ function SensorHistory(){
                     </tr>
                     </tbody>
                 </Table>
-                <Button className='my-2 me-5 float-end' variant='secondary' as='a' href=''>Thống kê hoạt động</Button>    
+                <Button className='my-2 me-5 float-end' variant='secondary' as='a' href='/StatisticPage'>Thống kê hoạt động</Button>    
             </div>
         </div>
     )

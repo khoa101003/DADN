@@ -14,6 +14,7 @@ exports.getRecord = (req, res) => {
     Record.find({})
         .then(record => {
             // res.status(200).send({ "hi": "hi" })
+            console.log(new Date())
             res.status(200).send(record)
         })
         .catch(err => res.status(400).send(err))

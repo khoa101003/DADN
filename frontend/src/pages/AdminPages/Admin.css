@@ -7,7 +7,7 @@ body {
 }
 
 /*Styling for SideBar.jsx */
-/* .side-bar {
+.side-bar {
     max-width: 22.5%;
     height: 100vh;
     background-color: #007155;
@@ -17,7 +17,7 @@ body {
 
 .admin-logo {
     margin: 0;
-} */
+}
 
 /* Styling for ManageUser.jsx */
 .add-user > button {

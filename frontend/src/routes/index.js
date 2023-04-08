@@ -45,9 +45,9 @@ const routes = [
     { path: '/ManageSensor', component: ManageSensor },
     { path: '/controlPump', component: ControlPump },
     { path: '/schedule', component: Schedule },
-    { path: '/admin', component: ManageUser },
-    { path: 'admin/request', component: ManageRequest }
-
+    { path: '/admin/user', component: ManageUser },
+    { path: '/admin/request', component: ManageRequest }
+    
 ]
 
 export default routes;

@@ -10,7 +10,7 @@ function ManageUser() {
     return (
         <div className="row mx-auto container">
             <SideBar />
-            <div className="col-xl-9 col-md-9 mt-5 mx-auto">
+            <div className="col-xl-9 col-md-9 mt-5 mx-auto px-5">
                 <h1 className="text-center fw-bold">Quản lý khách hàng</h1>
                 <div className="row my-5">
                     <div className="col-6 add-user">
