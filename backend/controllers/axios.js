@@ -1,5 +1,4 @@
 const Axiosx = require('../models/axios.model')
-const axiosx = new Axiosx();
 const devices = [
   {
     id:1,
@@ -27,6 +26,50 @@ const devices = [
     name:"Mini Pump"
   },
 ]
+
+exports.autoUpdate = (req, res)=>{
+  const axios = require("axios");
+  const updateValue = async (device, newValue) =>{
+    const dt = await Axiosx.collection.findOne(
+      {
+        id:device.id
+      }
+    )
+    const valueList = dt.valueList;
+    if(valueList[valueList.length-1].log_time != newValue.log_time){
+      valueList.push(newValue)
+      Axiosx.collection.updateOne(
+          {
+            id:device.id
+          },
+          {
+            $set:
+            {
+              valueList:valueList,
+              curValue:newValue.value
+            }
+          }
+        )
+    }
+    console.log(valueList)
+  }
+  
+    devices.forEach((device) => {
+    const options = {
+      method: 'GET',
+      url: `https://io.adafruit.com/api/v2/hongphat03/feeds/${device.key}`
+    };
+  
+    axios.request(options).then(function (response) {
+      updateValue(device,{
+        log_time:response.data['updated_at'],
+        value:response.data['last_value']})
+    }).catch(function (error) {
+      console.log(error)
+      console.error(error);
+    });
+    })
+}
 
 exports.getData =  (req, res) => {
   const axios = require("axios");

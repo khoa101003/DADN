@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/admin-logo.png";
 import user from "../../assets/users.png";
 import request from "../../assets/request.png";
@@ -11,28 +12,32 @@ import classNames from 'classnames/bind';
 import styles from './SideBar.module.scss';
 const cx = classNames.bind(styles);
 
-function SideBar() {
+function SideBar(props) {
     const sbstyle = {
         backgroundColor: '#007155',
         height: '100vh'
     }
-    const [userLogo, setUserLogo] = useState(active_user);
+    const logoutStyle = {
+        cursor: 'pointer'
+    }
+    const [userLogo, setUserLogo] = useState(user);
     const [requestLogo, setRequestLogo] = useState(request);
     const [deviceLogo, setDeviceLogo] = useState(device);
+    //position: sensor,garden,notify
+    useEffect(()=>{
+        if(props.position=="sensor") setUserLogo(active_user);
+        if(props.position=="garden") setRequestLogo(active_request);
+        if(props.position=="notify") setDeviceLogo(active_device);
+    },[])
+    const navigate = useNavigate()
     function handleMangeUser() {
-        setUserLogo(userLogo => active_user);
-        setRequestLogo(requestLogo => request);
-        setDeviceLogo((deviceLogo) => device);
+        navigate('/SensorInfoPage')
     }
     function handleManageRequest() {
-        setUserLogo(userLogo => user);
-        setRequestLogo(requestLogo => active_request);
-        setDeviceLogo((deviceLogo) => device);
+        navigate('/')
     }
     function handleMangeDevice() {
-        setUserLogo(userLogo => user);
-        setRequestLogo(requestLogo => request);
-        setDeviceLogo((deviceLogo) => active_device);
+        navigate('/NotificationPage')
     }
     return (
         <div className="col-xl-3 col-md-3 side-bar container p-auto" style={sbstyle} >
@@ -56,7 +61,7 @@ function SideBar() {
                 </h6>
             </div>
             <hr className="w-75 mx-auto" />
-            <div className="logout text-center mt-5">Đăng xuất</div>
+            <div className="logout text-center mt-5" style={logoutStyle} onClick={()=>navigate('/login-as')}>Đăng xuất</div>
         </div>
     );
 }

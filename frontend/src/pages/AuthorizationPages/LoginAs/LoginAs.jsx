@@ -16,8 +16,12 @@ const cx= classNames.bind(styles);
 
 function LoginAs(){
     const navigate = useNavigate();
-    const handleClick = () =>{
-        navigate('/login')
+    const handleClick = (value) =>{
+        navigate(`/login/${value}`,{
+            state: {
+                logType: value
+            }
+        })
     }
     return(
         <div className={cx('wrapped')}>
@@ -39,13 +43,13 @@ function LoginAs(){
                             <p>Đăng nhập với tư cách:</p>
 
                             <div className={cx('options')}>
-                                <Button variant="outline-success" size='lg' className={cx('btn')} onClick={handleClick}>
+                                <Button variant="outline-success" size='lg' className={cx('btn')} onClick={()=>handleClick('customer')}>
                                     Khách hàng
                                 </Button>
-                                <Button variant="outline-success" size='lg' className={cx('btn')} onClick={handleClick}>
+                                <Button variant="outline-success" size='lg' className={cx('btn')} onClick={()=>handleClick('technician')}>
                                     Kỹ thuật viên
                                 </Button>
-                                <Button variant="outline-success" size='lg' className={cx('btn')} onClick={handleClick}>
+                                <Button variant="outline-success" size='lg' className={cx('btn')} onClick={()=>handleClick('admin')}>
                                     Quản trị viên
                                 </Button>
                             </div>

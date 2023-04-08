@@ -24,7 +24,7 @@ import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
 const routes = [
     //Authorize
     {  path: '/login-as', component: LoginAs  },
-    {  path: '/login', component: Login  },
+    {  path: '/login/:slug', component: Login  },
     {  path: '/pass-retri', component: PassRetrival  },
     {  path: '/register', component: Register  },
     //Customer

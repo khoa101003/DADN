@@ -71,8 +71,8 @@ function GardenList(){
 
     return(
         <Container>
-            <Row >
-                <SideBar />
+            <Row>
+                <SideBar position="garden" />
                 <Col xs='9'>
                     <h1 className={cx('title')}>Danh sách mảnh vườn</h1>
                     <Row>
