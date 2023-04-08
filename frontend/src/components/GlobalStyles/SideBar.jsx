@@ -41,9 +41,6 @@ function SideBar(props) {
     function handleMangeDevice() {
         navigate('/NotificationPage')
 
-        height: '100vh',
-        textDecoration: "none"
-
     }
 
     const linkStyle = {
@@ -52,9 +49,6 @@ function SideBar(props) {
     };
     const location = useLocation();
     const path = location.pathname;
-    const userLogo = (path == "/admin/user") ? active_user : user;
-    const requestLogo = (path == "/admin/request") ? active_request : request;
-    const deviceLogo = (path == "/admin/device") ? active_device : device;
     // const [userLogo, setUserLogo] = useState(active_user);
     // const [requestLogo, setRequestLogo] = useState(request);
     // const [deviceLogo, setDeviceLogo] = useState(device);
@@ -79,28 +73,22 @@ function SideBar(props) {
             <img className="admin-logo img-fluid mx-auto d-block py-5" src={logo}></img>
 
             <div className="my-5 mx-5">
-                <Link to="/admin/user" style={linkStyle}>
-                    <h6 className="d-flex align-items-center">
-                        <img src={userLogo} className="pe-3 admin-user-icon"></img>
-                        Quản lý khách hàng
-                    </h6>
-                </Link>
+                <h6 className="d-flex align-items-center" onClick={handleMangeUser}>
+                    <img src={userLogo} className="pe-3 admin-user-icon"></img>
+                    Quản lý sensor
+                </h6>
             </div>
             <div className="my-5 mx-5">
-                <Link to="/admin/request" style={linkStyle}>
-                    <h6 className="d-flex align-items-center">
-                        <img src={requestLogo} className="pe-3 admin-request-icon"></img>
-                        Quản lý yêu cầu
-                    </h6>
-                </Link>
+                <h6 className="d-flex align-items-center" onClick={handleManageRequest}>
+                    <img src={requestLogo} className="pe-3 admin-request-icon"></img>
+                    Quản lý khu vườn
+                </h6>
             </div>
             <div className="my-5 mx-5">
-                <Link to="/admin/device" style={linkStyle}>
-                    <h6 className="d-flex align-items-center">
-                        <img src={deviceLogo} className="pe-3 admin-cloud-icon"></img>
-                        Quản lý thiết bị
-                    </h6>
-                </Link>
+                <h6 className="d-flex align-items-center" onClick={handleMangeDevice}>
+                    <img src={deviceLogo} className="pe-3 admin-cloud-icon"></img>
+                    Thông báo
+                </h6>
             </div>
             <hr className="w-75 mx-auto" />
             <div className="logout text-center mt-5" style={logoutStyle} onClick={()=>navigate('/login-as')}>Đăng xuất</div>
