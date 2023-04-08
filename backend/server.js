@@ -2,7 +2,6 @@ const express = require('express')
 const db = require('./config/dbconfig')
 const cors = require('cors')
 
-
 const app = express()
 //Connect to database
 db.connect();
@@ -27,7 +26,7 @@ app.get('/', (req, res) => {
 
 require('./route/garden.route')(app)
 require('./route/axios.route')(app)
-
+require('./route/record.route')(app)
 const port = 3030
 
 app.listen(port, () => {

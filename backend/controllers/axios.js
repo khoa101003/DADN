@@ -29,7 +29,7 @@ const devices = [
 ]
 
 exports.getData =  (req, res) => {
-  const axios = require("axios");
+  
   const getData = async (device, newValue) =>{
     const dt = await Axiosx.collection.findOne(
       {
