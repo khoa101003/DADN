@@ -36,7 +36,7 @@ function SideBar(props) {
         navigate('/SensorInfoPage')
     }
     function handleManageRequest() {
-        navigate('/')
+        navigate(`/${props.account}`)
     }
     function handleMangeDevice() {
         navigate('/NotificationPage')
