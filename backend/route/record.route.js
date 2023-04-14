@@ -16,6 +16,7 @@ module.exports = app => {
         RecordController.autoUpdate()
     },5000);
     router.get('/', RecordController.getRecord)
+    router.get('/:piece', RecordController.getPrivateRec)
     app.use('/api/record', router)
 }
 

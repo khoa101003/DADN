@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { MDBContainer } from "mdb-react-ui-kit";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss'
 import { useState, useEffect } from 'react';
@@ -64,26 +64,21 @@ function Login(){
 
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
-    const navigate = useNavigate()
-    const location = useLocation();
     const [warning,setWarning] = useState(false)
-
-    const logType = location.state.logType;
-    const getAuth = (user)=>{
-        return user.role === logType
-    }
+    const navigate = useNavigate()
+    const params = useParams()
 
     const handleSubmit = (e)=>{
         e.preventDefault();
         
-        const auth = users.filter(getAuth)
-        if(logType=='admin'){         
+        const auth = users.filter((user)=>user.role === params.role)
+        if(params.role=='admin'){         
             if(auth.find(ad=>ad.account===username && ad.password===password)) navigate('/admin')
         }
-        if(logType=='customer'){
-            if(auth.find(cus=>cus.account===username && cus.password===password)) navigate('/')
+        if(params.role=='customer'){
+            if(auth.find(cus=>cus.account===username && cus.password===password)) navigate(`/${username}`,{state: {owner: username}})
         }
-        if(logType=='technician'){
+        if(params.role=='technician'){
             if(auth.find(tech=>tech.account===username && tech.password===password)) navigate('/')
         }
         setWarning(true)
