@@ -5,6 +5,8 @@ import RowSchedule from './RowSchedule';
 import classnames from 'classnames/bind'
 import styles from './ControlPump.module.scss'
 import { switchPump } from '../../../api/controlPump';
+import { Link } from 'react-router-dom';
+import { getListSchedule } from '../../../api/schedule';
 
 const cx = classnames.bind(styles);
 const data = [
@@ -49,7 +51,7 @@ const ControlPump = () => {
     const [pumpSchedule,setPumpSchedule] = useState(true);
     const [pumpMoisture,setPumpMoisture] = useState(true);
     const [pumpManual,setPumpManual] = useState(false);
-
+    const [data1,setData1] = useState();
     const handleClickSchedule = () => {
         setPumpSchedule((state) => setPumpSchedule(!state));
     }
@@ -62,10 +64,18 @@ const ControlPump = () => {
     useEffect(() => {
         switchPump(pumpManual);
     },[pumpManual])
+    
+    const getData = async () => {
+        return await getListSchedule().then((res) => console.log(res[0].dates));
+    }
+    // console.log(getData)
+    // getListSchedule()
+    useEffect(() => {
+        getData()
+    })
     return (
         <Container>
             <Row>
-                
                 <SideBar></SideBar>
                 
                 <Col className="mx-2">
@@ -91,6 +101,7 @@ const ControlPump = () => {
                         </Col>
                         <Col xs={9} className={`${!pumpSchedule?'opacity-25':''}`}>
                             <RowSchedule schedule = {data} />
+                            <Link to={{pathname:"/schedule"}}><Button>Thêm lịch</Button></Link>
                         </Col>
                     </Row>
                     <Row className={cx('row','py-5')}>

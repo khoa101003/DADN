@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import {Container, Row, Col, Form, ListGroup, ListGroupItem, Button, FormCheck} from 'react-bootstrap';
+import {Container, Row, Col, Form, Button} from 'react-bootstrap';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import Custom from './Custom';
 import Monthly from './Monthly';
 import Weekly from './Weekly';
+import { postSchedule } from '../../../api/schedule';
 
 
 const Schedule = () => {
@@ -57,8 +58,9 @@ const Schedule = () => {
         }))
     }
     const handleClick = () => {
-        console.log(schedule.type)
-        console.log(schedule.dates)
+        // console.log(schedule.dates["Fri"])
+        postSchedule(schedule)
+        // console.log(schedule)
     }
     return (
         <Container>
