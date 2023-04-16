@@ -43,7 +43,7 @@ function GardenList(){
         return await getGardenList().then((res)=>setGardens(res))
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         loadData()
     },[])
 
