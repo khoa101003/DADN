@@ -24,12 +24,12 @@ import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
 const routes = [
     //Authorize
     {  path: '/login-as', component: LoginAs  },
-    {  path: '/login/:slug', component: Login  },
+    {  path: '/login/:role', component: Login  },
     {  path: '/pass-retri', component: PassRetrival  },
     {  path: '/register', component: Register  },
     //Customer
-    {path: '/', component: GardenList},
-    {path: '/garden-detail', component: GardenDetail},
+    {path: '/:account', component: GardenList},
+    {path: '/:account/garden-detail/:id', component: GardenDetail},
 
     {path: '/garden-regis', component: GardenRegis},
     {path: '/garden-mod', component: GardenModify},
