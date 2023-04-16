@@ -20,5 +20,6 @@ const Record = new Schema({
         }
     ],
     curValue: String, // render trên web
+    garPiece: Number
 });
 module.exports = mongoose.model('record', Record)
