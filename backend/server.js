@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 
 require('./route/garden.route')(app)
 // require('./route/axios.route')(app)
-
+require('./route/notification.route')(app)
 require('./route/user.route')(app)
 
 

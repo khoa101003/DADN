@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Container, Modal, Row, Col, Button } from "react-bootstrap";
+import { markReadNotification, deleteNotification } from "../../../api/notificationApi";
 
-function Notification() {
+
+function Notification({id, type, urgent, isReadN, measure, threshold, time, gardenName, x, y}) {
     const [visible, setVisiable] = useState(true)
 
+    // Confirm modal
     const [showConfirm, setShowConfirm] = useState(false)
     const showModalConfirm = () => setShowConfirm(true)
-    const hideModalConfirm = () => setShowConfirm(false)
+    const hideModalConfirm = () => {
+        setShowConfirm(false)
+        deleteNotification(id)
+    }
 
+    // Success Modal
     const [showSuccess, setShowSuccess] = useState(false)
     const showModalSuccess = () => {
         setShowSuccess(true)
@@ -18,27 +25,73 @@ function Notification() {
         setVisiable(false)
     }
 
+    // Detail Modal
     const [showDetail, setShowDetail] = useState(false)
-    const [isRead, setIsRead] = useState(false)
+    const [isRead, setIsRead] = useState(isReadN)
     const showModalDetail = () => {
         setShowDetail(true)
-        setIsRead(true)
+        if (!isRead) {
+            setIsRead(true)
+            markReadNotification(id)
+        }
     }
     const hideModalDetail = () => setShowDetail(false)
 
-    const icon_style = {
-        height: '2rem',
+    // Icon
+    const icon_style = {height: '2rem',}
+    let icon_src, icon_alt, measure_msg, threshold_msg;
+    switch (type) {
+        case "Temperature":
+            icon_src = "./images/Icon_nhiet_do.svg"
+            icon_alt = "nhiệt độ"
+            measure_msg = `Nhiệt độ đo được ${measure}°C`
+            threshold_msg = `Nhiệt độ ngưỡng ${threshold}°C`
+            break
+        case "Soil Humidity":
+            icon_src = "./images/Icon_do_am_dat.svg"
+            icon_alt = "độ ẩm đất"
+            measure_msg = `Độ ẩm đo được ${measure}%`
+            threshold_msg = `Độ ẩm ngưỡng ${threshold}%`
+            break
+        case "Harvest":
+            icon_src = "./images/Icon_thu_hoach.svg"
+            icon_alt = "thu hoạch"
+            break
+        case "Air Humidity":
+            icon_src = "./images/Icon_do_am_khong_khi.svg"
+            icon_alt = "độ ẩm không khí"
+            measure_msg = `Độ ẩm đo được ${measure}%`
+            threshold_msg = `Độ ẩm ngưỡng ${threshold}%`
+            break
+        default:
+            icon_src = "./images/Icon_hu_hong_thiet_bi.svg"
+            icon_alt = "hư hỏng thiết bị"
     }
+
+    const font_style = `my-3 ${!isRead ? "fw-bold" : ""} ${urgent ? "text-danger" : ""}`
+
+    // Time
+    const options = {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        hourCycle: 'h12',
+    };
+    const time_notify = new Date(time).toLocaleString('en-US', options)
 
     return (
         <>
         {   visible && ( <>
-            <Row className={!isRead ? "my-3 fw-bold" : "my-3"}>
+            <Row className={font_style}>
                 <Col md={{span: 1}} onClick={showModalDetail} className="d-flex justify-content-center">
-                    <img src='./images/Icon_do_am_khong_khi.svg' alt="Độ ẩm không khí" style={icon_style}/>
+                    <img src={icon_src} alt={icon_alt} style={icon_style}/>
                 </Col>
-                <Col md={{span: 4}} onClick={showModalDetail}>Thông báo độ ẩm không khí</Col>
-                <Col md={{span: 3}} onClick={showModalDetail}>8:48 PM 22/2/2023</Col>
+                <Col md={{span: 4}} onClick={showModalDetail}>Thông báo {icon_alt}</Col>
+                <Col md={{span: 3}} onClick={showModalDetail}>{time_notify}</Col>
                 <Col md={{span: 3}} onClick={showModalDetail}>{!isRead ? "Chưa đọc" : "Đã đọc"}</Col>
                 <Col md={{span: 1}} className="d-flex justify-content-center">
                     <button onClick={showModalConfirm}>
@@ -52,8 +105,8 @@ function Notification() {
                     <Container>
                     <Row>
                         <Col className='d-flex'>
-                        <img src='./images/Icon_do_am_khong_khi.svg' alt="Độ ẩm không khí" style={icon_style}/>
-                        <span className='ms-3 fs-5 fw-bold'>Cảnh báo độ ẩm không khí</span>
+                        <img src={icon_src} alt={icon_alt} style={icon_style}/>
+                        <span className='ms-3 fs-5 fw-bold'>Thông báo {icon_alt}</span>
                         </Col>
                     </Row>
                     </Container>
@@ -62,19 +115,19 @@ function Notification() {
                     <Container>
                     <Row className='g-2'>
                         <Col sm={6} className="p-2">
-                        Thời gian: 22/3/2023 12:30PM
+                        Thời gian: {time_notify}
                         </Col>
+                        {type !== "Harvest" && type !== "Device" && <Col sm={6} className="p-2">
+                        {threshold_msg}
+                        </Col>}
                         <Col sm={6} className="p-2">
-                        Độ ẩm tối đa: 33%
+                        Mảnh vườn: {gardenName}
                         </Col>
-                        <Col sm={6} className="p-2">
-                        Mảnh vườn: ???
-                        </Col>
-                        <Col sm={6} className="p-2">
-                        Độ ẩm hiện tại: 35%
-                        </Col>
+                        {type !== "Harvest" && type !== "Device" && <Col sm={6} className="p-2">
+                        {measure_msg}
+                        </Col>}
                         <Col sm={12} className="p-2">
-                        Vị trí: ???
+                        Vị trí: Hàng {x} cột {y}
                         </Col>
                     </Row>
                     </Container>

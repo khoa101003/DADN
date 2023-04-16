@@ -14,9 +14,10 @@ function SensorInfoPage() {
   const lastPage = 5
   const sensorPerPage = 5
 
-  const sensorList = Array.from({length : 50}, (_, i) => i + 1).map((i) => (
-    <SensorInfo i={i} />
-  ))
+  // const sensorList = Array.from({length : 50}, (_, i) => i + 1).map((i) => (
+  //   <SensorInfo i={i} />
+  // ))
+  const sensorList = []
 
   const emptyRow = (
     <Row className='my-3' style={{height : '32px'}}></Row>

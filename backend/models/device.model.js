@@ -1,47 +1,12 @@
-// const mongoose = require("mongoose");
-// const Schema = mongoose.Schema;
-// const ObjectId = Schema.ObjectId;
-
-// const Device = new Schema({
-//     id: ObjectId,
-//     name: String,
-//     type: String, // value = ['sensor','pump', 'light']
-//     owner: String, // Dùng để biết thiết bị thuộc khu vườn nào
-//     curValue: Number,
-//     coord: {
-//         x: Number,
-//         y: Number
-//     },
-//     price: Number,
-//     status: Boolean,
-//     startDate: { type: Date, default: Date.now },
-//     sensorType: String,
-//     threshold: {
-//         min: Number,
-//         max: Number
-//     },
-//     water: Number,
-//     time: Number
-// });
-
-// module.exports = mongoose.model('device', Device)
-
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
-// try {
-//     mongoose.connect('mongodb://127.0.0.1:27017/test');
-//     console.log("Connect Successfully!")
-// }
-// catch (err) {
-//     console.log(err)
-// }
 
 const Device = new Schema({
     id: ObjectId,
     name: String,
     status: Boolean,
+    garden: ObjectId,
     coordinates: {
         x: Number,
         y: Number
@@ -87,47 +52,11 @@ const Device = new Schema({
     installationTime: Date
 })
 
+DeviceSchema.pre('save', function (next) {
+    if (this.typeDevice === 'LED') {
+        this.inforDevice = undefined;
+    }
+    next();
+});
+
 module.exports = mongoose.model('device', Device)
-
-// DeviceSchema.pre('save', function (next) {
-//     if (this.typeDevice === 'LED') {
-//         this.inforDevice = undefined;
-//     }
-//     next();
-// });
-
-// const Device = new mongoose.model('device', DeviceSchema)
-// const x = new Device({
-//     name: 'Đèn LED siêu sáng',
-//     status: true,
-//     coordinates: {
-//         x: 2,
-//         y: 1
-//     },
-//     inforDevice: {
-//         sensorType: ['Temperature', 'Air Humidity'],
-//         alarmThreshold: {
-//             min: 25,
-//             max: 40,
-//         }
-//     },
-//     typeDevice: 'LED',
-//     size: 20,
-//     price: 10000,
-//     warrantyTime: Date.now(),
-//     installationTime: Date.now()
-// })
-
-// x.save()
-//     .then((result) => {
-//         console.log("Saved:", result)
-//     })
-//     .catch((err) => {
-//         console.log(err.message)
-//     })
-
-// process.on('SIGINT', function () {
-//     mongoose.connection.close()
-//     console.log("Disconnected!")
-//     process.exit(0)
-// })
