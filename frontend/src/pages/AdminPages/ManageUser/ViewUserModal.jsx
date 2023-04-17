@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {Button} from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import read from "../../assets/read.png";
-import white_user from "../../assets/user-white.png"
+import read from "../../../assets/read.png";
+import white_user from "../../../assets/user-white.png"
 function ViewUserModal(props) {
     const [show, setShow] = useState(false);
 

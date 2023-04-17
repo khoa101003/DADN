@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = "http://localhost:3030/api/record/static"
+const URL = "http://localhost:3030/api/record"
 export const getRecordList = async (id) => {
     return await axios.get(`${URL}`)
         .then(res => {

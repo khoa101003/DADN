@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import del from "../../assets/delete.png";
+import del from "../../../assets/delete.png";
 import ViewRequestModal from "./ViewRequestModal";
 import DeleteRequestModal from "./DeleteRequestModal";
 function RequestRow(props) {
     const trRef = useRef(null);
     return (
-        <tr ref={trRef}  className={props.request.isRead ? "text-muted" : undefined}>
+        <tr ref={trRef} className={props.request.isRead ? "text-muted" : undefined}>
             <td>{props.request.content}</td>
             <td>{props.request.account}</td>
             <td>{props.request.date}</td>
