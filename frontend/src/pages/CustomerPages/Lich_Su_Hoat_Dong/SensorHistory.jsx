@@ -6,29 +6,39 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-// import { getRecordList } from '../../../api/recordApi';
+import { getRecordList } from '../../../api/recordApi';
+import { getDeviceList } from '../../../api/deviceApi'
 import Pagination from './Pagination';
 
 const cx = classnames.bind(styles);
-function SensorHistory() {
-    let { device_id } = useParams()
-    console.log(device_id)
-    const [deviceVal, setDeviceVal] = useState([]);
-    // let data;
-    // const loadData = async () => {
-    //     try {
-    //         let data = await getRecordList(3)
-    //         data = data[0].valueList
-    //         setDeviceVal(data)
-    //         console.log(data)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-    // useEffect(() => {
-    //     loadData()
-    // }, [])
 
+function SensorHistory() {
+    const lastPage = 5
+    const sensorPerPage = 5
+
+    const params = useParams()
+    console.log(params.account)
+    const [device, setDevice] = useState([])
+    let deviceName = []
+    const loadDevice = async () => {
+        try {
+            const deviceList = await getDeviceList(params.account)
+            console.log('device list')
+            console.log(deviceList)
+            console.log('----')
+            setDevice(deviceList)
+            // deviceName = deviceList.map(device => <Dropdown.Item href="">{device.name}</Dropdown.Item>)
+        } catch (err) {
+            console.log(err)
+        }
+        
+    }
+    useEffect(() => {
+        loadDevice()
+    }, [])
+    // const data = loadDevice(params.account)
+    // console.log("data")
+    // console.log(data)
     const DataRow = (props) => {
         return (
             <tr>
@@ -41,10 +51,10 @@ function SensorHistory() {
     return (
         <div className="row mx-auto container">
             <SideBar position="sensor" />
-            <div className='col-xl-9 col-md-9 mt-5 px-5 mx-auto'>
+            <div className='col-xl-9 col-md-9 mt-3 px-5 mx-auto'>
                 <a href="" className={cx("return")}>
-
-                    {'<-- Trở lại'}
+                    <i className="fa-solid fa-arrow-left"></i>
+                    {/* {'<-- Trở lại'} */}
                 </a>
                 <h1 className="text-center">Lịch sử hoạt động</h1>
 
@@ -57,10 +67,11 @@ function SensorHistory() {
                             <Dropdown.Item href="?device_id=3">Sensor nhiệt độ</Dropdown.Item>
                             <Dropdown.Item href="/device_id=5">Máy bơm</Dropdown.Item>
                             <Dropdown.Item href="#/action-6">Đèn chiếu sáng</Dropdown.Item>
+                            {device.map((item, index) => <Dropdown.Item key={index} href="">{item.name}</Dropdown.Item>)}
                         </DropdownButton>
                     </div>
                     <div className="col-4 text-center my-4">
-                        <Button type='submit' size='lg' variant='dark'>Tải về</Button>
+                            <Button type='submit' size='lg' variant='dark'>Tải về</Button>
                     </div>
                     <div className="col-4 text-center my-4">
                         <Button className='my-2 me-5 float-end' size='lg' variant='dark' as='a' href='/StatisticPage'>Thống kê hoạt động</Button>

@@ -34,7 +34,7 @@ const routes = [
     { path: '/garden-regis', component: GardenRegis },
     { path: '/garden-mod', component: GardenModify },
 
-    { path: '/SensorHistory/:device_id', component: SensorHistory },
+    { path: '/:account/SensorHistory', component: SensorHistory },
     { path: '/SensorInfoPage', component: SensorInfoPage },
     { path: '/NotificationPage', component: NotificationPage },
     { path: '/StatisticPage', component: StatisticPage },
