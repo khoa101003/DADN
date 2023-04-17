@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { getRecordList } from '../../../api/recordApi'
+import { getRecordList } from '../../../api/static_recordApi'
 import ReactPaginate from 'react-paginate'
 import { Button, Form, Table, Container, Dropdown, DropdownButton, Col, Row } from 'react-bootstrap'
 import classnames from 'classnames/bind'
@@ -25,6 +25,7 @@ export default class App extends Component {
     loadData = async () => {
         try {
             let data = await getRecordList(3)
+            console.log(data)
             data = data[0].valueList
             const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
             console.log("slice")

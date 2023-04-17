@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import white_user from "../../assets/user-white.png"
-import write from "../../assets/write.png";
+import white_user from "../../../assets/user-white.png"
+import write from "../../../assets/write.png";
 
 function UpdateUserModal(props) {
     const [show, setShow] = useState(false);

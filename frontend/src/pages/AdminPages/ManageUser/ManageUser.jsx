@@ -1,11 +1,29 @@
-import search from "../../assets/search.png";
-import data from "./userData.js";
+import search from "../../../assets/search.png";
+import data from "../userData.js";
+import { getUserList } from "../../../api/userApi"
 import UserRow from "./UserRow";
 import AddUser from "./AddUser";
-import Pagination from "./Pagination";
-import SideBar from "../../components/GlobalStyles/SideBar";
-import "./Admin.css";
+import Pagination from "../Pagination";
+import SideBar from "../../../components/GlobalStyles/AdminSideBar";
+import "../Admin.css";
+import { useState, useEffect } from 'react';
 function ManageUser() {
+    const [users, setUsers] = useState([])
+    const loadData = async () => {
+        try {
+            let userData = await getUserList()
+            userData = userData.filter(user => user.role == 'customer')
+            setUsers(userData)
+            console.log(users)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        loadData()
+    }, [])
+
     const userList = data.map(user => <UserRow key={user.id} user={user} />)
     return (
         <div className="row mx-auto container">
