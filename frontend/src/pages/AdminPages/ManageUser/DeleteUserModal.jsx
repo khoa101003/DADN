@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import del from "../../assets/delete.png";
-import white_user from "../../assets/user-white.png";
+import del from "../../../assets/delete.png";
+import white_user from "../../../assets/user-white.png";
 function DeleteUserModal() {
     const [show, setShow] = useState(false);
 

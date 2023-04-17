@@ -31,7 +31,11 @@ require('./route/user.route')(app)
 
 
 require('./route/record.route')(app)
+
+require('./route/static_record.route')(app)
+
 require('./route/garden_piece.route')(app)
+
 
 const port = 3030
 
