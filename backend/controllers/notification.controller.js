@@ -1,4 +1,20 @@
 const Notification = require('../models/notification.model')
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+   service: "gmail",
+   auth: {
+      user: "luuhai12324@gmail.com",
+      pass: "jozeigzvwvcziglh"
+   }
+});
+
+const mailOptions = {
+   from: "luuhai12324@gmail.com",
+   to: "lauhoi2010@gmail.com",
+   subject: "Nodemailer Test",
+   html: "Test <button>sending</button> Gmail using Node JS"
+};
 
 const getNotification = (req, res) => {
     const URL = req.ip
@@ -13,6 +29,14 @@ const getNotification = (req, res) => {
 }
 
 const createNotification = (typeN, userIDN, urgentN, measureN, thresholdN, timeN, gardenNameN, xN, yN) => {
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+           console.log(error);
+        }else{
+           console.log("Email sent: " + info.response);
+        }
+     });
+
     const newNotification = new Notification({
         type: typeN,
         userID: userIDN,
@@ -35,8 +59,6 @@ const createNotification = (typeN, userIDN, urgentN, measureN, thresholdN, timeN
         .catch(err => {
             res.status(400).send(err.message)
         })
-
-    res.sendStatus(200)
 }
 
 const deleteNotification = (req, res) => {

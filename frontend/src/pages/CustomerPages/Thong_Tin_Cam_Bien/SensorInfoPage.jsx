@@ -11,13 +11,12 @@ import SideBar from '../../../components/GlobalStyles/SideBar';
 const cx = classnames.bind(styles);
 
 function SensorInfoPage() {
-  const lastPage = 5
+  const lastPage = 1
   const sensorPerPage = 5
 
-  // const sensorList = Array.from({length : 50}, (_, i) => i + 1).map((i) => (
-  //   <SensorInfo i={i} />
-  // ))
-  const sensorList = []
+  const sensorList = Array.from({length : 50}, (_, i) => i + 1).map((i) => (
+    <SensorInfo i={i} />
+  ))
 
   const emptyRow = (
     <Row className='my-3' style={{height : '32px'}}></Row>
@@ -51,7 +50,7 @@ function SensorInfoPage() {
 
   const onLast = () => {
     setCurrentPage(lastPage)
-    setStartIndex(lastPage - 2)
+    setStartIndex(lastPage >= 3 ? lastPage - 2 : 1)
   }
 
   return (
@@ -114,8 +113,8 @@ function SensorInfoPage() {
           <Pagination.First onClick={onFirst} />
           <Pagination.Prev onClick={onPrev}/>
           <Pagination.Item onClick={()=>setCurrentPage(startIndex)} key='first' className={currentPage - startIndex === 0 ? 'active' : ''}>{startIndex}</Pagination.Item>
-          <Pagination.Item onClick={()=>setCurrentPage(startIndex + 1)} key='second' className={currentPage - startIndex === 1 ? 'active' : ''}>{startIndex + 1}</Pagination.Item>
-          <Pagination.Item onClick={()=>setCurrentPage(startIndex + 2)} key='third' className={currentPage - startIndex === 2 ? 'active' : ''}>{startIndex + 2}</Pagination.Item>
+          {lastPage > 1 && <Pagination.Item onClick={()=>setCurrentPage(startIndex + 1)} key='second' className={currentPage - startIndex === 1 ? 'active' : ''}>{startIndex + 1}</Pagination.Item>}
+          {lastPage > 2 && <Pagination.Item onClick={()=>setCurrentPage(startIndex + 2)} key='third' className={currentPage - startIndex === 2 ? 'active' : ''}>{startIndex + 2}</Pagination.Item>}
           <Pagination.Next onClick={onNext} />
           <Pagination.Last onClick={onLast}/>
         </Pagination>

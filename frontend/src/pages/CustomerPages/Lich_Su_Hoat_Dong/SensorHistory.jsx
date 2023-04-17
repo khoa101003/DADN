@@ -5,9 +5,10 @@ import SideBar from '../../../components/GlobalStyles/SideBar'
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getRecordList } from '../../../api/recordApi';
-const cx = classnames.bind(styles);
+import { getRecordList } from '../../../api/static_recordApi';
 import Pagination from './Pagination';
+
+const cx = classnames.bind(styles);
 function SensorHistory() {
 
     const [deviceVal, setDeviceVal] = useState([]);

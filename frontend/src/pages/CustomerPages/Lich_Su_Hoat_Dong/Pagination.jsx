@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { getRecordList } from '../../../api/recordApi'
+import { getRecordList } from '../../../api/static_recordApi'
 import ReactPaginate from 'react-paginate'
 import { Button, Form, Table, Container, Dropdown, DropdownButton, Col, Row } from 'react-bootstrap'
 import classnames from 'classnames/bind'
 import styles from './SensorHistory.module.scss'
-const cx = classnames.bind(styles);
 import './Pagination.css'
+const cx = classnames.bind(styles);
+
 
 export default class App extends Component {
     constructor(props) {

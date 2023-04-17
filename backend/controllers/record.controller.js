@@ -9,6 +9,8 @@
 // module.exports = getRecord;
 
 const Record = require('../models/record.model')
+const { createNotification } = require('../controllers/notification.controller')
+
 const devices = [
   {
     id:1,
@@ -48,6 +50,10 @@ exports.autoUpdate = (req, res)=>{
     )
     const valueList = dt.valueList;
     if(valueList[valueList.length-1].log_time != newValue.log_time){
+      if (device.id === 3 && newValue.value > 29) {
+        createNotification("Temperature", "phongong", false, newValue.value, 29, newValue.log_time, "SuperGarden", 1, 5)
+      }
+
       valueList.push(newValue)
       Record.collection.updateOne(
           {

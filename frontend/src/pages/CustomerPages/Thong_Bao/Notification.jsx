@@ -11,7 +11,6 @@ function Notification({id, type, urgent, isReadN, measure, threshold, time, gard
     const showModalConfirm = () => setShowConfirm(true)
     const hideModalConfirm = () => {
         setShowConfirm(false)
-        deleteNotification(id)
     }
 
     // Success Modal
@@ -19,6 +18,7 @@ function Notification({id, type, urgent, isReadN, measure, threshold, time, gard
     const showModalSuccess = () => {
         setShowSuccess(true)
         setShowConfirm(false)
+        deleteNotification(id)
     }
     const hideModalSuccess = () => {
         setShowSuccess(false)

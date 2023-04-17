@@ -48,6 +48,13 @@ function NotificationPage() {
   },[])
 
 
+  const notificationsList = notifications.map((notification,i) => 
+  <Notification key={i} id={notification._id} type={notification.type} urgent={notification.urgent}
+  isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
+  time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
+  y={notification.coordinates.y}/>
+)
+
   return (
     <div className="row mx-auto container">
       <SideBar position="notify"/>
@@ -95,12 +102,19 @@ function NotificationPage() {
           <hr />
 
           {
-            notifications.map((notification,i) => 
-              <Notification key={i} id={notification._id} type={notification.type} urgent={notification.urgent}
-              isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
-              time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
-              y={notification.coordinates.y}/>
-            )
+            // notifications.map((notification,i) => 
+            //   <Notification key={i} id={notification._id} type={notification.type} urgent={notification.urgent}
+            //   isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
+            //   time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
+            //   y={notification.coordinates.y}/>
+            // )
+            // Array.from({length : notifications.lenght}, (_, i) => i).map((i) => 
+            //   <Notification key={i} id={notifications[i]._id} type={notifications[i].type} urgent={notifications[i].urgent}
+            //   isReadN={notifications[i].isRead} measure={notifications[i].measure} threshold={notifications[i].threshold}
+            //   time={notifications[i].time} gardenName={notifications[i].gardenName} x={notifications[i].coordinates.x}
+            //   y={notifications[i].coordinates.y}/>
+            // )
+            notificationsList
           }
 
       </div>
