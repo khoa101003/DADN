@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "6437b7b3ac42886d6eefa4e9"
+  },
+  "name": "Mảnh vườn 1",
+  "type": "Chuối",
+  "location": "Đâu đó trong thủ đức",
+  "owner": "giaukiien",
+  "area": 30,
+  "days": 20,
+  "id": 1
+},{
+  "_id": {
+    "$oid": "6437c1b6ac42886d6eefa4f3"
+  },
+  "name": "Mảnh vườn a",
+  "type": "Sầu riêng",
+  "location": "Đâu đó ở Đồng Nai",
+  "owner": "phongong",
+  "area": 30,
+  "days": 20,
+  "id": 2
+}]

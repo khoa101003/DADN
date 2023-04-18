@@ -16,38 +16,38 @@ import StatisticPage from "../pages/CustomerPages/Thong_Ke_Lich_SU/StatisticPage
 import GardenDashboard from "../pages/CustomerPages/GardenDashboard/GardenDashboard";
 import ManageSensor from "../pages/CustomerPages/ManageSensor/ManageSensor";
 import InputValue from "../pages/CustomerPages/InputValue/InputValue";
-import ManageUser from "../pages/AdminPages/ManageUser";
-import ManageRequest from "../pages/AdminPages/ManageRequest";
+import ManageUser from "../pages/AdminPages/ManageUser/ManageUser.jsx";
+import ManageRequest from "../pages/AdminPages/ManageRequest/ManageRequest.jsx";
 import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
 import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
 
 const routes = [
     //Authorize
-    {  path: '/login-as', component: LoginAs  },
-    {  path: '/login/:slug', component: Login  },
-    {  path: '/pass-retri', component: PassRetrival  },
-    {  path: '/register', component: Register  },
+    { path: '/login-as', component: LoginAs },
+    { path: '/login/:role', component: Login },
+    { path: '/pass-retri', component: PassRetrival },
+    { path: '/register', component: Register },
     //Customer
-    {path: '/', component: GardenList},
-    {path: '/garden-detail', component: GardenDetail},
+    { path: '/:account', component: GardenList },
+    { path: '/:account/garden-detail/:id', component: GardenDetail },
 
-    {path: '/garden-regis', component: GardenRegis},
-    {path: '/garden-mod', component: GardenModify},
+    { path: '/garden-regis', component: GardenRegis },
+    { path: '/garden-mod', component: GardenModify },
 
-    {path: '/SensorHistory', component: SensorHistory},
-    {path: '/SensorInfoPage', component: SensorInfoPage},
-    {path: '/NotificationPage', component: NotificationPage},
-    {path: '/StatisticPage', component: StatisticPage},
+    { path: '/:account/SensorHistory', component: SensorHistory },
+    { path: '/SensorInfoPage', component: SensorInfoPage },
+    { path: '/NotificationPage', component: NotificationPage },
+    { path: '/StatisticPage', component: StatisticPage },
 
 
-    {path: '/GardenDashboard', component:GardenDashboard },
-    {path: '/InputValue', component: InputValue},
+    { path: '/GardenDashboard', component: GardenDashboard },
+    { path: '/InputValue', component: InputValue },
     { path: '/ManageSensor', component: ManageSensor },
     { path: '/controlPump', component: ControlPump },
     { path: '/schedule', component: Schedule },
-    { path: '/admin/user', component: ManageUser },
+    { path: '/admin', component: ManageUser },
     { path: '/admin/request', component: ManageRequest }
-    
+
 ]
 
 export default routes;

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const Garden_piece = new Schema({
-    id: ObjectId,
+    id: Number,
     date: { type: Date, default: Date.now }, //Ngay bat dau trong cay
     name: String,
     type: String, // Loai cay trong

@@ -1,11 +1,11 @@
 import RequestRow from "./RequestRow";
-import Pagination from "./Pagination";
-import data from "./requestData.js";
+import Pagination from "../Pagination";
+import data from "../requestData.js";
 import AddGarden from "./AddGarden";
 import UpdateGarden from "./UpdateGarden";
 import DeleteGarden from "./DeleteGarden";
-import SideBar from "../../components/GlobalStyles/SideBar";
-import "./Admin.css";
+import SideBar from "../../../components/GlobalStyles/AdminSideBar";
+import "../Admin.css";
 function ManageRequest() {
     const requestList = data.map(request => < RequestRow key={request.id} request={request} />);
     return (

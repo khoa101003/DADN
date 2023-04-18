@@ -1,0 +1,101 @@
+[{
+  "_id": {
+    "$oid": "643cc452e90164eb13f80262"
+  },
+  "id": "2",
+  "name": "Sensor do am 1",
+  "type": "sensor",
+  "owner": "phongong",
+  "coordinates": {
+    "x": 2,
+    "y": 1
+  },
+  "status": true,
+  "sensor_type": "do am",
+  "threshold": {
+    "min": 25,
+    "max": 30
+  },
+  "water": null,
+  "time": null
+},{
+  "_id": {
+    "$oid": "643cc482e90164eb13f80268"
+  },
+  "id": "2",
+  "name": "Sensor nhiet do 1",
+  "type": "sensor",
+  "owner": "phongong",
+  "coordinates": {
+    "x": 2,
+    "y": 1
+  },
+  "status": true,
+  "sensor_type": "nhiet do",
+  "threshold": {
+    "min": 25,
+    "max": 30
+  },
+  "water": null,
+  "time": null
+},{
+  "_id": {
+    "$oid": "643cc79fe90164eb13f80285"
+  },
+  "id": "5",
+  "name": "May bom 1",
+  "type": "pump",
+  "owner": "phongong",
+  "coordinates": {
+    "x": 3,
+    "y": 5
+  },
+  "status": true,
+  "sensor_type": null,
+  "threshold": {
+    "min": null,
+    "max": null
+  },
+  "water": 300,
+  "time": null
+},{
+  "_id": {
+    "$oid": "643cc8b4e90164eb13f80288"
+  },
+  "id": "4",
+  "name": "Sensor do am 1",
+  "type": "sensor",
+  "owner": "phongong",
+  "coordinates": {
+    "x": 6,
+    "y": 3
+  },
+  "status": true,
+  "sensor_type": "do am",
+  "threshold": {
+    "min": 25,
+    "max": 30
+  },
+  "water": null,
+  "time": null
+},{
+  "_id": {
+    "$oid": "643cc8e1e90164eb13f80289"
+  },
+  "id": "1",
+  "name": "Den 1",
+  "type": "light",
+  "owner": "phongong",
+  "coordinates": {
+    "x": 4,
+    "y": 4
+  },
+  "status": true,
+  "sensor_type": "den",
+  "threshold": {
+    "min": null,
+    "max": null
+  },
+  "water": null,
+  "time": 3000
+}]

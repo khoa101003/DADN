@@ -137,3 +137,10 @@ exports.getRecord = (req, res) => {
         })
         .catch(err => res.status(400).send(err))
 }
+
+exports.getPrivateRec = (req,res) =>{
+  const query = { garPiece: req.params['piece'] }
+  Record.find(query)
+  .then(record=>res.status(200).send(record))
+  .catch(err=>res.status(400).send(err))
+}
