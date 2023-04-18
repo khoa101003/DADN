@@ -45,7 +45,7 @@ function GardenList() {
     }
 
 
-    useEffect(() => {
+    //useEffect(() => {
 
     
         useEffect(() => {
@@ -98,6 +98,6 @@ function GardenList() {
                 </Row>
             </Container>
         )
-    })
+    //})
 }
 export default GardenList;

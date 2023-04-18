@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const Device = new Schema({
-    id: ObjectId,
+    id: Number,
     name: String, // tên của device
     type: String, // loại của device, đèn, máy bơm hoặc cảm biến
     owner: String, // Dùng để biết thiết bị thuộc khu vườn nào. owner = customer

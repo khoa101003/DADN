@@ -21,7 +21,7 @@ const getNotification = (req, res) => {
     console.log(`Receive get notification request from ${URL}`)
     Notification.find({})
         .then((data) => {
-            res.send(data)
+            res.status(200).send(data)
         })
         .catch(err => {
             res.status(400).send(err.message)
