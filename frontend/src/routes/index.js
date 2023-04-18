@@ -21,6 +21,8 @@ import ManageRequest from "../pages/AdminPages/ManageRequest/ManageRequest.jsx";
 import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
 import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
 
+import Search from "../pages/TechnicianPages/Search.jsx"
+import GardenLst from "../pages/TechnicianPages/GardenLst.jsx"
 const routes = [
     //Authorize
     { path: '/login-as', component: LoginAs },
@@ -37,7 +39,7 @@ const routes = [
     { path: '/:account/SensorHistory', component: SensorHistory },
     { path: '/SensorInfoPage', component: SensorInfoPage },
     { path: '/NotificationPage', component: NotificationPage },
-    { path: '/StatisticPage', component: StatisticPage },
+    { path: ':account/SensorHistory/:device_id', component: StatisticPage },
 
 
     { path: '/GardenDashboard', component: GardenDashboard },
@@ -46,8 +48,10 @@ const routes = [
     { path: '/controlPump', component: ControlPump },
     { path: '/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },
-    { path: '/admin/request', component: ManageRequest }
-
+    { path: '/admin/request', component: ManageRequest },
+    // Technician part
+    { path: '/tech', component: Search },
+    { path: '/tech/:account', component: GardenLst}
 ]
 
 export default routes;
