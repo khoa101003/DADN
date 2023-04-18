@@ -6,11 +6,10 @@ import device from "../../assets/frame.png";
 import active_user from "../../assets/users-active.png";
 import active_request from "../../assets/request-active.png";
 import active_device from "../../assets/frame-active.png";
-import classNames from 'classnames/bind';
+// import classNames from 'classnames/bind';
 import { Link, useLocation } from 'react-router-dom';
-import styles from './SideBar.module.scss';
+// import styles from './SideBar.module.scss';
 import { NavLink } from "react-bootstrap";
-const cx = classNames.bind(styles);
 
 function SideBar() {
     const sbstyle = {

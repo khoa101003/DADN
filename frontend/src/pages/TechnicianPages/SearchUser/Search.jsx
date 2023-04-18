@@ -1,5 +1,5 @@
 import "./Search.css"
-import { getUserList } from '../../api/userApi';
+import { getUserList } from '../../../api/userApi';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 function Search() {
@@ -37,7 +37,7 @@ function Search() {
                     flag = false
                     navigate(`/tech/${account}`)
                 }
-                    
+
             }
             if (flag)
                 alert("Tài khoản không tồn tại trên hệ thống")
@@ -54,7 +54,6 @@ function Search() {
             </div>
             <div className="right col-2"></div>
         </div>
-
     )
 }
 
