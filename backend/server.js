@@ -35,7 +35,7 @@ require('./route/record.route')(app)
 require('./route/static_record.route')(app)
 require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
-
+require('./route/Factory.route')(app)
 
 const port = 3030
 
