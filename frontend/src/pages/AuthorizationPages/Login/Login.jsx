@@ -78,7 +78,7 @@ function Login(){
             if(auth.find(cus=>cus.account===username && cus.password===password)) navigate(`/${username}`,{state: {owner: username}})
         }
         if(params.role=='technician'){
-            if(auth.find(tech=>tech.account===username && tech.password===password)) navigate('/')
+            if(auth.find(tech=>tech.account===username && tech.password===password)) navigate('/tech')
         }
         setWarning(true)
         setUsername('')
