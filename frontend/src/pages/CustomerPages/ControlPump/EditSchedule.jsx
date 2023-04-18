@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal} from 'react-bootstrap';
 import write from '../../../assets/write.png'
+import { updateSchedule } from '../../../api/schedule';
 const EditSchedule = (props) => {
-    const schedule = props.schedule;
     const [show,setShow] = useState(false);
+    const [schedule, setSchedule] = useState({...props.schedule});
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
+    const handleChangeTime = (e) => {
+        setSchedule((sche)=>({
+            ...sche,
+            "time":e.target.value,
+        }))
+    }
+    const handleChangeWater = (e) => {
+        setSchedule((sche)=>({
+            ...sche,
+            "water":e.target.value,
+        }))
+    }
+    const handleClick = () => {
+        console.log(schedule)
+        console.log(props.schedule._id)
+        updateSchedule(props.schedule._id,schedule)
+        setShow(false)
+    }
     return (
         <>
             <Button onClick={handleShow}>
@@ -18,18 +37,18 @@ const EditSchedule = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group>
-                            <Form.Label>Thời gian</Form.Label>
-                            <Form.Control type='datetime-local' defaultValue={schedule.time}/>
+                        <Form.Group onChange={handleChangeTime}>
+                            <Form.Label>Time</Form.Label>
+                            <Form.Control size="lg" type="time" />
                         </Form.Group>
-                        <Form.Group>
+                         <Form.Group onChange={handleChangeWater}>
                             <Form.Label>Lượng nước</Form.Label>
-                            <Form.Control type='number' placeholder='ml' defaultValue={schedule.amount}/>
+                            <Form.Control size="lg" type="number" />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button >Lưu</Button>
+                    <Button onClick={handleClick}>Lưu </Button>
                     <Button variant="secondary" onClick={()=>setShow(false)}>Thoát</Button>
                 </Modal.Footer>
             </Modal>

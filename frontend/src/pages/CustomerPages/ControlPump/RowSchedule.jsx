@@ -1,15 +1,21 @@
 import {Table } from "react-bootstrap";
 import DeleteSchedule from "./DeleteSchedule";
 import EditSchedule from "./EditSchedule";
+import { useState } from "react";
 
 const RowSchedule = (props) => {
-    const schedules = props.schedule;
-    const row = schedules.map((schedule) => (
-        <tr key={schedule.id}>
-            <th>{schedule.time}</th>
-            <th>{schedule.amount}</th>
-            <th><EditSchedule schedule = {schedule}></EditSchedule></th>
-            <th><DeleteSchedule /></th>
+    const listSchedule = props.schedule;
+    // const dates = schedules.dates
+    // console.log(listSchedule)
+    // const [listSchedule,setListSchedule] = useState(props.schedule);
+    // setListSchedule(props.schedule)
+    const row = listSchedule.map((date) => (
+        <tr>
+            <th>{date.time}</th>
+            <th>{date.water}</th>
+            <th>{date.type == "weekly"?date.dates:date.dates.substring(0,10)}</th>
+            <th><EditSchedule schedule = {date}></EditSchedule></th>
+            <th><DeleteSchedule id={date._id}/></th>
         </tr>
     ))
     return (
@@ -18,6 +24,7 @@ const RowSchedule = (props) => {
                 <tr>
                     <th>Thời gian</th>
                     <th>Lượng nước</th>
+                    <th>Ngày</th>
                     <th></th>
                     <th></th>
                 </tr>

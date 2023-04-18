@@ -5,6 +5,7 @@ import Custom from './Custom';
 import Monthly from './Monthly';
 import Weekly from './Weekly';
 import { postSchedule } from '../../../api/schedule';
+import { redirect, useNavigate } from 'react-router-dom';
 
 
 const Schedule = () => {
@@ -16,7 +17,7 @@ const Schedule = () => {
         setSchedule((sche)=>({
             ...sche,
             type:"weekly",
-            "dates":obj
+            dates:obj
         }))
     }
     const handleChangeMonthly = (obj) => {
@@ -60,7 +61,7 @@ const Schedule = () => {
     const handleClick = () => {
         // console.log(schedule.dates["Fri"])
         postSchedule(schedule)
-        // console.log(schedule)
+        window.location.href = 'http://localhost:5173/controlPump';
     }
     return (
         <Container>

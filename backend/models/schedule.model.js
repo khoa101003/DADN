@@ -7,6 +7,6 @@ const Schedule = new Schema({
     time:String,
     water:Number,
     type:String,
-    dates:[]
+    dates:Object
 });
 module.exports = mongoose.model('schedule', Schedule)

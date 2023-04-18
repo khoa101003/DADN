@@ -4,12 +4,16 @@ const userController = require('../controllers/user.controller')
 
 module.exports = app =>{
     router = express.Router()
+    router.post('/:id',schedule.updateSchedule)
     router.post('/', schedule.postSchedule);
-    // setInterval(()=>{
+
+    // const intervalObj = setInterval(()=>{
     //     schedule.getSchedule()
-    //   },500);
+    // },5000);
+
     router.get('/listSchedule', schedule.getListSchedule);
     router.get('/', schedule.getSchedule);
+    router.delete('/:id',schedule.deleteById);
     app.use('/api/schedulee',router)
 }
 
