@@ -21,6 +21,11 @@ import ManageRequest from "../pages/AdminPages/ManageRequest/ManageRequest.jsx";
 import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
 import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
 
+// Tech part 
+import Search from "../pages/TechnicianPages/SearchUser/Search.jsx"
+import GardenLst from "../pages/TechnicianPages/GardenLst/GardenLst.jsx"
+import DeviceType from "../pages/TechnicianPages/DeviceType/DeviceType.jsx"
+import ManageDevice from "../pages/TechnicianPages/ManageDevice/ManageDevice.jsx"
 const routes = [
     //Authorize
     { path: '/login-as', component: LoginAs },
@@ -37,7 +42,7 @@ const routes = [
     { path: '/:account/SensorHistory', component: SensorHistory },
     { path: '/SensorInfoPage', component: SensorInfoPage },
     { path: '/NotificationPage', component: NotificationPage },
-    { path: '/StatisticPage', component: StatisticPage },
+    { path: ':account/SensorHistory/:device_id', component: StatisticPage },
 
 
     { path: '/GardenDashboard', component: GardenDashboard },
@@ -46,8 +51,12 @@ const routes = [
     { path: '/controlPump', component: ControlPump },
     { path: '/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },
-    { path: '/admin/request', component: ManageRequest }
-
+    { path: '/admin/request', component: ManageRequest },
+    // Technician part
+    { path: '/tech', component: Search },
+    { path: '/tech/:account', component: GardenLst },
+    { path: '/tech/:account/:gar_id', component: DeviceType },
+    { path: '/tech/:account/:gar_id/:device_type', component: ManageDevice }
 ]
 
 export default routes;

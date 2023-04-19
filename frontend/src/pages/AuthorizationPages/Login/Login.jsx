@@ -72,13 +72,13 @@ function Login(){
         
         const auth = users.filter((user) => user.role === params.role)
         if(params.role=='admin'){         
-            if(auth.find(ad=>ad.account===username && ad.password===password)) navigate('/admin/user')
+            if(auth.find(ad=>ad.account===username && ad.password===password)) navigate('/admin')
         }
         if(params.role=='customer'){
             if(auth.find(cus=>cus.account===username && cus.password===password)) navigate(`/${username}`,{state: {owner: username}})
         }
         if(params.role=='technician'){
-            if(auth.find(tech=>tech.account===username && tech.password===password)) navigate('/')
+            if(auth.find(tech=>tech.account===username && tech.password===password)) navigate('/tech')
         }
         setWarning(true)
         setUsername('')
