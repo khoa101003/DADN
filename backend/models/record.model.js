@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 const Record = new Schema({
     id: Number,
     name: String,
-    owner: Number, // Record nay thuoc ve thiet bi nao
+    owner: Number, // Record nay thuoc ve thiet bi nao String
     type: String,
     // data.time.max = last value  adafruit (time)
     time: {
@@ -18,7 +18,15 @@ const Record = new Schema({
             value: String // value = 1/0: on/off. Còn khác giá trị này thì là sensor
             // Muốn kiểm tra giá trị thì dùng thêm trường type ở trên
         }
-    ],
+    ], 
+    /*
+    controlList: [
+        {
+            controller: String
+            value: Number
+        }
+    ]
+    */
     curValue: String, // render trên web
     garPiece: Number
 });
