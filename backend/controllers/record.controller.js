@@ -7,7 +7,7 @@
 // }
 
 // module.exports = getRecord;
-
+const Observable = require('./Observer')
 const Record = require('../models/record.model')
 const devices = [
   {
@@ -38,6 +38,7 @@ const devices = [
 ]
 
 const axios = require("axios");
+const { logger } = require('./autoPump');
 
 exports.autoUpdate = (req, res)=>{
   const updateValue = async (device, newValue) =>{
@@ -46,6 +47,7 @@ exports.autoUpdate = (req, res)=>{
         id:device.id
       }
     )
+
     const valueList = dt.valueList;
     if(valueList[valueList.length-1].log_time != newValue.log_time){
       valueList.push(newValue)
@@ -62,9 +64,9 @@ exports.autoUpdate = (req, res)=>{
           }
         )
     }
-    console.log(valueList)
+    // console.log(valueList)
   }
-  
+  // let data = []
     devices.forEach((device) => {
     const options = {
       method: 'GET',
@@ -75,11 +77,17 @@ exports.autoUpdate = (req, res)=>{
       updateValue(device,{
         log_time:response.data['updated_at'],
         value:response.data['last_value']})
+      // data = {
+      //   ...data,
+      //   [device.key]:response.data['last_value']
+      // }
+      Observable.notify({[device.key]:response.data['last_value']})
     }).catch(function (error) {
       console.log(error)
       console.error(error);
     });
     })
+    // console.log(data)
 }
 
 exports.getData =  (req, res) => {

@@ -5,7 +5,7 @@ export const switchPump = async (props) =>{
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': 'JWT fefege...',
-        'X-AIO-Key':'aio_zluZ62Dmvv8y7Y6EhwmEIKOEYsuO'
+        'X-AIO-Key':'aio_Ydss25hDmgz9CswD0YQxHhDA0uIA'
       }
       const data2 = {
         "datum":{"value":value}
