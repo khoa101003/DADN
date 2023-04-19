@@ -17,9 +17,6 @@ exports.getGPieceById = (req,res)=>{
     console.log(req.params['id'])
     const query = { id: req.params['id']}
     Garden_piece.find({})
-    .then(piece => {
-        console.log(piece)
-        res.status(200).send(piece)
-    })
+    .then(piece => res.status(200).send(piece))
     .catch(err => res.status(400).send(err))
 }

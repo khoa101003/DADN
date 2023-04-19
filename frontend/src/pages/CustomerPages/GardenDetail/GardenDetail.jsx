@@ -33,11 +33,7 @@ function GardenDetail(){
     const params = useParams()
 
     const loadData1 = async () =>{
-        await getPieceById(params.id).then((res)=>{
-            console.log("Result")
-            console.log(res)
-            setDetail(res[0])
-        })
+        await getPieceById(params.id).then((res)=>setDetail(res[0]))
     }
 
     const loadData2 = async () =>{

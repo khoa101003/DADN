@@ -1,30 +1,81 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import { useState } from "react";
-import { Data } from "./Data.js";
+import { useEffect, useState } from "react";
+//import { Data } from "./Data.js";
+import { getRecordList } from "../../../api/recordApi.js";
 import LineChart from './LineChart.jsx';
 import { Row, Col, Dropdown, DropdownButton, Form, Button } from "react-bootstrap";
 import SideBar from "../../../components/GlobalStyles/SideBar.jsx";
+import { useParams } from "react-router-dom";
 
-Chart.register(CategoryScale);
 
 function StatisticPage() { 
+  const params = useParams()
+  const [ chartData, setChartData ] = useState([])
+
+  const loadData = async function (id) {
+    return await getRecordList(id)
+  } 
+
+  const handleChangeDate = (e) => {
+      e.preventDefault()
+      let start = document.getElementById("start").value
+      let end = document.getElementById("end").value
+      if (!start)
+          alert("Vui lòng nhập ngày bắt đầu")
+      else if (!end)
+          alert("Vui lòng nhập ngày kết thúc")
+      else {
+          start = new Date(start)
+          end = new Date(end)
+          if (start > end)
+              alert("Ngày bắt đầu phải nhỏ hơn ngày kết thúc")
+          else {
+            loadData(params.device_id)
+            .then((res) => {
+              const valueList = res[0].valueList
+              const newChartData = valueList.filter(item => {
+                if (item.log_time >= start && item.log_time <= end)
+                    console.log(item)
+                    return item
+              })
+              setChartData(newChartData)
+            })
+          }
+      }
+  }
+
+  const resetDate = function () {
+    loadData(params.device_id)
+      .then((res) => {
+        const valueList = res[0].valueList
+        const newChartData = valueList.slice(valueList.length - 10, valueList.length).map((data) => {
+          return {
+            log_time: data.log_time, 
+            value: data.value,
+          }
+        })
+        setChartData(newChartData)
+      })
+  }
+
+  useEffect(() => {
+    loadData(params.device_id)
+      .then((res) => {
+        const valueList = res[0].valueList
+        const newChartData = valueList.slice(valueList.length - 10, valueList.length).map((data) => {
+          return {
+            log_time: data.log_time, 
+            value: data.value,
+          }
+        })
+        setChartData(newChartData)
+      })
+  }, [])
+
   const containerStyle = {
     width: '80%',
   }
-  const [chartData, setChartData] = useState({
-    labels: Data.map((data) => data.time), 
-    datasets: [
-      {
-        label: "Nhiệt độ (oC)",
-        fill: true,
-        data: Data.map((data) => data.measure),
-        borderColor: "red",
-        borderWidth: 2,
-        backgroundColor: 'rgb(255,0,0,0.25)'
-      }
-    ]
-  });
  
   return (
     <div className="row mx-auto container">
@@ -33,39 +84,23 @@ function StatisticPage() {
         <h1 className="text-center">Thống kê lịch sử</h1>
 
           <Row className="mt-4">
-            {// <Col xs={2}>
-            //     <Dropdown.Header>Chọn loại thiết bị</Dropdown.Header>
-            //     <DropdownButton id="equipment-type" title="Sensor nhiệt độ">
-            //         <Dropdown.Item href="#/action-1">Sensor độ ẩm đất</Dropdown.Item>
-            //         <Dropdown.Item href="#/action-2">Sensor độ ẩm không khí</Dropdown.Item>
-            //         <Dropdown.Item href="#/action-3">Sensor ánh sáng</Dropdown.Item>
-            //         <Dropdown.Item href="#/action-4">Sensor nhiệt độ</Dropdown.Item>
-            //     </DropdownButton>
-            // </Col>
-            // <Col xs={2}>
-            //     <Dropdown.Header>Chọn thiết bị</Dropdown.Header>
-            //     <DropdownButton id="equipment-list" title="Sensor 1">
-            //         <Dropdown.Item href="#/action-1">Sensor 1</Dropdown.Item>
-            //         <Dropdown.Item href="#/action-2">Sensor 2</Dropdown.Item>
-            //         <Dropdown.Item href="#/action-3">Sensor 3</Dropdown.Item>
-            //         <Dropdown.Item href="#/action-4">Sensor 4</Dropdown.Item>
-            //     </DropdownButton>
-            // </Col>
-            }
             <Col xs={3}>
-                <Form.Group controlId="date">
+                <Form.Group controlId="start">
                 <Form.Label>Ngày bắt đầu</Form.Label>
                 <Form.Control size='sm' type="date"></Form.Control>
                 </Form.Group>
             </Col>
             <Col xs={3}>
-                <Form.Group controlId="date">
+                <Form.Group controlId="end">
                 <Form.Label>Ngày kết thúc</Form.Label>
                 <Form.Control size='sm' type="date"></Form.Control>
                 </Form.Group>
             </Col>
             <Col>
-                <Button type='submit' size='lg' variant='secondary'>Lọc</Button>
+                <Button type='submit' size='lg' variant='primary' onClick={handleChangeDate}>Lọc</Button>
+            </Col>
+            <Col>
+                <Button type='submit' size='lg' variant='secondary' onClick={resetDate}>Reset</Button>
             </Col>
           </Row>
 
