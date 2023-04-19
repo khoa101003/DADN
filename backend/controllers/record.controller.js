@@ -7,7 +7,7 @@
 // }
 
 // module.exports = getRecord;
-
+const Observable = require('./Observer')
 const Record = require('../models/record.model')
 const devices = [
   {
@@ -38,49 +38,56 @@ const devices = [
 ]
 
 const axios = require("axios");
+const { logger } = require('./autoPump');
 
 exports.autoUpdate = (req, res)=>{
-  // const updateValue = async (device, newValue) =>{
-  //   const dt = await Record.collection.findOne(
-  //     {
-  //       id:device.id
-  //     }
-  //   )
+  const updateValue = async (device, newValue) =>{
+    const dt = await Record.collection.findOne(
+      {
+        id:device.id
+      }
+    )
 
-  //   const valueList = dt.valueList;
-  //   if(valueList[valueList.length-1].log_time != newValue.log_time){
-  //     valueList.push(newValue)
-  //     Record.collection.updateOne(
-  //         {
-  //           id:device.id
-  //         },
-  //         {
-  //           $set:
-  //           {
-  //             valueList:valueList,
-  //             curValue:newValue.value
-  //           }
-  //         }
-  //       )
-  //   }
-  //   console.log(valueList)
-  // }
+    const valueList = dt.valueList;
+    if(valueList[valueList.length-1].log_time != newValue.log_time){
+      valueList.push(newValue)
+      Record.collection.updateOne(
+          {
+            id:device.id
+          },
+          {
+            $set:
+            {
+              valueList:valueList,
+              curValue:newValue.value
+            }
+          }
+        )
+    }
+    // console.log(valueList)
+  }
+  // let data = []
+    devices.forEach((device) => {
+    const options = {
+      method: 'GET',
+      url: `https://io.adafruit.com/api/v2/hongphat03/feeds/${device.key}`
+    };
   
-    // devices.forEach((device) => {
-    // const options = {
-    //   method: 'GET',
-    //   url: `https://io.adafruit.com/api/v2/hongphat03/feeds/${device.key}`
-    // };
-  
-    // axios.request(options).then(function (response) {
-    //   updateValue(device,{
-    //     log_time:response.data['updated_at'],
-    //     value:response.data['last_value']})
-    // }).catch(function (error) {
-    //   console.log(error)
-    //   console.error(error);
-    // });
-    // })
+    axios.request(options).then(function (response) {
+      updateValue(device,{
+        log_time:response.data['updated_at'],
+        value:response.data['last_value']})
+      // data = {
+      //   ...data,
+      //   [device.key]:response.data['last_value']
+      // }
+      Observable.notify({[device.key]:response.data['last_value']})
+    }).catch(function (error) {
+      console.log(error)
+      console.error(error);
+    });
+    })
+    // console.log(data)
 }
 
 exports.getData =  (req, res) => {

@@ -4,6 +4,7 @@ const ObjectId = Schema.ObjectId;
 
 const Schedule = new Schema({
     id: ObjectId,
+    owner:String,
     time:String,
     water:Number,
     type:String,

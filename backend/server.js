@@ -1,6 +1,6 @@
 const express = require('express')
 const db = require('./config/dbconfig')
-const cors = require('cors')
+const cors = require('cors');
 
 const app = express()
 //Connect to database
@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 })
 
 
-
 require('./route/garden.route')(app)
 // require('./route/axios.route')(app)
 
@@ -37,7 +36,11 @@ require('./route/static_record.route')(app)
 require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
 
+require('./route/userInput.route')(app)
 
+const { logger } = require('./controllers/autoPump')
+const Observable = require('./controllers/Observer')
+Observable.subscribe(logger)
 
 const port = 3030
 

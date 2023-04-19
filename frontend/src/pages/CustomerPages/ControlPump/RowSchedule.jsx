@@ -9,8 +9,8 @@ const RowSchedule = (props) => {
     // console.log(listSchedule)
     // const [listSchedule,setListSchedule] = useState(props.schedule);
     // setListSchedule(props.schedule)
-    const row = listSchedule.map((date) => (
-        <tr>
+    const row = listSchedule.map((date,index) => (
+        <tr key={index}>
             <th>{date.time}</th>
             <th>{date.water}</th>
             <th>{date.type == "weekly"?date.dates:date.dates.substring(0,10)}</th>
