@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 const Record = new Schema({
     id: Number,
     name: String,
-    owner: Number, // Record nay thuoc ve thiet bi nao String
+    owner: String, // Record nay thuoc ve thiet bi nao String
     type: String,
     // data.time.max = last value  adafruit (time)
     time: {
