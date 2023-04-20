@@ -5,13 +5,12 @@ import Custom from './Custom';
 import Monthly from './Monthly';
 import Weekly from './Weekly';
 import { postSchedule } from '../../../api/schedule';
-import { redirect, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate, useParams } from 'react-router-dom';
 
 
 const Schedule = () => {
     const [schedule, setSchedule] = useState({});
-
-
+    const user = useParams();
     const handleChangeWeekly = (obj) => {
 
         setSchedule((sche)=>({
@@ -60,8 +59,12 @@ const Schedule = () => {
     }
     const handleClick = () => {
         // console.log(schedule.dates["Fri"])
+        setSchedule((sche) => ({
+            ...sche,
+            owner:user.account
+        }))
         postSchedule(schedule)
-        window.location.href = 'http://localhost:5173/controlPump';
+        window.location.href = `http://localhost:5173/${user.account}/controlPump`;
     }
     return (
         <Container>

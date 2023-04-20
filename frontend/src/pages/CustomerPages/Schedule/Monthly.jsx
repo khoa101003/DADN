@@ -15,7 +15,7 @@ const Monthly = (props) => {
         setDate(date)
     };
     const handleSubmit = () => {
-        console.log(typeof date[0])
+        // console.log(typeof date[0])
         const listDate = date.map((item) =>(new Date(item)));
         props.onChange(listDate);
         setShow(false);
@@ -38,10 +38,7 @@ const Monthly = (props) => {
                         value={date} 
                         onChange={handleChange}
                         multiple
-                        plugins={[
-                        <DatePanel />
-                        ]}
-                    />
+                        />
                 </Row> 
             </Modal.Body>
             <Modal.Footer>

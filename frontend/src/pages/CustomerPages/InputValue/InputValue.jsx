@@ -1,13 +1,15 @@
 import classnames from 'classnames/bind'
 import styles from './InputValue.module.scss'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { useState } from 'react';
-import { postUserInput } from '../../../api/userInput';
+import { postUserInput } from '../../../api/deviceApi';
 const cx = classnames.bind(styles);
 
 const InputValue = () => {
+    const user = useParams();
+    console.log(user)
     const [data,setData] = useState({
         minTemp:"",
         maxTemp:"",
@@ -40,8 +42,12 @@ const InputValue = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
+        setData((data) => ({
+            ...data,
+            owner:user.account
+        }))
         postUserInput(data)
+        // const navigate = useNavigate();
     }
     return (
         <Container>

@@ -45,11 +45,11 @@ const routes = [
     { path: ':account/SensorHistory/:device_id', component: StatisticPage },
 
 
-    { path: '/GardenDashboard', component: GardenDashboard },
-    { path: '/InputValue', component: InputValue },
+    { path: '/:account/dashboard', component: GardenDashboard },
+    { path: '/:account/InputValue', component: InputValue },
     { path: '/ManageSensor', component: ManageSensor },
-    { path: '/controlPump', component: ControlPump },
-    { path: '/schedule', component: Schedule },
+    { path: '/:account/controlPump', component: ControlPump },
+    { path: '/:account/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },
     { path: '/admin/request', component: ManageRequest },
     // Technician part

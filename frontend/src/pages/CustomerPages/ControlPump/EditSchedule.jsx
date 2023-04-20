@@ -10,20 +10,21 @@ const EditSchedule = (props) => {
     
     const handleChangeTime = (e) => {
         setSchedule((sche)=>({
-            ...sche,
+            ...props.schedule,
             "time":e.target.value,
         }))
     }
     const handleChangeWater = (e) => {
         setSchedule((sche)=>({
-            ...sche,
+            ...props.schedule,
             "water":e.target.value,
         }))
     }
     const handleClick = () => {
-        console.log(schedule)
-        console.log(props.schedule._id)
+        // console.log(schedule)
+        // console.log(props.schedule._id)
         updateSchedule(props.schedule._id,schedule)
+        props.onEdit(props.schedule._id,schedule)
         setShow(false)
     }
     return (
@@ -39,11 +40,11 @@ const EditSchedule = (props) => {
                     <Form>
                         <Form.Group onChange={handleChangeTime}>
                             <Form.Label>Time</Form.Label>
-                            <Form.Control size="lg" type="time" />
+                            <Form.Control size="lg" type="time" value={props.time}/>
                         </Form.Group>
                          <Form.Group onChange={handleChangeWater}>
                             <Form.Label>Lượng nước</Form.Label>
-                            <Form.Control size="lg" type="number" />
+                            <Form.Control size="lg" type="number" value={props.water}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

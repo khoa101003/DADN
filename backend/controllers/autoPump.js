@@ -1,13 +1,13 @@
 const { default: axios } = require('axios')
 const Observable = require('./Observer')
-const userInput = require('../models/userInput.model')
+const device = require('../models/device.model')
 
 
 module.exports.logger = function (data) {
     if(data['do-am-dat']){
-        userInput.find({})
-        .then((userInput) => {
-            if(data['do-am-dat'] < userInput[0].soil){
+        device.find({type:"soil",owner:"phongong"})
+        .then((device) => {
+            if(data['do-am-dat'] < device[0].threshold.min){
                 console.log("tuoi")
             }
             else{
@@ -15,6 +15,7 @@ module.exports.logger = function (data) {
             }
 
         })
+        .catch((err) => console.log(err))
     }
 }
   

@@ -36,7 +36,6 @@ require('./route/static_record.route')(app)
 require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
 require('./route/Factory.route')(app)
-require('./route/userInput.route')(app)
 
 const { logger } = require('./controllers/autoPump')
 const Observable = require('./controllers/Observer')

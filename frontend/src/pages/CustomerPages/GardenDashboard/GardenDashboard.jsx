@@ -3,6 +3,8 @@ import styles from './GardenDashboard.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
+import { useEffect, useState } from 'react';
+import { getCurValueTemp } from '../../../api/adafruitApi';
 
 const cx = classnames.bind(styles);
 const data = {
@@ -22,6 +24,19 @@ const infor = {
     hours:"60"
 }
 const GardenDashboard = () => {
+    const [data,setData] = useState({});
+
+
+    useEffect(() => {
+        const getTemp = async () => {
+            return await getCurValueTemp().then(res =>setData(res)).catch((err) => console.log(err))
+        }
+        getTemp()
+        const interval = setInterval(() => getTemp(),1000)
+        return () => {
+            clearInterval(interval);
+        }
+    },[])
     return (
         <Container>
             <Row>
@@ -36,7 +51,7 @@ const GardenDashboard = () => {
                                     <h3>Nhiệt độ</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{dataSensor.temp} &#8451;</p>
+                                    <p>{data.temp} &#8451;</p>
                                 </div>
                             </div>
                         </Col>
@@ -47,7 +62,7 @@ const GardenDashboard = () => {
                                     <h3>Độ ẩm</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{dataSensor.humidity} &#37;</p>
+                                    <p>{data.humidity} &#37;</p>
                                 </div>
                             </div>
                         </Col>
@@ -58,7 +73,7 @@ const GardenDashboard = () => {
                                     <h3>Ánh sáng</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{dataSensor.lux} lx</p>
+                                    <p>{data.light} lx</p>
                                 </div>
                             </div>
                         </Col>
@@ -69,7 +84,7 @@ const GardenDashboard = () => {
                                     <h3>Độ ẩm đất</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{dataSensor.soilMoisture} &#37;</p>
+                                    <p>{data.soil} &#37;</p>
                                 </div>
                             </div>
                         </Col>

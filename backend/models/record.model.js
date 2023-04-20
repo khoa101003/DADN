@@ -14,6 +14,7 @@ const Record = new Schema({
     // data.valueList.push({log_time, value})*
     valueList: [
         {
+            controller:String,
             log_time: { type: Date, default: Date.now },
             value: String // value = 1/0: on/off. Còn khác giá trị này thì là sensor
             // Muốn kiểm tra giá trị thì dùng thêm trường type ở trên

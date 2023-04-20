@@ -8,3 +8,7 @@ export const getDeviceList = async (account) => {
         })
         .catch((err) => alert('Failure!!!', err));
 }
+
+export const postUserInput = async (props) => {
+    return await axios.post(`${URL}`, props).then((res)=>{console.log('Thêm thành công')}).catch((err) =>console.log(err));;
+}

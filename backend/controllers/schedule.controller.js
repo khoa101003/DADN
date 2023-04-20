@@ -4,6 +4,7 @@ const axios = require('axios')
 
 exports.postSchedule = (req, res) => {
     const scheduleList = req.body
+    console.log(scheduleList)
     const dates = scheduleList.dates
     // đổi chế độ tưới -> xóa hết chế độ cũ
     schedule.find({type:scheduleList.type})
@@ -30,16 +31,19 @@ exports.postSchedule = (req, res) => {
 
 
 // send request turn on pump
-const postReq = () => {
+const postReq = (props) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_Ydss25hDmgz9CswD0YQxHhDA0uIA'
+    'X-AIO-Key':'aio_PGDN75wlGxbqxkgjmCqnMR3HXnDO'
   }
   const data2 = {
-    "datum":{"value":"ON"}
+    "datum":
+    {
+      "value":"ON"
+    }
   }
-  
+  console.log(new Date())
   axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom/data', data2, {
       headers: headers
     })
@@ -53,7 +57,6 @@ const postReq = () => {
 }
 
 exports.getSchedule = () => {
-    console.log("aa")
     schedule.find({})
     .then(schedules => {
       console.log(schedules)
@@ -65,15 +68,14 @@ exports.getSchedule = () => {
       minute = minute<10?"0"+minute.toString():minute.toString();
       let curTime = hour+":"+minute;
 
-    //   console.log(schedules[0].time === curTime)
-
     //   // lặp lại theo tuần
       if(schedules[0].type == "weekly"){
         schedules.forEach((obj) => {
-          if(obj.dates === day.toDateString().substring(0,3)){
-            console.log(obj.dates)
+          console.log(obj.time)
+          console.log(curTime)
+          if(obj.dates === day.toDateString().substring(0,3) && obj.time === curTime){
             console.log(day.toDateString().substring(0,3))
-            postReq()
+            postReq({owner:schedules[0].owner})
           }
         })
         
@@ -82,20 +84,20 @@ exports.getSchedule = () => {
       else if(schedules[0].type == "monthly"){
         schedules.forEach((obj) => {
           let days = new Date(obj.dates)
-          if(days.getDate() === day.getDate()){
-            postReq()
+          if(days.getDate() === day.getDate() && obj.time === curTime){
+            postReq({owner:schedules[0].owner})
           }
         })
       }
       // lặp lại trong khoảng thời gian
-      else if(schedules[0].type === "custom"){
+      else if(schedules[0].type === "custom" && obj.time === curTime){
         schedules.forEach((obj) => {
           let days = new Date(obj.dates)
           days = days.toDateString();
           if(day.toDateString() === days){
-            console.log(days)
-            console.log(day.toDateString())
-            postReq()
+            // console.log(days)
+            // console.log(day.toDateString())
+            postReq({owner:schedules[0].owner})
             schedule.collection.deleteOne({dates:schedules[0].dates})
           }
         })
