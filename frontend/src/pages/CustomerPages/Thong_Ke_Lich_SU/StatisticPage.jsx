@@ -1,13 +1,19 @@
-import Chart from "chart.js/auto";
-import { CategoryScale } from "chart.js";
 import { useEffect, useState } from "react";
-//import { Data } from "./Data.js";
 import { getRecordList } from "../../../api/recordApi.js";
 import LineChart from './LineChart.jsx';
-import { Row, Col, Dropdown, DropdownButton, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import SideBar from "../../../components/GlobalStyles/SideBar.jsx";
 import { useParams } from "react-router-dom";
 
+function isInInterval(start, end, date) {
+  if (date.getFullYear() < start.getFullYear() || date.getFullYear > end.getFullYear())
+    return false
+  if (date.getMonth() < start.getMonth() || date.getMonth > end.getMonth())
+    return false
+  if (date.getDate() < start.getDate() || date.getDate > end.getDate())
+    return false
+  return true
+}
 
 function StatisticPage() { 
   const params = useParams()
@@ -26,8 +32,10 @@ function StatisticPage() {
       else if (!end)
           alert("Vui lòng nhập ngày kết thúc")
       else {
-          start = new Date(start)
-          end = new Date(end)
+          start = new Date(start).toISOString()
+          end = new Date(end).toISOString()
+          console.log(`Ngày bắt đầu: ${start}`)
+          console.log(`Ngày kết thúc: ${end}`)
           if (start > end)
               alert("Ngày bắt đầu phải nhỏ hơn ngày kết thúc")
           else {
@@ -35,9 +43,10 @@ function StatisticPage() {
             .then((res) => {
               const valueList = res[0].valueList
               const newChartData = valueList.filter(item => {
-                if (item.log_time >= start && item.log_time <= end)
-                    console.log(item)
+                const item_date = new Date(item.log_time).toISOString()
+                if (item_date >= start && item_date <= end) {
                     return item
+                }
               })
               setChartData(newChartData)
             })
@@ -46,6 +55,11 @@ function StatisticPage() {
   }
 
   const resetDate = function () {
+    let start = document.getElementById("start")
+    let end = document.getElementById("end")
+    start.value = start.defaultValue
+    end.value = end.defaultValue
+
     loadData(params.device_id)
       .then((res) => {
         const valueList = res[0].valueList
