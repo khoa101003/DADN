@@ -44,12 +44,12 @@ function PassRetrival(){
                                 <Form className='d-flex align-items-center flex-column mb-5'>
                                     <Form.Group className="mb-3" controlId="email" style={inputStyled}>
                                         <Form.Label style={labelStyle}>Nhập địa chỉ email</Form.Label>
-                                        <Form.Control size='lg' type="text" placeholder="type your email address" />
+                                        <Form.Control  type="text" placeholder="type your email address" />
                                     </Form.Group>
                                     <h5>Hoặc</h5>
                                     <Form.Group className="mb-3" controlId="phonenum" style={inputStyled}>
                                         <Form.Label style={labelStyle}>Nhập số điện thoại</Form.Label>
-                                        <Form.Control size='lg' type="text" placeholder="type your phone number" />
+                                        <Form.Control  type="text" placeholder="type your phone number" />
                                     </Form.Group>
 
                                     <Button variant="success" type="submit" className={cx('btn')} onClick={handleSubmit}>

@@ -20,8 +20,11 @@ import ManageUser from "../pages/AdminPages/ManageUser";
 import ManageRequest from "../pages/AdminPages/ManageRequest";
 import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
 import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
+import NavigateCus from "../pages/CustomerPages/NavigateCus/NavigateCus.jsx";
 
 const routes = [
+    //Navigate page
+    {path: '/', component: NavigateCus},
     //Authorize
     {  path: '/login-as', component: LoginAs  },
     {  path: '/login/:role', component: Login  },
@@ -31,8 +34,8 @@ const routes = [
     {path: '/:account', component: GardenList},
     {path: '/:account/garden-detail/:id', component: GardenDetail},
 
-    {path: '/garden-regis', component: GardenRegis},
-    {path: '/garden-mod', component: GardenModify},
+    {path: '/:account/garden-regis', component: GardenRegis},
+    {path: '/:account/garden-mod/:id', component: GardenModify},
 
     {path: '/SensorHistory', component: SensorHistory},
     {path: '/SensorInfoPage', component: SensorInfoPage},
