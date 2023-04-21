@@ -33,11 +33,11 @@ function GardenDetail(){
     const params = useParams()
 
     const loadData1 = async () =>{
-        await getPieceById(params.id).then((res)=>setDetail(res[0]))
+        return await getPieceById(params.id).then((res)=>setDetail(res[0]))
     }
 
     const loadData2 = async () =>{
-        await getPrivateRecord(params.id).then((res)=>setSensors(res))
+        return await getPrivateRecord(params.id).then((res)=>setSensors(res))
     }
     useEffect(()=>{
         loadData1()
@@ -129,7 +129,7 @@ function GardenDetail(){
                     <div className={cx('edit-del')}>
                         <Row>
                             <Col xs={{span: 2, offset: 3}}>
-                                <Button variant="primary" style={{width: "100%"}} href='/garden-mod'>Sửa thông tin</Button>
+                                <Button variant="primary" style={{width: "100%"}} href={`/${params.account}/garden-mod/${params.id}`}>Sửa thông tin</Button>
                             </Col>
                             <Col xs={{span: 2, offset: 1}}>
                                 <Button variant="danger" style={{width: "100%"}}>Xóa</Button>

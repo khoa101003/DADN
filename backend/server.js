@@ -35,6 +35,7 @@ require('./route/schedule.route')(app)
 require('./route/static_record.route')(app)
 require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
+require('./route/request.route')(app)
 require('./route/Factory.route')(app)
 require('./route/userInput.route')(app)
 

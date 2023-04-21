@@ -53,7 +53,6 @@ const postReq = () => {
 }
 
 exports.getSchedule = () => {
-    console.log("aa")
     schedule.find({})
     .then(schedules => {
       console.log(schedules)
