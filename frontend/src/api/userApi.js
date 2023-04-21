@@ -6,3 +6,15 @@ export const getUserList = async () =>{
         .then((res) => res.data)
         .catch((err) => alert('Failure!!!', err));
 }
+
+export const getUserbyAccount = async(user) =>{
+    return await axios.get(`${URL}/${user}`)
+        .then((res) => res.data)
+        .catch((err) => alert('Failure!!!', err));
+}
+
+export const postRegisterRequest = async (props) =>{
+    return await axios.post(`${URL}`, props)
+        .then((res) => true)
+        .catch((err) => alert('Failure!!!', err));
+}
