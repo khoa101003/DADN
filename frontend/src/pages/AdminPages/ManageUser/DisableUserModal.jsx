@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import disable from "../../assets/disable.png";
-import user from '../../assets/user.png';
+import disable from "../../../assets/disable.png";
+import user from '../../../assets/user.png';
 
 function DisableUserModal(props) {
     const [show, setShow] = useState(false);

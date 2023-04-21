@@ -25,7 +25,7 @@ function SideBar() {
     };
     const location = useLocation();
     const path = location.pathname;
-    const userLogo = (path == "/admin/user") ? active_user : user;
+    const userLogo = (path == "/admin") ? active_user : user;
     const requestLogo = (path == "/admin/request") ? active_request : request;
     const deviceLogo = (path == "/admin/device") ? active_device : device;
     // const [userLogo, setUserLogo] = useState(active_user);
@@ -52,7 +52,7 @@ function SideBar() {
             <img className="admin-logo img-fluid mx-auto d-block py-5" src={logo}></img>
 
             <div className="my-5 mx-5">
-                <Link to="/admin/user" style={linkStyle}>
+                <Link to="/admin" style={linkStyle}>
                     <h6 className="d-flex align-items-center">
                         <img src={userLogo} className="pe-3 admin-user-icon"></img>
                         Quản lý khách hàng

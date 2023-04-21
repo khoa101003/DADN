@@ -61,17 +61,16 @@ function Login(){
     useEffect(()=>{
         loadData()
     },[])
-
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
     const [warning,setWarning] = useState(false)
     const navigate = useNavigate()
     const params = useParams()
-
+    
     const handleSubmit = (e)=>{
         e.preventDefault();
         
-        const auth = users.filter((user)=>user.role === params.role)
+        const auth = users.filter((user) => user.role === params.role)
         if(params.role=='admin'){         
             if(auth.find(ad=>ad.account===username && ad.password===password)) navigate('/admin/user')
         }
