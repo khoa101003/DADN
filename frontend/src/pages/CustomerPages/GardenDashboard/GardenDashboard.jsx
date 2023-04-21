@@ -1,33 +1,45 @@
 import classnames from 'classnames/bind'
 import styles from './GardenDashboard.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { useEffect, useState } from 'react';
 import { getCurValueTemp } from '../../../api/adafruitApi';
+import { getThreshold } from '../../../api/deviceApi';
 
 const cx = classnames.bind(styles);
-const data = {
-        minTemp:"25",
-        maxTemp:"35",
-        soil:"30",
-        maxSoil:"40"
-    };
-const dataSensor = {
-    temp:'30',
-    humidity:'40',
-    lux:'150',
-    soilMoisture:'30'
-}
+// const data = {
+//         minTemp:"25",
+//         maxTemp:"35",
+//         soil:"30",
+//         maxSoil:"40"
+//     };
+// const dataSensor = {
+//     temp:'30',
+//     humidity:'40',
+//     lux:'150',
+//     soilMoisture:'30'
+// }
 const infor = {
     days:"10",
     hours:"60"
 }
 const GardenDashboard = () => {
     const [data,setData] = useState({});
-
-
+    const [threshold,setThreshold] = useState({
+        minTemp:"",
+        maxTemp:"",
+        soil:"",
+        maxSoil:""
+    })
+    const user = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
     useEffect(() => {
+        if(location.state)setThreshold(location.state)
+        else{
+            getThreshold().then((res) => setThreshold(res)).catch((err)=>console.log(err))
+        }
         const getTemp = async () => {
             return await getCurValueTemp().then(res =>setData(res)).catch((err) => console.log(err))
         }
@@ -37,6 +49,7 @@ const GardenDashboard = () => {
             clearInterval(interval);
         }
     },[])
+
     return (
         <Container>
             <Row>
@@ -119,21 +132,21 @@ const GardenDashboard = () => {
                     </Row>
                     <Row className={cx('value-notify')}>
                         <Col xs='5' className={cx('value')}>
-                            <h4>Nhiệt độ tối thiểu: {data.minTemp}</h4>
+                            <h4>Nhiệt độ tối thiểu: {threshold.minTemp}</h4>
                         </Col>
                         <Col xs='5' className={cx('value')}>
-                            <h4>Nhiệt độ tối đa: {data.maxTemp}</h4>
+                            <h4>Nhiệt độ tối đa: {threshold.maxTemp}</h4>
                         </Col>
                         <Col xs='5' className={cx('value')}>
-                            <h4>Độ ẩm đất cần duy trì: {data.soil}</h4>
+                            <h4>Độ ẩm đất cần duy trì: {threshold.soil}</h4>
                         </Col>
                         <Col xs='5' className={cx('value')}>
-                            <h4>Độ ẩm đất tối đa: {data.maxSoil}</h4>
+                            <h4>Độ ẩm đất tối đa: {threshold.maxSoil}</h4>
                         </Col>
                         <Col xs={{span:2, offset:9 }} className='mb-3'>
-                            <Link to={{pathname:'/InputValue'}}>
-                                <Button variant="success">Thiết Lập</Button>
-                            </Link>     
+                            {/* <Link to={{pathname:`../${user.account}/InputValue`, state: { prevPath: location.pathname }}}> */}
+                                <Button variant="success" onClick={() => {navigate(`../${user.account}/InputValue`,{state: { prevPath: location.pathname}} )}}>Thiết Lập</Button>
+                            {/* </Link>      */}
                         </Col> 
                     </Row>
                 </Col>

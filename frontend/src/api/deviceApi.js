@@ -10,5 +10,9 @@ export const getDeviceList = async (account) => {
 }
 
 export const postUserInput = async (props) => {
-    return await axios.post(`${URL}`, props).then((res)=>{console.log('Thêm thành công')}).catch((err) =>console.log(err));;
+    return await axios.post(`${URL}`, props).then((res)=>res).catch((err) =>console.log(err));;
+}
+
+export const getThreshold = async () => {
+    return await axios.get(`${URL}/threshold`).then((res) => res.data).catch((err) => console.log(err))
 }

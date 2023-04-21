@@ -8,7 +8,9 @@ exports.getDevices = (req, res) => {
 
 exports.postThreshold = (req,res) => {
     // console.log(req.body)
+    var a = 0;
     const data = req.body
+    // console.log(data)
     Device.updateOne({type:"temp", owner:data.owner},
     {
         $set: {
@@ -30,6 +32,36 @@ exports.postThreshold = (req,res) => {
             }
         },
     })
-    .then(console.log("thanh cong"))
+    .then(res.status(200).send("OK"))
     .catch((err) => console.log(err))
+}
+
+exports.getThreshold = (req,res) => {
+    var thresholds = {}
+    Device.find({})
+    .then((devices) => {
+        devices.forEach((device) => {
+            if(device.type === "temp"){
+                thresholds.minTemp = device.threshold.min;
+                thresholds.maxTemp = device.threshold.max
+                // threshold = {
+                //     ...threshold,
+                //     minTemp:device.threshold.min,
+                //     maxTemp:device.threshold.max
+                // }
+            }
+            if(device.type === "soil"){
+                thresholds.soil = device.threshold.min;
+                thresholds.maxSoil = device.threshold.max
+                // threshold = {
+                //     ...threshold,
+                //     soil:device.threshold.min,
+                //     maxSoil:device.threshold.max
+                // }
+            res.send(thresholds)
+            }
+        })
+    })
+    .catch((err) => console.log(err))
+
 }

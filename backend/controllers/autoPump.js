@@ -8,10 +8,10 @@ module.exports.logger = function (data) {
         device.find({type:"soil",owner:"phongong"})
         .then((device) => {
             if(data['do-am-dat'] < device[0].threshold.min){
-                console.log("tuoi")
+                // console.log("tuoi")
             }
             else{
-                console.log("ko tuoi")
+                // console.log("ko tuoi")
             }
 
         })

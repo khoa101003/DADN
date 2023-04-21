@@ -17,7 +17,7 @@ exports.postSchedule = (req, res) => {
         dates:date.substring(0,10)
       }
       // insert nếu ngày đó chưa có trong db
-      schedule.find({dates:data.dates})
+      schedule.find({dates:data.dates, time:date.time})
       .then((sche) => {
         if(sche.length == 0){
           schedule.collection.insertOne(data)
@@ -35,12 +35,37 @@ const postReq = (props) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_PGDN75wlGxbqxkgjmCqnMR3HXnDO'
+    'X-AIO-Key':'aio_CaAk91HEKZv9uM95w8YxZqdK2uo8'
   }
   const data2 = {
     "datum":
     {
       "value":"ON"
+    }
+  }
+  console.log(new Date())
+  axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom/data', data2, {
+      headers: headers
+    })
+    .then((response) => {
+      console.log("OK")
+    })
+    .catch((error) => {
+      console.log(error)
+      console.error(error);
+    })
+}
+
+const turnOff = () => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT fefege...',
+    'X-AIO-Key':'aio_CaAk91HEKZv9uM95w8YxZqdK2uo8'
+  }
+  const data2 = {
+    "datum":
+    {
+      "value":"OFF"
     }
   }
   console.log(new Date())
@@ -86,18 +111,33 @@ exports.getSchedule = () => {
           let days = new Date(obj.dates)
           if(days.getDate() === day.getDate() && obj.time === curTime){
             postReq({owner:schedules[0].owner})
+            const timer = Math.floor(obj.water/1.5)
+            console.log(timer)
+            setTimeout(() => {
+              turnOff();
+            },timer)
+            const month = days.getMonth()+1 < 12 ? days.getMonth()+1:0
+            days.setMonth(month)
+            schedule.collection.updateOne({_id: obj._id},{
+              $set:{
+                dates:days.toISOString().substring(0,10)
+              }
+            })
           }
         })
       }
       // lặp lại trong khoảng thời gian
-      else if(schedules[0].type === "custom" && obj.time === curTime){
+      else if(schedules[0].type === "custom"){
         schedules.forEach((obj) => {
           let days = new Date(obj.dates)
           days = days.toDateString();
-          if(day.toDateString() === days){
-            // console.log(days)
-            // console.log(day.toDateString())
+          if(day.toDateString() === days && obj.time === curTime){
             postReq({owner:schedules[0].owner})
+            const timer = Math.floor(obj.water/1.5)
+            console.log(timer)
+            setTimeout(() => {
+              turnOff();
+            },timer)
             schedule.collection.deleteOne({dates:schedules[0].dates})
           }
         })
