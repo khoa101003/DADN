@@ -8,8 +8,9 @@ const DeleteSchedule = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleDelete = () => {
-        console.log(props.id)
+        // console.log(props.id)
         deleteScheduleById(props.id)
+        props.onDelete(props.id)
         setShow(false);
     }
     return (

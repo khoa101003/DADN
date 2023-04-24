@@ -4,6 +4,7 @@ const axios = require('axios')
 
 exports.postSchedule = (req, res) => {
     const scheduleList = req.body
+    console.log(scheduleList)
     const dates = scheduleList.dates
     // đổi chế độ tưới -> xóa hết chế độ cũ
     schedule.find({type:scheduleList.type})
@@ -16,7 +17,7 @@ exports.postSchedule = (req, res) => {
         dates:date.substring(0,10)
       }
       // insert nếu ngày đó chưa có trong db
-      schedule.find({dates:data.dates})
+      schedule.find({dates:data.dates, time:date.time})
       .then((sche) => {
         if(sche.length == 0){
           schedule.collection.insertOne(data)
@@ -30,16 +31,44 @@ exports.postSchedule = (req, res) => {
 
 
 // send request turn on pump
-const postReq = () => {
+const postReq = (props) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_Ydss25hDmgz9CswD0YQxHhDA0uIA'
+    'X-AIO-Key':'aio_CaAk91HEKZv9uM95w8YxZqdK2uo8'
   }
   const data2 = {
-    "datum":{"value":"ON"}
+    "datum":
+    {
+      "value":"ON"
+    }
   }
-  
+  console.log(new Date())
+  axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom/data', data2, {
+      headers: headers
+    })
+    .then((response) => {
+      console.log("OK")
+    })
+    .catch((error) => {
+      console.log(error)
+      console.error(error);
+    })
+}
+
+const turnOff = () => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT fefege...',
+    'X-AIO-Key':'aio_CaAk91HEKZv9uM95w8YxZqdK2uo8'
+  }
+  const data2 = {
+    "datum":
+    {
+      "value":"OFF"
+    }
+  }
+  console.log(new Date())
   axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom/data', data2, {
       headers: headers
     })
@@ -64,15 +93,14 @@ exports.getSchedule = () => {
       minute = minute<10?"0"+minute.toString():minute.toString();
       let curTime = hour+":"+minute;
 
-    //   console.log(schedules[0].time === curTime)
-
     //   // lặp lại theo tuần
       if(schedules[0].type == "weekly"){
         schedules.forEach((obj) => {
-          if(obj.dates === day.toDateString().substring(0,3)){
-            console.log(obj.dates)
+          console.log(obj.time)
+          console.log(curTime)
+          if(obj.dates === day.toDateString().substring(0,3) && obj.time === curTime){
             console.log(day.toDateString().substring(0,3))
-            postReq()
+            postReq({owner:schedules[0].owner})
           }
         })
         
@@ -81,8 +109,20 @@ exports.getSchedule = () => {
       else if(schedules[0].type == "monthly"){
         schedules.forEach((obj) => {
           let days = new Date(obj.dates)
-          if(days.getDate() === day.getDate()){
-            postReq()
+          if(days.getDate() === day.getDate() && obj.time === curTime){
+            postReq({owner:schedules[0].owner})
+            const timer = Math.floor(obj.water/1.5)
+            console.log(timer)
+            setTimeout(() => {
+              turnOff();
+            },timer)
+            const month = days.getMonth()+1 < 12 ? days.getMonth()+1:0
+            days.setMonth(month)
+            schedule.collection.updateOne({_id: obj._id},{
+              $set:{
+                dates:days.toISOString().substring(0,10)
+              }
+            })
           }
         })
       }
@@ -91,10 +131,13 @@ exports.getSchedule = () => {
         schedules.forEach((obj) => {
           let days = new Date(obj.dates)
           days = days.toDateString();
-          if(day.toDateString() === days){
-            console.log(days)
-            console.log(day.toDateString())
-            postReq()
+          if(day.toDateString() === days && obj.time === curTime){
+            postReq({owner:schedules[0].owner})
+            const timer = Math.floor(obj.water/1.5)
+            console.log(timer)
+            setTimeout(() => {
+              turnOff();
+            },timer)
             schedule.collection.deleteOne({dates:schedules[0].dates})
           }
         })

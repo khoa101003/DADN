@@ -11,9 +11,9 @@ export const getListSchedule = async () => {
 }
 
 export const deleteScheduleById = async (id) => {
-    return await axios.delete(`${URL}/${id}`)
+    return await axios.delete(`${URL}/${id}`).then(console.log("xoa thanh cong")).catch((err) => console.log(err))
 }
 
 export const updateSchedule = async (id,sche) => {
-    return await axios.post(`${URL}/${id}`,sche)
+    return await axios.post(`${URL}/${id}`,sche).then(console.log("cap nhat thanh cong")).catch((err) => console.log(err))
 }

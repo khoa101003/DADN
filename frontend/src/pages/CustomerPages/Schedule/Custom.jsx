@@ -104,9 +104,9 @@ const Custom = (props) => {
                         value={CusDate} 
                         onChange={handleChange}
                         multiple
-                        plugins={[
-                        <DatePanel />
-                        ]}
+                        // plugins={[
+                        // <DatePanel />
+                        // ]}
                         minDate={minDate}
                         maxDate={maxDate}
                         />
