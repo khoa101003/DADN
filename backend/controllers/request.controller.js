@@ -4,7 +4,7 @@ exports.registerGarden = (req, res)=>{
     data = req.body
     Request.insertMany([
         {
-            status: true,
+            status: false,
             name: 'Register Garden',
             sender: data.sender,
             description: 'Register garden request',
@@ -39,7 +39,7 @@ exports.modifyGarden = (req, res)=>{
     data = req.body
     Request.insertMany([
         {
-            status: true,
+            status: false,
             name: 'Modify Garden',
             sender: data.sender,
             description: 'Modify garden request',
@@ -65,6 +65,20 @@ exports.modifyGarden = (req, res)=>{
                     quantity: data.device[4].quantity
                 }
             ],
+            registerGarden: data.registerGarden
+        }
+    ])
+}
+
+exports.deleteGarden = (req, res)=>{
+    data = req.body
+    Request.insertMany([
+        {
+            status: false,
+            name: 'Delete Garden',
+            sender: data.sender,
+            description: 'Delete garden request',
+            device: [],
             registerGarden: data.registerGarden
         }
     ])

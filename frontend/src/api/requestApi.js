@@ -13,3 +13,10 @@ export const modifyGardenRequest = async (props) =>{
         .then((res) => true)
         .catch((err) => alert('Failure!!!', err));
 }
+
+export const deleteGardenRequest = async (props) =>{
+    console.log('delete')
+    return await axios.post(`${URL}/del-gar`, props)
+        .then((res) => true)
+        .catch((err) => alert('Failure!!!', err));
+}

@@ -25,7 +25,7 @@ exports.addRegister = (req, res)=>{
                     address: data.address, 
                     role: 'customer', 
                     status: false, 
-                    date: data.birth, // Ngay sinh, chi co customer co
+                    date: data.date, // Ngay sinh, chi co customer co
                 }
             ])
         })

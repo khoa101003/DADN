@@ -18,3 +18,9 @@ export const getPieceById = async (id)=>{
         .then((res) => res.data)
         .catch((err) => alert('Failure!!!', err));
 }
+
+export const delPieceById = async (id)=>{
+    return await axios.delete(`${URL}/delete/${id}`)
+        .then((res) => true)
+        .catch((err)=>alert('Failure!!!', err))
+}
