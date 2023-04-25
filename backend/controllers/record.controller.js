@@ -38,7 +38,6 @@ const devices = [
 ]
 
 const axios = require("axios");
-const { logger } = require('./autoPump');
 
 exports.autoUpdate = (req, res)=>{
   const updateValue = async (device, newValue) =>{
@@ -50,6 +49,9 @@ exports.autoUpdate = (req, res)=>{
 
     const valueList = dt.valueList;
     if(valueList[valueList.length-1].log_time != newValue.log_time){
+      if(dt.type === 'soil'){
+        Observable.notify({[device.key]:newValue.value})
+      }
       valueList.push(newValue)
       Record.collection.updateOne(
           {
@@ -81,10 +83,10 @@ exports.autoUpdate = (req, res)=>{
       //   ...data,
       //   [device.key]:response.data['last_value']
       // }
-      Observable.notify({[device.key]:response.data['last_value']})
+      
     }).catch(function (error) {
-      console.log(error)
-      console.error(error);
+      // console.log(error)
+      // console.error(error);
     });
     })
     // console.log(data)
@@ -139,7 +141,6 @@ exports.getRecord = (req, res) => {
     Record.find({})
         .then(record => {
             // res.status(200).send({ "hi": "hi" })
-            console.log(new Date())
             res.status(200).send(record)
         })
         .catch(err => res.status(400).send(err))

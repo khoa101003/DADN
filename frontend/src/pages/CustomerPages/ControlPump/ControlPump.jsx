@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import {Row, Col, Container, Button, ToggleButton, ButtonGroup} from 'react-bootstrap'
+import {Row, Col, Container, Button, ToggleButton, ButtonGroup, Modal} from 'react-bootstrap'
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import RowSchedule from './RowSchedule';
 import classnames from 'classnames/bind'
 import styles from './ControlPump.module.scss'
-import { switchPump } from '../../../api/adafruitApi';
+import { getCurValuePump, getCurValueTemp } from '../../../api/adafruitApi';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getListSchedule } from '../../../api/schedule';
+import { deleteAll, getListSchedule, manualPump } from '../../../api/schedule';
 import { getThreshold } from '../../../api/deviceApi';
+import { controlAutoPump } from '../../../api/controlObserverApi';
+import { getAllRecord } from '../../../api/recordApi';
+import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classnames.bind(styles);
 const data1 = [
@@ -54,26 +57,39 @@ const ControlPump = () => {
     const location = useLocation();
     const [soil,setSoil] = useState('');
     const [pumpSchedule,setPumpSchedule] = useState(true);
-    const [pumpMoisture,setPumpMoisture] = useState(true);
+    const [pumpMoisture,setPumpMoisture] = useState(false);
     const [pumpManual,setPumpManual] = useState(false);
     const [data,setData] = useState([{
         time:"",
         water:"",
         dates:""
     }]);
+    const [show,setShow] = useState(false);
     const handleClickSchedule = () => {
         setPumpSchedule((state) => setPumpSchedule(!state));
     }
-    const handleClickMoisture = () => {
-        setPumpMoisture((state) => setPumpMoisture(!state))
+    const handleClickMoistureOn = () => {
+        setPumpMoisture(true)
+        controlAutoPump(true).then(res => console.log(res)).catch(err => console.log(err))
     }
-    const handleClickManual = () => {
-        setPumpManual((state) => setPumpManual(!state))
-        console.log(data)
+    const handleClickMoistureOff = () => {
+        setPumpMoisture(false)
+        controlAutoPump(false).then(res => console.log(res)).catch(err => console.log(err))
     }
-    useEffect(() => {
-        switchPump(pumpManual);
-    },[pumpManual])
+    const handleClickManualOn = () => {
+        manualPump(true,user.account);
+        setPumpManual(true)
+        // console.log(new Date().toISOString())
+    }
+    const handleClickManualOff = () => {
+        manualPump(false,user.account);
+        setPumpManual(false)
+        // console.log(new Date().toISOString())
+    }
+    // useEffect(() => {
+    //     console.log(pumpManual)
+    //     manualPump(pumpManual,user.account);
+    // },[pumpManual])
     
     const getData = async () => {
         return await getListSchedule().then((res) => {
@@ -89,6 +105,31 @@ const ControlPump = () => {
         }
         getData();
     },[])
+
+    
+    // const intervalObj = setInterval(()=>{
+    //     getDataAdafruit();
+    // },2000)
+    // useEffect(() => {
+    //     getDataAdafruit();
+    // },[pumpManual])
+    useEffect(() => {
+        const getDataAdafruit = async () => {
+            return await getAllRecord().then(res => {
+                if(res.find(obj => obj.type === 'pump').curValue === 'OFF') setPumpManual(false)
+                else if(res.find(obj => obj.type === 'pump').curValue === 'ON') setPumpManual(true)
+            }).catch(err => console.log(err))
+        }
+        const interval = setInterval(() => getDataAdafruit(),3000)
+        return () => {
+            clearInterval(interval);
+        }
+    },[])
+    const handleDelete = () => {
+        deleteAll()
+        setData([])
+        setShow(false)
+    }
     return (
         <Container>
             <Row>
@@ -101,7 +142,7 @@ const ControlPump = () => {
                             <div>
                                 <h2>Tưới theo lịch</h2>
                             </div>
-                            <ButtonGroup className=''>
+                            {/* <ButtonGroup className=''>
                                 <ToggleButton
                                 onClick={handleClickSchedule}
                                 variant={pumpSchedule? 'primary' : 'secondary'}
@@ -113,30 +154,32 @@ const ControlPump = () => {
                                 variant={pumpSchedule? 'secondary' : 'primary'}
                                 size="lg"
                                 >OFF</ToggleButton>
-                            </ButtonGroup>
+                            </ButtonGroup> */}
                         </Col>
                         <Col xs={9} className={`${!pumpSchedule?'opacity-25':''}`}>
                             <RowSchedule schedule = {data}/>
                             <Link to={{pathname:`/${user.account}/schedule`}}><Button>Thêm lịch</Button></Link>
+                            <Button onClick={() => setShow(true)}>Xóa tất cả</Button>
                         </Col>
+
                     </Row>
                     <Row className={cx('row','py-5')}>
                         <Col className={cx('box','sm-box','col-left')}>
                             <div className={cx('center')}>   
                                 <h2>Tưới theo độ ẩm</h2>
                                 <ButtonGroup>
-                                    <ToggleButton
-                                    onClick={handleClickMoisture}
+                                    <Button
+                                    onClick={handleClickMoistureOn}
                                     variant={pumpMoisture? 'primary' : 'secondary'}
                                     size="lg"
                                     >ON
-                                    </ToggleButton>
-                                    <ToggleButton
-                                    onClick={handleClickMoisture}
+                                    </Button>
+                                    <Button
+                                    onClick={handleClickMoistureOff}
                                     variant={pumpMoisture? 'secondary' : 'primary'}
                                     size="lg"
                                     >OFF
-                                    </ToggleButton>
+                                    </Button>
                                 </ButtonGroup>
                             </div>
                             <div className={cx(`${!pumpMoisture?'opacity-25':''}`,'center')} >
@@ -150,26 +193,45 @@ const ControlPump = () => {
                                 <h2>Tưới thủ công</h2>
                             </div>
                             <ButtonGroup>
-                                <ToggleButton
-                                onClick={handleClickManual}
+                                <Button
+                                onClick={handleClickManualOn}
                                 variant={pumpManual? 'primary' : 'secondary'}
                                 size="lg"
                                 >ON
-                                </ToggleButton>
-                                <ToggleButton
-                                onClick={handleClickManual}
+                                </Button>
+                                <Button
+                                onClick={handleClickManualOff}
                                 variant={pumpManual? 'secondary' : 'primary'}
                                 size="lg"
                                 >OFF
-                                </ToggleButton>
+                                </Button>
                             </ButtonGroup>
-                        </div>       
+                        </div>   
                         </Col>
+
                     </Row>
                 </Col>
             </Row>
             
-  
+        {/* <Modal show={show} onHide={}>
+            <Modal.Body>
+                Bạn có muốn xóa tất cả
+                <Button onClick={handleDelete}>Xóa</Button>
+                <Button onClick={}>Hủy</Button>
+            </Modal.Body>
+        </Modal> */}
+            <Modal show = {show} onHide={()=>setShow(false)} centered>
+                <Modal.Header className="bg-danger" closeButton>
+                    <Modal.Title>Xóa lịch tưới</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>Bạn có muốn xóa lịch tưới ?</h4>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleDelete}>Xóa</Button>
+                    <Button variant="secondary" onClick={() => setShow(false)}>Hủy</Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };

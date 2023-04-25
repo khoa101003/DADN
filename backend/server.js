@@ -37,10 +37,12 @@ require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
 require('./route/request.route')(app)
 require('./route/Factory.route')(app)
+require('./route/controlObserver.route')(app)
+// require('./route/controlObserver.route')(app)
 
-const { logger } = require('./controllers/autoPump')
-const Observable = require('./controllers/Observer')
-Observable.subscribe(logger)
+// const { autoPump } = require('./controllers/autoPump')
+// const Observable = require('./controllers/Observer')
+// Observable.subscribe(autoPump)
 const port = 3030
 
 

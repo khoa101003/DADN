@@ -6,6 +6,7 @@ import SideBar from '../../../components/GlobalStyles/SideBar';
 import { useEffect, useState } from 'react';
 import { getCurValueTemp } from '../../../api/adafruitApi';
 import { getThreshold } from '../../../api/deviceApi';
+import { getAllRecord } from '../../../api/recordApi';
 
 const cx = classnames.bind(styles);
 // const data = {
@@ -41,10 +42,17 @@ const GardenDashboard = () => {
             getThreshold().then((res) => setThreshold(res)).catch((err)=>console.log(err))
         }
         const getTemp = async () => {
-            return await getCurValueTemp().then(res =>setData(res)).catch((err) => console.log(err))
+            return await getAllRecord().then(res =>{
+                setData({
+                    temp: res.find(obj => obj.type === 'temp').curValue,
+                    humidity: res.find(obj => obj.type === 'air').curValue,
+                    soil: res.find(obj => obj.type === 'soil').curValue,
+                    light: res.find(obj => obj.type === 'light').curValue,
+                })
+            }).catch((err) => console.log(err))
         }
         getTemp()
-        const interval = setInterval(() => getTemp(),1000)
+        const interval = setInterval(() => getTemp(),2000)
         return () => {
             clearInterval(interval);
         }
