@@ -4,9 +4,10 @@ import SideBar from '../../../components/GlobalStyles/SideBar';
 import RowSchedule from './RowSchedule';
 import classnames from 'classnames/bind'
 import styles from './ControlPump.module.scss'
-import { switchPump } from '../../../api/controlPump';
-import { Link } from 'react-router-dom';
+import { switchPump } from '../../../api/adafruitApi';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getListSchedule } from '../../../api/schedule';
+import { getThreshold } from '../../../api/deviceApi';
 
 const cx = classnames.bind(styles);
 const data1 = [
@@ -48,6 +49,10 @@ const data1 = [
     }
 ]
 const ControlPump = () => {
+    const user = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [soil,setSoil] = useState('');
     const [pumpSchedule,setPumpSchedule] = useState(true);
     const [pumpMoisture,setPumpMoisture] = useState(true);
     const [pumpManual,setPumpManual] = useState(false);
@@ -71,9 +76,17 @@ const ControlPump = () => {
     },[pumpManual])
     
     const getData = async () => {
-        return await getListSchedule().then((res) => setData(res));
+        return await getListSchedule().then((res) => {
+            res.sort((a,b) => a.dates.localeCompare(b.dates))
+            // console.log(res[0].dates - res[1].dates)
+            setData(res)
+        }).catch((err) => console.log(err));
     }
     useEffect(() => {
+        if(location.state)setSoil(location.state.soil)
+        else{
+            getThreshold().then((res) => setSoil(res.soil)).catch((err)=>console.log(err))
+        }
         getData();
     },[])
     return (
@@ -104,7 +117,7 @@ const ControlPump = () => {
                         </Col>
                         <Col xs={9} className={`${!pumpSchedule?'opacity-25':''}`}>
                             <RowSchedule schedule = {data}/>
-                            <Link to={{pathname:"/schedule"}}><Button>Thêm lịch</Button></Link>
+                            <Link to={{pathname:`/${user.account}/schedule`}}><Button>Thêm lịch</Button></Link>
                         </Col>
                     </Row>
                     <Row className={cx('row','py-5')}>
@@ -127,10 +140,8 @@ const ControlPump = () => {
                                 </ButtonGroup>
                             </div>
                             <div className={cx(`${!pumpMoisture?'opacity-25':''}`,'center')} >
-                                <h2>50%</h2>
-                                <div>
-                                    <Link to={{pathname:"/inputValue"}}><Button size="lg">Thiết lập</Button></Link>
-                                </div>
+                                <h2>{soil}%</h2>
+                                <Button variant="success" onClick={() => {navigate(`../${user.account}/InputValue`,{state: { prevPath: location.pathname}} )}}>Thiết Lập</Button>
                             </div>
                         </Col>
                         <Col className={cx('box','sm-box')}>
