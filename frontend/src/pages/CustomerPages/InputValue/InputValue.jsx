@@ -1,19 +1,27 @@
 import classnames from 'classnames/bind'
 import styles from './InputValue.module.scss'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
-import { useState } from 'react';
-import { postUserInput } from '../../../api/userInput';
+import { useEffect, useState } from 'react';
+import { getThreshold, postUserInput } from '../../../api/deviceApi';
 const cx = classnames.bind(styles);
 
 const InputValue = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location.state)
+    const user = useParams();
     const [data,setData] = useState({
         minTemp:"",
         maxTemp:"",
         soil:"",
         maxSoil:""
     });
+    // const getData = () => return await 
+    useEffect(() => {
+        getThreshold().then((res) => setData(res)).catch((err) => console.log(err))
+    },[])
     const handleMinTemp = (e) => {
         setData((value) => ({
             ...value,
@@ -38,10 +46,15 @@ const InputValue = () => {
             maxSoil:e.target.value
         }))
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
-        postUserInput(data)
+        postUserInput({
+            ...data,
+            owner:user.account,
+        }).then((res) => {
+            if(res.status === 200) navigate(location.state.prevPath,{state:data})
+        })
     }
     return (
         <Container>
@@ -71,7 +84,7 @@ const InputValue = () => {
                             <Form.Control type="number" defaultValue={data.maxSoil}/>                      
                         </Form.Group>
                         <div className='text-center mb-2'>
-                                <Button className={cx('button')} variant="success" type="submit" onClick={handleSubmit}>Lưu</Button>
+                            <Button className={cx('button')} variant="success" type="submit" onClick={handleSubmit}>Lưu</Button>
                         </div>
 s                    </Form>
                 </div>

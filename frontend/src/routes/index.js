@@ -20,6 +20,7 @@ import ManageUser from "../pages/AdminPages/ManageUser/ManageUser.jsx";
 import ManageRequest from "../pages/AdminPages/ManageRequest/ManageRequest.jsx";
 import ControlPump from "../pages/CustomerPages/ControlPump/ControlPump";
 import Schedule from "../pages/CustomerPages/Schedule/Schedule.jsx";
+import NavigateCus from "../pages/CustomerPages/NavigateCus/NavigateCus.jsx";
 
 // Tech part 
 import Search from "../pages/TechnicianPages/SearchUser/Search.jsx"
@@ -27,6 +28,8 @@ import GardenLst from "../pages/TechnicianPages/GardenLst/GardenLst.jsx"
 import DeviceType from "../pages/TechnicianPages/DeviceType/DeviceType.jsx"
 import ManageDevice from "../pages/TechnicianPages/ManageDevice/ManageDevice.jsx"
 const routes = [
+    //Navigate page
+    {path: '/', component: NavigateCus},
     //Authorize
     { path: '/login-as', component: LoginAs },
     { path: '/login/:role', component: Login },
@@ -36,8 +39,8 @@ const routes = [
     { path: '/:account', component: GardenList },
     { path: '/:account/garden-detail/:id', component: GardenDetail },
 
-    { path: '/garden-regis', component: GardenRegis },
-    { path: '/garden-mod', component: GardenModify },
+    {path: '/:account/garden-regis', component: GardenRegis},
+    {path: '/:account/garden-mod/:id', component: GardenModify},
 
     { path: '/:account/SensorHistory', component: SensorHistory },
     { path: '/SensorInfoPage', component: SensorInfoPage },
@@ -45,11 +48,11 @@ const routes = [
     { path: '/:account/SensorHistory/:device_id', component: StatisticPage },
 
 
-    { path: '/GardenDashboard', component: GardenDashboard },
-    { path: '/InputValue', component: InputValue },
+    { path: '/:account/dashboard', component: GardenDashboard },
+    { path: '/:account/InputValue', component: InputValue },
     { path: '/ManageSensor', component: ManageSensor },
-    { path: '/controlPump', component: ControlPump },
-    { path: '/schedule', component: Schedule },
+    { path: '/:account/controlPump', component: ControlPump },
+    { path: '/:account/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },
     { path: '/admin/request', component: ManageRequest },
     // Technician part

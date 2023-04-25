@@ -107,12 +107,12 @@ function Login(){
                                 <Form className='d-flex align-items-center flex-column' onSubmit={e=>handleSubmit(e)}>
                                     <Form.Group className="mb-3" controlId="username" style={inputStyled}>
                                         <Form.Label style={labelStyle}>Tên đăng nhập</Form.Label>
-                                        <Form.Control size="lg" type="text" placeholder="type your username" value={username} onChange={e=>setUsername(e.target.value)} />
+                                        <Form.Control  type="text" placeholder="type your username" value={username} onChange={e=>setUsername(e.target.value)} />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="password" style={inputStyled}>
                                         <Form.Label style={labelStyle}>Mật khẩu</Form.Label>
-                                        <Form.Control size="lg" type="password" placeholder="type your password" value={password} onChange={e=>setPassword(e.target.value)} />
+                                        <Form.Control  type="password" placeholder="type your password" value={password} onChange={e=>setPassword(e.target.value)} />
                                     </Form.Group>
 
                                     { warning? <span className="text-danger">Sai tên đăng nhập hoặc mật khẩu</span> : null}
