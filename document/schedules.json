@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "6442cbba014adbaaef7cdf3d"
+  },
+  "time": "00:45",
+  "water": "1000",
+  "type": "custom",
+  "dates": "2023-04-21"
+},{
+  "_id": {
+    "$oid": "6442cbba014adbaaef7cdf3f"
+  },
+  "time": "00:45",
+  "water": "1000",
+  "type": "custom",
+  "dates": "2023-04-22"
+},{
+  "_id": {
+    "$oid": "6442cbba014adbaaef7cdf41"
+  },
+  "time": "00:45",
+  "water": "1000",
+  "type": "custom",
+  "dates": "2023-04-23"
+},{
+  "_id": {
+    "$oid": "6442cbba014adbaaef7cdf45"
+  },
+  "time": "00:45",
+  "water": "1000",
+  "type": "custom",
+  "dates": "2023-04-24"
+},{
+  "_id": {
+    "$oid": "6442cbba014adbaaef7cdf47"
+  },
+  "time": "00:45",
+  "water": "1000",
+  "type": "custom",
+  "dates": "2023-04-25"
+}]
