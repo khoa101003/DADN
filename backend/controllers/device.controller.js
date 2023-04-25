@@ -1,6 +1,6 @@
 const Device = require('../models/device.model')
 
-exports.getThreshold = async (id) => {
+exports.getThresholdById = async (id) => {
     const threshold = Device.find({'id' : id})
         .then((res) => {
             return {min: res[0].threshold.min, max: res[0].threshold.max}

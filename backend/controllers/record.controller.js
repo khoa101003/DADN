@@ -10,7 +10,7 @@
 const Observable = require('./Observer')
 const Record = require('../models/record.model')
 const { createNotification } = require('./notification.controller')
-const { getThreshold } = require('./device.controller')
+const { getThresholdById } = require('./device.controller')
 
 const devices = [
   {
@@ -73,7 +73,7 @@ exports.autoUpdate = (io)=>{
 
       // Kiểm tra ngưỡng giá trị
       if (dt.type !== 'pump' && dt.type !== 'led' && dt.type !== 'light') {
-        const {min, max} = await getThreshold(dt.id)
+        const {min, max} = await getThresholdById(dt.id)
         if (newValue.value < min || newValue.value > max) {
           const threshold = newValue.value < min ? min : max;
           const type = dt.type === 'air' ? "Air Humidity"
