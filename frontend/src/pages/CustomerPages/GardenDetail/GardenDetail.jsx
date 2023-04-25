@@ -45,12 +45,11 @@ function GardenDetail(){
     },[])
 
     sensors.forEach((sensor)=>{
-        if(sensor.type === 'Do am') airSensor = sensor
-        if(sensor.type === 'Do am dat') soilSensor = sensor
-        if(sensor.type === 'Nhiet do') tempSensor = sensor
-        if(sensor.type === 'Anh sang') lightSensor = sensor
+        if(sensor.type === 'air') airSensor = sensor
+        if(sensor.type === 'soil') soilSensor = sensor
+        if(sensor.type === 'temp') tempSensor = sensor
+        if(sensor.type === 'light') lightSensor = sensor
     })
-
 
     return(
         <>
