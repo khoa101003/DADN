@@ -8,11 +8,6 @@ import { useState, useEffect } from 'react';
 import { getUserList } from '../../../api/userApi';
 
 //component style
-const LinkStyled1 = {
-    color: "green",
-    margin: "10%",
-    alignSelf: "end"
-}
 const LinkStyled2 = {
     color: "green",
     margin: "10%",
@@ -116,7 +111,6 @@ function Login(){
                                     </Form.Group>
 
                                     { warning? <span className="text-danger">Sai tên đăng nhập hoặc mật khẩu</span> : null}
-                                    <Link style={LinkStyled1} to='/pass-retri'>Quên mật khẩu?</Link>
                                     <Button variant="success" type="submit" className={cx('btn')}>
                                         Đăng nhập
                                     </Button>

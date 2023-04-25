@@ -6,5 +6,6 @@ module.exports = app=>{
     router.get('/',Garden_pieceController.getGPieceList)
     router.get('/:owner',Garden_pieceController.getPrivateGPiece)
     router.get('/detail/:id', Garden_pieceController.getGPieceById)
+    router.delete('/delete/:id', Garden_pieceController.delGPiece)
     app.use('/api/garden-piece',router)
 }
