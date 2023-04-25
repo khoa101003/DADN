@@ -123,8 +123,4 @@ module.exports = mongoose.model('device', Device)
 //         console.log(err.message)
 //     })
 
-// process.on('SIGINT', function () {
-//     mongoose.connection.close()
-//     console.log("Disconnected!")
-//     process.exit(0)
-// })
+module.exports = mongoose.model('device', Device)
