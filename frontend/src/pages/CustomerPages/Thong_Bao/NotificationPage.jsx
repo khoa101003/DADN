@@ -7,16 +7,17 @@ import Notification from './Notification';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { getNotificationList } from '../../../api/notificationApi';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { io } from 'socket.io-client';
 
 const cx = classnames.bind(styles);
 
-
-
 function NotificationPage() {
   const [notifications, setNotifications] = useState([])
+  const params = useParams()
 
   const loadData = async function () {
-    await getNotificationList().then((result) => {
+    await getNotificationList(params.account).then((result) => {
       result.sort(function (a,b) {
         if (a.isRead && !b.isRead) {
           return 1
@@ -44,22 +45,28 @@ function NotificationPage() {
   }
 
   useEffect(() => {
+    const socket = io('http://localhost:3030')
+    socket.emit('notify', params.account)
+    socket.on('connect_error', (error) => {
+      console.log('Connection error:', error);
+    });
+    socket.on('connect_timeout', (timeout) => {
+      console.log('Connection timeout:', timeout);
+    });
+    socket.on('newNotify', () => {
+      loadData()
+    })
     loadData()
+    return () => {
+      socket.disconnect()
+    }
   },[])
 
-
-  const notificationsList = notifications.map((notification,i) => 
-  <Notification key={i} id={notification._id} type={notification.type} urgent={notification.urgent}
-  isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
-  time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
-  y={notification.coordinates.y}/>
-)
 
   return (
     <div className="row mx-auto container">
       <SideBar position="notify"/>
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-          {/*<a href="" className={cx("return")}>{'<-- Trở lại'}</a>*/}
           <h1 className="text-center">Thông báo</h1>
           
           <h5>Tìm kiếm: </h5>
@@ -102,19 +109,12 @@ function NotificationPage() {
           <hr />
 
           {
-            // notifications.map((notification,i) => 
-            //   <Notification key={i} id={notification._id} type={notification.type} urgent={notification.urgent}
-            //   isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
-            //   time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
-            //   y={notification.coordinates.y}/>
-            // )
-            // Array.from({length : notifications.lenght}, (_, i) => i).map((i) => 
-            //   <Notification key={i} id={notifications[i]._id} type={notifications[i].type} urgent={notifications[i].urgent}
-            //   isReadN={notifications[i].isRead} measure={notifications[i].measure} threshold={notifications[i].threshold}
-            //   time={notifications[i].time} gardenName={notifications[i].gardenName} x={notifications[i].coordinates.x}
-            //   y={notifications[i].coordinates.y}/>
-            // )
-            notificationsList
+            notifications.map((notification) => 
+              <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
+              isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
+              time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
+              y={notification.coordinates.y}/>
+            )
           }
 
       </div>

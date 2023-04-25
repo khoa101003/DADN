@@ -1,26 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getRecordList } from "../../../api/recordApi.js";
 import LineChart from './LineChart.jsx';
 import { Row, Col, Form, Button } from "react-bootstrap";
 import SideBar from "../../../components/GlobalStyles/SideBar.jsx";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Chart from 'chart.js/auto';
+import { io } from 'socket.io-client';
+
 
 function isInInterval(start, end, date) {
-  if (date.getFullYear() < start.getFullYear() || date.getFullYear > end.getFullYear())
+  if (date.getFullYear() < start.getFullYear() || date.getFullYear() > end.getFullYear())
     return false
-  if (date.getMonth() < start.getMonth() || date.getMonth > end.getMonth())
+  if (date.getMonth() < start.getMonth() || date.getMonth() > end.getMonth())
     return false
-  if (date.getDate() < start.getDate() || date.getDate > end.getDate())
+  if (date.getDate() < start.getDate() || date.getDate() > end.getDate())
     return false
   return true
 }
 
 function StatisticPage() { 
   const params = useParams()
+  const navigate = useNavigate()
+
   const [ chartData, setChartData ] = useState([])
+  const [ dataShow, setDataShow ] = useState([])
+  const [ type, setType ] = useState('')
+  const realTime = useRef(true)
 
   const loadData = async function (id) {
-    return await getRecordList(id)
+    return await getRecordList(id).then((res) => {
+      const valueList = res[0].valueList
+      setType(res[0].type)
+      setChartData(valueList)
+      const newChartData = valueList.slice(valueList.length - 10, valueList.length).map((data) => {
+        return {
+          log_time: data.log_time, 
+          value: data.value,
+        }
+      })
+      setDataShow(newChartData)
+    })
   } 
 
   const handleChangeDate = (e) => {
@@ -32,27 +51,22 @@ function StatisticPage() {
       else if (!end)
           alert("Vui lòng nhập ngày kết thúc")
       else {
-          start = new Date(start).toISOString()
-          end = new Date(end).toISOString()
-          console.log(`Ngày bắt đầu: ${start}`)
-          console.log(`Ngày kết thúc: ${end}`)
+          start = new Date(start)
+          end = new Date(end)
           if (start > end)
               alert("Ngày bắt đầu phải nhỏ hơn ngày kết thúc")
           else {
-            loadData(params.device_id)
-            .then((res) => {
-              const valueList = res[0].valueList
-              const newChartData = valueList.filter(item => {
-                const item_date = new Date(item.log_time).toISOString()
-                if (item_date >= start && item_date <= end) {
+              const newChartData = chartData.filter(item => {
+                const item_date = new Date(item.log_time)
+                if (isInInterval(start, end, item_date)) {
                     return item
                 }
               })
-              setChartData(newChartData)
-            })
+              realTime.current = false
+              setDataShow(newChartData)
+            }
           }
       }
-  }
 
   const resetDate = function () {
     let start = document.getElementById("start")
@@ -60,41 +74,45 @@ function StatisticPage() {
     start.value = start.defaultValue
     end.value = end.defaultValue
 
+    realTime.current = true
     loadData(params.device_id)
-      .then((res) => {
-        const valueList = res[0].valueList
-        const newChartData = valueList.slice(valueList.length - 10, valueList.length).map((data) => {
-          return {
-            log_time: data.log_time, 
-            value: data.value,
-          }
-        })
-        setChartData(newChartData)
-      })
   }
 
   useEffect(() => {
+    const socket = io('http://localhost:3030')
+    socket.emit('statis', params.account, params.device_id)
+    socket.on('connect_error', (error) => {
+      console.log('Connection error:', error);
+    });
+    socket.on('connect_timeout', (timeout) => {
+      console.log('Connection timeout:', timeout);
+    });
+    socket.on('newData', () => {
+      console.log(realTime)
+      if (realTime.current) {
+        console.log(realTime)
+        loadData(params.device_id)
+      }
+    })
     loadData(params.device_id)
-      .then((res) => {
-        const valueList = res[0].valueList
-        const newChartData = valueList.slice(valueList.length - 10, valueList.length).map((data) => {
-          return {
-            log_time: data.log_time, 
-            value: data.value,
-          }
-        })
-        setChartData(newChartData)
-      })
+    return () => {
+      socket.disconnect()
+    }
   }, [])
 
   const containerStyle = {
     width: '80%',
   }
  
+  const returnToHistory = () => {
+    navigate(`/${params.account}/SensorHistory`)
+  }
+
   return (
     <div className="row mx-auto container">
       <SideBar />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
+        <i className="fa-solid fa-arrow-left" onClick={returnToHistory}></i>
         <h1 className="text-center">Thống kê lịch sử</h1>
 
           <Row className="mt-4">
@@ -119,7 +137,7 @@ function StatisticPage() {
           </Row>
 
         <div className="d-flex flex-column align-items-center mt-3">
-          <LineChart style={containerStyle} chartData={chartData} />
+          <LineChart style={containerStyle} chartData={dataShow} type={type}/>
         </div>
       </div>
     </div>

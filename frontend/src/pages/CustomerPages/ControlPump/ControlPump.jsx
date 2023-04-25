@@ -5,9 +5,11 @@ import RowSchedule from './RowSchedule';
 import classnames from 'classnames/bind'
 import styles from './ControlPump.module.scss'
 import { switchPump } from '../../../api/controlPump';
+import { Link } from 'react-router-dom';
+import { getListSchedule } from '../../../api/schedule';
 
 const cx = classnames.bind(styles);
-const data = [
+const data1 = [
     {
         id:'1',
         time:'2023-03-16T19:41',
@@ -49,7 +51,11 @@ const ControlPump = () => {
     const [pumpSchedule,setPumpSchedule] = useState(true);
     const [pumpMoisture,setPumpMoisture] = useState(true);
     const [pumpManual,setPumpManual] = useState(false);
-
+    const [data,setData] = useState([{
+        time:"",
+        water:"",
+        dates:""
+    }]);
     const handleClickSchedule = () => {
         setPumpSchedule((state) => setPumpSchedule(!state));
     }
@@ -58,14 +64,21 @@ const ControlPump = () => {
     }
     const handleClickManual = () => {
         setPumpManual((state) => setPumpManual(!state))
+        console.log(data)
     }
     useEffect(() => {
         switchPump(pumpManual);
     },[pumpManual])
+    
+    const getData = async () => {
+        return await getListSchedule().then((res) => setData(res));
+    }
+    useEffect(() => {
+        getData();
+    },[])
     return (
         <Container>
             <Row>
-                
                 <SideBar></SideBar>
                 
                 <Col className="mx-2">
@@ -90,7 +103,8 @@ const ControlPump = () => {
                             </ButtonGroup>
                         </Col>
                         <Col xs={9} className={`${!pumpSchedule?'opacity-25':''}`}>
-                            <RowSchedule schedule = {data} />
+                            <RowSchedule schedule = {data}/>
+                            <Link to={{pathname:"/schedule"}}><Button>Thêm lịch</Button></Link>
                         </Col>
                     </Row>
                     <Row className={cx('row','py-5')}>
@@ -115,7 +129,7 @@ const ControlPump = () => {
                             <div className={cx(`${!pumpMoisture?'opacity-25':''}`,'center')} >
                                 <h2>50%</h2>
                                 <div>
-                                    <Button size="lg">Thiết lập</Button>
+                                    <Link to={{pathname:"/inputValue"}}><Button size="lg">Thiết lập</Button></Link>
                                 </div>
                             </div>
                         </Col>

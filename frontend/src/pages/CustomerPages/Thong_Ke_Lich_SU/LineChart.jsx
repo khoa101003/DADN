@@ -1,7 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-function LineChart({ chartData }) {
+function LineChart({ chartData, type }) {
   const containerStyle = {
     width: '90%',
   }
@@ -17,6 +17,34 @@ function LineChart({ chartData }) {
     hourCycle: 'h12',
   };
 
+  let _label, _color, _backgroundColor;
+  switch (type) {
+    case "temp":
+        _label = "Nhiệt độ";
+        _color = "red"
+        _backgroundColor = 'rgb(255,0,0,0.25)'
+        break
+    case "soil":
+        _label = "Độ ẩm đất (%)";
+        _color = "blue"
+        _backgroundColor = 'rgb(0,0,255,0.25)'
+        break
+    case "air":
+        _label = "Độ ẩm không khí (%)";
+        _color = "blue"
+        _backgroundColor = 'rgb(0,0,255,0.25)'
+        break
+    case "light":
+        _label = "Độ rọi (lx)";
+        _color = "yellow"
+        _backgroundColor = 'rgb(255,255,0,0.25)'
+        break
+    default:
+        _label = "Bật/Tắt máy bơm";
+        _color = "black"
+        _backgroundColor = 'rgb(0,0,0,0.25)'
+  }
+
   return (
     <div style={containerStyle}>
       <Line
@@ -24,12 +52,12 @@ function LineChart({ chartData }) {
           labels: chartData.map((data) => new Date(data.log_time).toLocaleString('en-US', options)),
           datasets: [
                 {
-                  label: "Nhiệt độ (oC)",
+                  label: _label,
                   fill: true,
                   data: chartData.map((data) => data.value),
-                  borderColor: "red",
+                  borderColor: _color,
                   borderWidth: 2,
-                  backgroundColor: 'rgb(255,0,0,0.25)'
+                  backgroundColor: _backgroundColor,
                 }
               ]
         }}

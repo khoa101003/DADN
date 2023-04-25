@@ -9,9 +9,10 @@ const {
 module.exports = app => {
     router = express.Router()
     router.route('/')
-        .get(getNotification)
         .delete(deleteNotification)
         .patch(markReadedNotification)
+
+    router.route('/:account').get(getNotification)
 
     app.use('/api/notification', router)
 }

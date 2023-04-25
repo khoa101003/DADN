@@ -41,7 +41,7 @@ const routes = [
 
     { path: '/:account/SensorHistory', component: SensorHistory },
     { path: '/SensorInfoPage', component: SensorInfoPage },
-    { path: '/NotificationPage', component: NotificationPage },
+    { path: '/:account/NotificationPage', component: NotificationPage },
     { path: '/:account/SensorHistory/:device_id', component: StatisticPage },
 
 

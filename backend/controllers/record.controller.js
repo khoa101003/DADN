@@ -7,9 +7,10 @@
 // }
 
 // module.exports = getRecord;
-
+const Observable = require('./Observer')
 const Record = require('../models/record.model')
-const { createNotification } = require('../controllers/notification.controller')
+const { createNotification } = require('./notification.controller')
+const { getThreshold } = require('./device.controller')
 
 const devices = [
   {
@@ -40,8 +41,9 @@ const devices = [
 ]
 
 const axios = require("axios");
+const { logger } = require('./autoPump');
 
-exports.autoUpdate = (req, res)=>{
+exports.autoUpdate = (io)=>{
   const updateValue = async (device, newValue) =>{
     const dt = await Record.collection.findOne(
       {
@@ -50,12 +52,8 @@ exports.autoUpdate = (req, res)=>{
     )
     const valueList = dt.valueList;
     if(valueList[valueList.length-1].log_time != newValue.log_time){
-      if (device.id === 3 && newValue.value > 29) {
-        createNotification("Temperature", "phongong", false, newValue.value, 29, newValue.log_time, "SuperGarden", 1, 5)
-      }
-
       valueList.push(newValue)
-      Record.collection.updateOne(
+      await Record.collection.updateOne(
           {
             id:device.id
           },
@@ -67,10 +65,31 @@ exports.autoUpdate = (req, res)=>{
             }
           }
         )
+
+      if (io.sockets.adapter.rooms.has(`statis-${dt.owner}-${dt.id}`)) {
+        io.to(`statis-${dt.owner}-${dt.id}`).emit('newData')
+      }
+
+
+      // Kiểm tra ngưỡng giá trị
+      if (dt.type !== 'pump' && dt.type !== 'led' && dt.type !== 'light') {
+        const {min, max} = await getThreshold(dt.id)
+        if (newValue.value < min || newValue.value > max) {
+          const threshold = newValue.value < min ? min : max;
+          const type = dt.type === 'air' ? "Air Humidity"
+                  : dt.type === 'temp' ? "Temperature" 
+                  : "Soil Humidity";
+          await createNotification(type, dt.owner, false, newValue.value, threshold, newValue.log_time, "SuperGarden", 1, 5)
+        }
+        if (io.sockets.adapter.rooms.has(`notify-${dt.owner}`)) {
+          io.to(`notify-${dt.owner}`).emit('newNotify')
+        }
+      }
+      ////////////////////////
     }
-    console.log(valueList)
+    // console.log(valueList)
   }
-  
+  // let data = []
     devices.forEach((device) => {
     const options = {
       method: 'GET',
@@ -81,11 +100,17 @@ exports.autoUpdate = (req, res)=>{
       updateValue(device,{
         log_time:response.data['updated_at'],
         value:response.data['last_value']})
+      // data = {
+      //   ...data,
+      //   [device.key]:response.data['last_value']
+      // }
+      Observable.notify({[device.key]:response.data['last_value']})
     }).catch(function (error) {
       console.log(error)
       console.error(error);
     });
     })
+    // console.log(data)
 }
 
 exports.getData =  (req, res) => {

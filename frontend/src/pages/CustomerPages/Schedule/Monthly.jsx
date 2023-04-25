@@ -9,12 +9,13 @@ const Monthly = (props) => {
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState();
 
     const handleChange = date => {
         setDate(date)
     };
     const handleSubmit = () => {
+        console.log(typeof date[0])
         const listDate = date.map((item) =>(new Date(item)));
         props.onChange(listDate);
         setShow(false);

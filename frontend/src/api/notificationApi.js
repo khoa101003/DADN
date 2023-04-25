@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const URL = 'http://localhost:3030/api/notification'
 
-export const getNotificationList = async () =>{
-    return await axios.get(`${URL}`)
+export const getNotificationList = async (account) =>{
+    return await axios.get(`${URL}/${account}`)
         .then((res) => res.data)
         .catch((err) => alert('Failure!!!', err));
 }

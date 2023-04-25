@@ -42,32 +42,31 @@ function Notification({id, type, urgent, isReadN, measure, threshold, time, gard
     let icon_src, icon_alt, measure_msg, threshold_msg;
     switch (type) {
         case "Temperature":
-            icon_src = "./images/Icon_nhiet_do.svg"
+            icon_src = "/images/Icon_nhiet_do.svg"
             icon_alt = "nhiệt độ"
             measure_msg = `Nhiệt độ đo được ${measure}°C`
             threshold_msg = `Nhiệt độ ngưỡng ${threshold}°C`
             break
         case "Soil Humidity":
-            icon_src = "./images/Icon_do_am_dat.svg"
+            icon_src = "/images/Icon_do_am_dat.svg"
             icon_alt = "độ ẩm đất"
             measure_msg = `Độ ẩm đo được ${measure}%`
             threshold_msg = `Độ ẩm ngưỡng ${threshold}%`
             break
         case "Harvest":
-            icon_src = "./images/Icon_thu_hoach.svg"
+            icon_src = "/images/Icon_thu_hoach.svg"
             icon_alt = "thu hoạch"
             break
         case "Air Humidity":
-            icon_src = "./images/Icon_do_am_khong_khi.svg"
+            icon_src = "/images/Icon_do_am_khong_khi.svg"
             icon_alt = "độ ẩm không khí"
             measure_msg = `Độ ẩm đo được ${measure}%`
             threshold_msg = `Độ ẩm ngưỡng ${threshold}%`
             break
         default:
-            icon_src = "./images/Icon_hu_hong_thiet_bi.svg"
+            icon_src = "/images/Icon_hu_hong_thiet_bi.svg"
             icon_alt = "hư hỏng thiết bị"
     }
-
     const font_style = `my-3 ${!isRead ? "fw-bold" : ""} ${urgent ? "text-danger" : ""}`
 
     // Time
@@ -95,7 +94,7 @@ function Notification({id, type, urgent, isReadN, measure, threshold, time, gard
                 <Col md={{span: 3}} onClick={showModalDetail}>{!isRead ? "Chưa đọc" : "Đã đọc"}</Col>
                 <Col md={{span: 1}} className="d-flex justify-content-center">
                     <button onClick={showModalConfirm}>
-                    <img src='./images/Icon_delete.svg' alt="Xóa" style={icon_style} />
+                    <img src='/images/Icon_delete.svg' alt="Xóa" style={icon_style} />
                     </button>
                 </Col>
             </Row>
@@ -149,7 +148,7 @@ function Notification({id, type, urgent, isReadN, measure, threshold, time, gard
 
             <Modal id="Modal-success" onHide={hideModalSuccess} show={showSuccess} centered>
                 <Modal.Body className='d-flex flex-column justify-content-center'>
-                    <img src="./images/Icon_xac_nhan.svg" style={{height: '5rem'}} alt="Xác nhận"/>
+                    <img src="/images/Icon_xac_nhan.svg" style={{height: '5rem'}} alt="Xác nhận"/>
                     <div className='text-center fw-bold fs-6 mt-3'>Bạn đã xóa thành công</div>
                 </Modal.Body>
             </Modal>
