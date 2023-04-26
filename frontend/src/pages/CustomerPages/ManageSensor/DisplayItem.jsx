@@ -19,11 +19,11 @@ const DisplayItem = ({items}) => {
             items.map((item) => {
               return(
                 <Row key={item.id} className='my-5'>
-                  <Col><h5>{item.type}</h5> </Col>
-                  <Col><h5>{item.garden}</h5></Col>
-                  <Col><h5>{item.row}</h5></Col>
+                  <Col><h5>{item.name}</h5> </Col>
+                  <Col><h5>Khu A</h5></Col>
+                  <Col><h5>{item.coordinates.x}</h5></Col>
                   <Col><h5>{item.time}</h5></Col>
-                  <Col><h5>{item.status}</h5></Col>
+                  <Col><h5>{item.status?"Bình thường":"Đang hỏng"}</h5></Col>
                 </Row>
               )
             })

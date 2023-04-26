@@ -20,7 +20,11 @@ export const postRegisterRequest = async (props) =>{
 }
 
 export const updateUserInfor = async (id, data) => {
-    return await axios.post(`${URL}/${id}`, props)
+    console.log('call api ne');
+    console.log(`${URL}/${id}`);
+    console.log('data ne');
+    console.log(data);
+    return await axios.post(`${URL}/${id}`, data)
         .then((res) => true)
         .catch((err) => alert('Failure!!!', err));
 } 

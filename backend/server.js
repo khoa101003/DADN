@@ -40,12 +40,14 @@ require('./route/user.route')(app)
 
 require('./route/record.route')(app, io)
 
-//require('./route/schedule.route')(app)
+require('./route/schedule.route')(app)
 require('./route/static_record.route')(app)
 require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
 require('./route/request.route')(app)
 require('./route/Factory.route')(app)
+require('./route/controlObserver.route')(app)
+// require('./route/controlObserver.route')(app)
 
 const { logger } = require('./controllers/autoPump')
 const { checkThreshold } = require('./controllers/checkThreshold')

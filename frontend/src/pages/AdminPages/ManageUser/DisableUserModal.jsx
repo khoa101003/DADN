@@ -3,14 +3,30 @@ import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import disable from "../../../assets/disable.png";
 import user from '../../../assets/user.png';
+import { updateUserInfor } from '../../../api/userApi';
 
 function DisableUserModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    function handleDisableRequest() {
+    const id = props.user.id
+    const status = props.user.status
 
+    function handleDisableRequest() {
+        console.log('disable user ne');
+        console.log(status);
+
+        console.log('id ne ' + id);
+        const data = {
+            type: "disable",
+            status: !status
+        }
+        const isSuccess = updateUserInfor(id, data)
+        if (isSuccess) {
+            alert("Thành công")
+            location.reload();
+        }
     }
     return (
         <>
@@ -30,8 +46,8 @@ function DisableUserModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Tài khoản sau khi vô hiệu khóa không thể thực hiện được bất kỳ chức năng gì
-                        của ứng dụng. Bạn có muốn vô hiệu hóa tài khoản không ?
+                    <p>{!status ? "Tài khoản sau khi vô hiệu khóa không thể thao tác được. Bạn có muốn vô hiệu hóa tài khoản không ?"
+                        : "Bạn có muốn mở khóa tài khoản của người dùng này không ?"}
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
