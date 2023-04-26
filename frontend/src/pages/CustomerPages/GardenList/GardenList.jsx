@@ -46,6 +46,7 @@ function GardenList() {
     const [delGar, setDelGar] = useState(false);
     const handleCloseDelete = () => {
         setDelGar(false)
+        loadData()
     };
 
     const [sendReq, setSendReq] = useState(false)
@@ -63,7 +64,7 @@ function GardenList() {
         if(sensor.length == 0 ){
             delPieceById(gar.id)
             setDelGar(true)
-            await loadData();
+            // loadData();
         }
         else
         {
