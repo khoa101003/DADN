@@ -48,8 +48,10 @@ require('./route/request.route')(app)
 require('./route/Factory.route')(app)
 
 const { logger } = require('./controllers/autoPump')
+const { checkThreshold } = require('./controllers/checkThreshold')
 const Observable = require('./controllers/Observer')
 Observable.subscribe(logger)
+Observable.subscribe(checkThreshold)
 const port = 3030
 
 io.on('connection', (socket) => {

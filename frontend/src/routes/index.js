@@ -43,7 +43,7 @@ const routes = [
     {path: '/:account/garden-mod/:id', component: GardenModify},
 
     { path: '/:account/SensorHistory', component: SensorHistory },
-    { path: '/SensorInfoPage', component: SensorInfoPage },
+    { path: '/:account/SensorInfoPage/:garden_id', component: SensorInfoPage },
     { path: '/:account/NotificationPage', component: NotificationPage },
     { path: '/:account/SensorHistory/:device_id', component: StatisticPage },
 

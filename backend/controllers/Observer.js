@@ -1,4 +1,3 @@
-
 const logger = require('./autoPump')
 
 const observers = [];
