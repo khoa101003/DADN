@@ -54,7 +54,7 @@ exports.turnOn = (ctrl) => {
       headers: headers
     })
     .then((response) => {
-      console.log("OK")
+      // console.log("OK")
     })
     .catch((error) => {
       console.log(error)
@@ -121,7 +121,7 @@ exports.turnOff = (ctrl) => {
       headers: headers
     })
     .then((response) => {
-      console.log("OK")
+      // console.log("OK")
     })
     .catch((error) => {
       console.log(error)
