@@ -7,7 +7,7 @@ const cx= classNames.bind(styles);
 
 const FilterItem = ({filterItem, data}) => {
     const gardens = [...new Set(data.map((Val) => Val.garden))];
-    const types = [...new Set(data.map((Val) => Val.type))];
+    const types = [...new Set(data.map((Val) => Val.name))];
     const status = [...new Set(data.map((Val) => Val.status))];
 
     const [filters,setFilter] = useState({});
@@ -66,7 +66,7 @@ const handleClick = () => {
                     <option value="DEFAULT">Trạng thái</option>
                     {
                         status.map((status) => {
-                            return <option value ={status} key = {status}>{status}</option>
+                            return <option value ={status?"Bình thường":"Hỏng"} key = {status?"Bình thường":"Hỏng"}>{status?"Bình thường":"Hỏng"}</option>
                         })
                     }
                 </Form.Select>

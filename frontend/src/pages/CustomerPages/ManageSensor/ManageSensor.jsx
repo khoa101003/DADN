@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import DisplayItem from "./DisplayItem";
 import FilterItem from "./FilterItem";
 import classnames from 'classnames/bind'
 import styles from './ManageSensor.module.scss'
 import SideBar from "../../../components/GlobalStyles/SideBar";
+import { getDeviceList } from "../../../api/deviceApi";
+import { useParams } from "react-router-dom";
 
 const cx = classnames.bind(styles);
-const data = [
+const data1 = [
     {
         id: "1",
         type: "DHT20",
         garden: "Khu A",
-        row: "1",
+        coordinates:{
+            x:1,
+            y:2
+        },
         time: "2023-03-11",
         status: "Bình thường",
     },
@@ -20,7 +25,10 @@ const data = [
         id: "2",
         type: "Độ ẩm đất",
         garden: "Khu A",
-        row: "2",
+        coordinates:{
+            x:1,
+            y:2
+        },
         time: "2023-03-12",
         status: "Đang hỏng",        
     },
@@ -28,7 +36,10 @@ const data = [
         id: "3",
         type: "Độ ẩm đất",
         garden: "Khu B",
-        row: "3",
+        coordinates:{
+            x:1,
+            y:2
+        },
         time: "2023-03-11",
         status: "Bình thường"
     },
@@ -36,7 +47,10 @@ const data = [
         id: "4",
         type: "Ánh sáng",
         garden: "Khu C",
-        row: "3",
+        coordinates:{
+            x:1,
+            y:2
+        },
         time: "2023-03-10",
         status: "Bình thường"
     },
@@ -44,14 +58,27 @@ const data = [
         id: "5",
         type: "Ánh sáng",
         garden: "Khu C",
-        row: "2",
+        coordinates:{
+            x:1,
+            y:2
+        },
         time: "2023-03-10",
         status: "Đang hỏng"
     }
 ]
 const ManageSensor = () => {
+    const user = useParams()
+    const [data, setData] = useState(data1);
     const [items,setItem] = useState(data);
-
+    const getData = async () => {
+        getDeviceList(user.account).then(res =>  {
+            setItem(res)
+            setData(res)
+        }).catch(err => console.log(err))
+    }
+    useEffect(() => {
+        getData();
+    },[])
     const filterItem = (filters) => {
         const newItem = data.filter((item) => {
             for(let key in filters){

@@ -7,13 +7,16 @@ module.exports = app =>{
     router.post('/:id',schedule.updateSchedule)
     router.post('/', schedule.postSchedule);
 
-    // const intervalObj = setInterval(()=>{
-    //     schedule.getSchedule()
-    // },1000);
-
+    const intervalObj = setInterval(()=>{
+        schedule.schedulePump()
+    },2000);
+    // router.get('/autoPump',schedule.controlAutoPump1)
+    // router.get('/controlObserver/:id',schedule.controlObserver)
+    router.get('/manualPump/:status/:user',schedule.manualPump)
     router.get('/listSchedule', schedule.getListSchedule);
-    router.get('/', schedule.getSchedule);
+    router.get('/', schedule.schedulePump);
     router.delete('/:id',schedule.deleteById);
+    router.delete('/',schedule.deleteAll)
     app.use('/api/schedulee',router)
 }
 
