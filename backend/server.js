@@ -49,10 +49,9 @@ require('./route/Factory.route')(app)
 require('./route/controlObserver.route')(app)
 // require('./route/controlObserver.route')(app)
 
-const { autoPump } = require('./controllers/autoPump')
+
 const { checkThreshold } = require('./controllers/checkThreshold')
 const Observable = require('./controllers/Observer')
-Observable.subscribe(autoPump)
 Observable.subscribe(checkThreshold)
 const port = 3030
 

@@ -43,7 +43,10 @@ exports.autoUpdate = (io)=>{
     const valueList = dt.valueList;
     if(valueList[valueList.length-1].log_time != newValue.log_time){
       if(dt.type === 'soil'){
-        Observable.notify({[device.key]:newValue.value})
+        Observable.notify({
+          [device.key]:newValue.value,
+          owner:dt.owner
+        })
       }
       valueList.push(newValue)
       await Record.collection.updateOne(

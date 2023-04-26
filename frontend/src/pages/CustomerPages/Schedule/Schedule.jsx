@@ -10,7 +10,11 @@ import {useNavigate, useParams } from 'react-router-dom';
 
 const Schedule = () => {
     const navigate = useNavigate();
-    const [schedule, setSchedule] = useState({});
+    const [schedule, setSchedule] = useState({
+        water:"",
+        time:"",
+        dates:[]
+    });
     const user = useParams();
     const handleChangeWeekly = (obj) => {
         setSchedule((sche)=>({
@@ -58,15 +62,24 @@ const Schedule = () => {
         }))
     }
     const handleClick = () => {
-        if(Number(schedule.water) < 0){
+        console.log(schedule.water)
+        if(schedule.time.length === 0){
+            alert("Thời gian không được bỏ trống")
+        }
+        else if(schedule.water.length=== 0 ){
+            alert("Lượng nước không được bỏ trống")
+        }
+        else if(schedule.dates.length === 0){
+            alert("Ngày tưới không được bỏ trống")
+        }
+        else if(Number(schedule.water) < 0){
             alert("Lượng nước không thể âm")
         }
         else{
-            setSchedule((sche) => ({
-                ...sche,
+            postSchedule({
+                ...schedule,
                 owner:user.account
-            }))
-            postSchedule(schedule)
+            })
             navigate(`../${user.account}/controlPump`)
         }
     }
