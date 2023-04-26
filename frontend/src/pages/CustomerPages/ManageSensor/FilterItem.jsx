@@ -23,6 +23,7 @@ const FilterItem = ({filterItem, data}) => {
     }
     const handleChange = (e) => {
         e.preventDefault();
+        console.log("Change")
         const filter = e.target;
         const obj = {};
         obj[filter.id] = filter.value;

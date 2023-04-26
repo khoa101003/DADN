@@ -68,7 +68,8 @@ function StatisticPage() {
           }
       }
 
-  const resetDate = function () {
+  const resetDate = function (e) {
+    e.preventDefault()
     let start = document.getElementById("start")
     let end = document.getElementById("end")
     start.value = start.defaultValue
