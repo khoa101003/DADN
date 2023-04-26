@@ -26,7 +26,10 @@ const infor = {
     hours:"60"
 }
 const GardenDashboard = () => {
+
     const [data,setData] = useState({});
+    const [hour,setHour] = useState("")
+    const [day,setDay] = useState("");
     const [threshold,setThreshold] = useState({
         minTemp:"",
         maxTemp:"",
@@ -49,6 +52,20 @@ const GardenDashboard = () => {
                     soil: res.find(obj => obj.type === 'soil').curValue,
                     light: res.find(obj => obj.type === 'light').curValue,
                 })
+                const valueListLight = res.find(obj => obj.type === 'light').valueList
+                console.log(valueListLight)
+                const startDay = new Date(valueListLight[1]['log_time']);
+                const cur = new Date(valueListLight[valueListLight.length-1]['log_time'])
+                setDay(Math.ceil((cur.getTime() - startDay.getTime())/(1000 * 3600 * 24)))
+                const listDay = valueListLight.filter(obj => new Date(obj.log_time).toISOString().substring(0,10) === new Date().toISOString().substring(0,10))
+                let sumLux = 0;
+                listDay.forEach((obj) => {sumLux += Number(obj.value)})
+                if(listDay.length > 0){
+                    setHour(Math.ceil(sumLux/(listDay.length)))
+                }
+                // {
+                //     if(new Date(obj.log_time).getDate() === new Date("2023-04-25").getDate()) console.log(obj)
+                // }
             }).catch((err) => console.log(err))
         }
         getTemp()
@@ -61,7 +78,7 @@ const GardenDashboard = () => {
     return (
         <Container>
             <Row>
-                <SideBar />
+                <SideBar position="garden"/>
                 <Col xs='8' >
                     <h1 className={cx('title')}>Giám sát khu vườn</h1>
                     <Row className='my-4'>
@@ -72,7 +89,7 @@ const GardenDashboard = () => {
                                     <h3>Nhiệt độ</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{data.temp} &#8451;</p>
+                                    <p className={cx('text')}>{data.temp} &#8451;</p>
                                 </div>
                             </div>
                         </Col>
@@ -83,7 +100,7 @@ const GardenDashboard = () => {
                                     <h3>Độ ẩm</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{data.humidity} &#37;</p>
+                                    <p className={cx('text')}>{data.humidity} &#37;</p>
                                 </div>
                             </div>
                         </Col>
@@ -94,7 +111,7 @@ const GardenDashboard = () => {
                                     <h3>Ánh sáng</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{data.light} lx</p>
+                                    <p className={cx('text')}>{data.light} lx</p>
                                 </div>
                             </div>
                         </Col>
@@ -105,7 +122,7 @@ const GardenDashboard = () => {
                                     <h3>Độ ẩm đất</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{data.soil} &#37;</p>
+                                    <p className={cx('text')}>{data.soil} &#37;</p>
                                 </div>
                             </div>
                         </Col>
@@ -120,7 +137,7 @@ const GardenDashboard = () => {
                                     <h3>Ngày sinh trưởng</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{infor.days} ngày</p>
+                                    <p className={cx('text')}>{day} ngày</p>
                                 </div>
                             </div>
                         </Col>
@@ -130,10 +147,10 @@ const GardenDashboard = () => {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" className="icon" aria-hidden="true" focusable="false" viewBox="0 0 512 512">
                                         <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/>
                                     </svg>
-                                    <h3>Tổng giờ nắng</h3>
+                                    <h3>Lượng nắng trung bình</h3>
                                 </div>                               
                                 <div className={cx('value-dis')}>
-                                    <p>{infor.hours} giờ</p>
+                                    <p className={cx('text')}>{hour} lux</p>
                                 </div>
                             </div>
                         </Col>

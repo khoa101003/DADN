@@ -49,24 +49,36 @@ const InputValue = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        postUserInput({
-            ...data,
-            owner:user.account,
-        }).then((res) => {
-            if(res.status === 200) navigate(location.state.prevPath,{state:data})
-        })
+        console.log(data)
+        if(data.minTemp < 0 || data.maxTemp < 0 || data.soil < 0 || data.maxSoil < 0){
+            alert("Không được nhập giá trị âm")
+        }
+        else if(data.minTemp > data.maxTemp){
+            alert("Giá trị nhiệt độ min không được lớn hơn giá trị max")
+        }
+        else if(data.soil > data.maxSoil){
+            alert("Độ ẩm mong muốn không được lớn hơn độ ẩm tối đa")
+        }
+        else{
+            postUserInput({
+                ...data,
+                owner:user.account,
+            }).then((res) => {
+                if(res.status === 200) navigate(location.state.prevPath,{state:data})
+            })
+        }
     }
     return (
         <Container>
         <Row>
-            <SideBar />
+            <SideBar position="garden"/>
             <Col xs='9'>
                 <h1 className={cx('title')}>Thiết lập ngưỡng giá trị</h1>
                 <div className={cx('input-form')}>
                     <Form>
                         <Form.Group className="py-3 px-3" controlId="minTemp" onChange={handleMinTemp}>
                             <Form.Label>Nhiệt độ tối thiểu</Form.Label>
-                            <Form.Control type="number"  defaultValue={data.minTemp}/>                      
+                            <Form.Control type="number"  defaultValue={data.minTemp} min={0}/>                      
                         </Form.Group>
 
                         <Form.Group className="py-3 px-3" controlId="maxTemp" onChange={handleMaxTemp}>

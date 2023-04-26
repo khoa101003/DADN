@@ -133,7 +133,7 @@ const ControlPump = () => {
     return (
         <Container>
             <Row>
-                <SideBar></SideBar>
+                <SideBar position="garden"/>
                 
                 <Col className="mx-2">
                     <h1>Quản lý tưới cây</h1>  
@@ -156,10 +156,10 @@ const ControlPump = () => {
                                 >OFF</ToggleButton>
                             </ButtonGroup> */}
                         </Col>
-                        <Col xs={9} className={`${!pumpSchedule?'opacity-25':''}`}>
+                        <Col xs={9} className={cx('center')}>
                             <RowSchedule schedule = {data}/>
-                            <Link to={{pathname:`/${user.account}/schedule`}}><Button>Thêm lịch</Button></Link>
-                            <Button onClick={() => setShow(true)}>Xóa tất cả</Button>
+                            <Link className={cx('px-5')} to={{pathname:`/${user.account}/schedule`}}><Button size="lg">Thêm lịch</Button></Link>
+                            <Button size="lg" variant="secondary" onClick={() => setShow(true)}>Xóa tất cả</Button>
                         </Col>
 
                     </Row>
@@ -184,7 +184,7 @@ const ControlPump = () => {
                             </div>
                             <div className={cx(`${!pumpMoisture?'opacity-25':''}`,'center')} >
                                 <h2>{soil}%</h2>
-                                <Button variant="success" onClick={() => {navigate(`../${user.account}/InputValue`,{state: { prevPath: location.pathname}} )}}>Thiết Lập</Button>
+                                <Button onClick={() => {navigate(`../${user.account}/InputValue`,{state: { prevPath: location.pathname}} )}}>Thiết Lập</Button>
                             </div>
                         </Col>
                         <Col className={cx('box','sm-box')}>

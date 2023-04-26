@@ -7,7 +7,7 @@ const EditSchedule = (props) => {
     const [schedule, setSchedule] = useState({});
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    useEffect(() => {
+    useEffect(() => {   
         setSchedule(props.schedule)
     },[props.schedule])
     const handleChangeTime = (e) => {
