@@ -12,6 +12,7 @@ const User = new Schema({
     address: String, 
     role: String, 
     status: Boolean, 
+    isDelete: Boolean,
     date: String, // Ngay sinh, chi co customer co
     start_date: String // Ngay bat dau lam viec, chi co admin va technician co
 });

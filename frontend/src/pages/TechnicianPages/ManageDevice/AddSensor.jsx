@@ -13,7 +13,7 @@ function AddSensor() {
     return (
         <>
             <Button variant="dark" onClick={handleShow} className="btn-lg mx-2">
-                Thêm khách hàng
+                Thêm Sensor
             </Button>
 
             <Modal

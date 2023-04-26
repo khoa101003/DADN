@@ -39,8 +39,7 @@ function SideBar(props) {
         navigate(`/${props.account}`)
     }
     function handleMangeDevice() {
-        navigate('/NotificationPage')
-
+        navigate(`/${props.account}/NotificationPage`)
     }
 
     const linkStyle = {

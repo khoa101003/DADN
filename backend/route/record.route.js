@@ -10,10 +10,10 @@
 const express = require('express')
 const RecordController = require('../controllers/record.controller')
 
-module.exports = app => {
+module.exports = (app, io) => {
     router = express.Router()
     const intervalObj = setInterval(()=>{
-        RecordController.autoUpdate()
+        RecordController.autoUpdate(io)
     },5000);
     router.get('/', RecordController.getRecord)
     router.get('/:piece', RecordController.getPrivateRec)

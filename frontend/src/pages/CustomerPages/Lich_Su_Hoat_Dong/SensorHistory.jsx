@@ -8,8 +8,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getRecordList } from '../../../api/recordApi';
 import { getDeviceList } from '../../../api/deviceApi'
-const cx = classnames.bind(styles);
 import stu from './Pagination';
+
+const cx = classnames.bind(styles);
 
 function SensorHistory() {
     const lastPage = 5

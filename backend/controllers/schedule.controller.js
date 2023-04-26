@@ -174,7 +174,7 @@ exports.updateSchedule = (req,res) => {
     const query = {dates:sche[0].dates}
     const updateDoc = {
       $set: {
-        time:data.time,
+        time:data.time, 
         water:data.water
       },
     };
