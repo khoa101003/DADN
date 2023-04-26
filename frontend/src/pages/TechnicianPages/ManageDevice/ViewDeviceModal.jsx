@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import read from "../../../assets/read.png";
+import read from "../assets/read.png";
 import white_user from "../../../assets/user-white.png"
-function ViewUserModal(props) {
+
+function ViewDeviceModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -11,11 +12,11 @@ function ViewUserModal(props) {
         setShow(true);
         // props.par.current.setAttribute("class", "text-muted");
     }
-    
+
     return (
         <>
             <Button variant="success" onClick={handleShow} className="mx-2">
-                <img src={read}/>
+                <img src={read} />
             </Button>
 
             <Modal
@@ -26,29 +27,26 @@ function ViewUserModal(props) {
                 <Modal.Header className="bg-success" closeButton>
                     <Modal.Title className="d-flex align-items-center text-white">
                         <img src={white_user} className="user-modal--user-icon me-2" />
-                        Thông tin khách hàng
+                        Thông tin Thiết bị
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row my-2">
                         <div className="col-6">
-                            Họ và tên: {props.user.name}
+                            Tên thiết bị: {props.device.name}
                         </div>
                         <div className="col-6">
-                            Số điện thoại: {props.user.phone}
+                            ID: {props.device.id}
                         </div>
                     </div>
                     <div className="my-3">
-                        Địa chỉ: {props.user.address}
+                        Ngày lắm đặt: {props.device.timeStart}
                     </div>
                     <div className="my-3">
-                        Tên tài khoản: {props.user.account}
+                        Ngày bảo trì: {props.device.timeExpire}
                     </div>
                     <div className="my-3">
-                        Mật khẩu: {props.user.password}
-                    </div>
-                    <div className="my-3">
-                        Mật khẩu: {props.user.email}
+                        Chủ vườn: {props.device.owner}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
@@ -60,5 +58,4 @@ function ViewUserModal(props) {
         </>
     );
 }
-
-export default ViewUserModal;
+export default ViewDeviceModal;

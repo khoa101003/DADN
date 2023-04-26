@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
+import white_user from "../assets/user-white.png"
+import write from "../../../assets/write.png";
 
-function AddSensor() {
+function UpdateDeviceModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    function handleAddRequest() {
+    function handleUpdateUser() {
 
     }
     return (
         <>
-            <Button variant="dark" onClick={handleShow} className="btn-lg mx-2">
-                Thêm Sensor
+            <Button variant="primary" onClick={handleShow} className="mx-2">
+                <img src={write} />
             </Button>
 
             <Modal
@@ -22,9 +24,10 @@ function AddSensor() {
                 onHide={handleClose}
                 centered
             >
-                <Modal.Header className="bg-dark" closeButton>
+                <Modal.Header className="bg-primary" closeButton>
                     <Modal.Title className="d-flex align-items-center text-white">
-                        Thêm thiết bị
+                        <img src={white_user} className="user-modal--user-icon me-2" />
+                        Cập nhật thông tin
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -33,63 +36,52 @@ function AddSensor() {
                         <input
                             type="text"
                             className="form-control w-50 mx-3"
-                            placeholder="Cảm biến CDS - NVZ1"
+                            placeholder="abcder123"
+                            defaultValue={props.device.name}
                         />
                     </div>
                     <div className="d-flex my-3 align-items-center">
-                        Loại thiết bị:
-                        <select className="form-select w-25 ms-3">
-                            <option selected>Open this select menu</option>
-                            <option value="light">Sensor ánh sáng</option>
-                            <option value="soil">Sensor độ ẩm đất</option>
-                            <option value="air">Sensor độ ẩm không khí</option>
-                            <option value="led">Đèn cảnh báo</option>
-                            <option value="pump">Máy bơm</option>
-                        </select>
-                        {/* <input
-                            type="text"
-                            className="form-control w-50 mx-3"
-                            placeholder="Quang trở"
-                        /> */}
-                    </div>
-                    <div className="d-flex my-3 align-items-center">
-                        Khối lượng
-                        <input
-                            type="text"
-                            className="form-control w-50 mx-3"
-                            plac
-                        />
-                    </div>
-                    <div className="d-flex my-3 align-items-center">
-                        Nhập lại mật khẩu:
+                        ID:
                         <input
                             type="password"
                             className="form-control w-50 mx-3"
                             min={8}
                             max={20}
+                            defaultValue={props.device.id}
                         />
                     </div>
                     <div className="d-flex my-3 align-items-center">
-                        Số điện thoại:
+                        Ngày lắp đặt:
                         <input
                             type="tel"
                             className="form-control w-50 mx-3"
-                            placeholder="0238647256"
+                            placeholder="0123456789"
+                            defaultValue={props.device.timeStart}
                         />
                     </div>
-
                     <div className="d-flex my-3 align-items-center">
-                        Địa chỉ:
+                        Ngày bảo trì:
+                        <input
+                            type="tel"
+                            className="form-control w-50 mx-3"
+                            placeholder="0123456789"
+                            defaultValue={props.device.timeExpire}
+                        />
+
+                    </div>
+                    <div className="d-flex my-3 align-items-center">
+                        Tình trạng:
                         <input
                             type="text"
                             className="form-control w-75 mx-3"
-                            placeholder=" 268, Lý Thường Kiệt. P. 14, Q. 10"
+                            placeholder="Your home address"
+                            defaultValue={props.device.status}
                         />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="dark" onClick={handleAddRequest} size="lg">
-                        Xác nhận
+                    <Button variant="primary" onClick={handleUpdateUser} size="lg">
+                        Cập nhật
                     </Button>
                     <Button variant="secondary" onClick={handleClose} size="lg">
                         Đóng
@@ -100,4 +92,4 @@ function AddSensor() {
     );
 }
 
-export default AddSensor;
+export default UpdateDeviceModal;
