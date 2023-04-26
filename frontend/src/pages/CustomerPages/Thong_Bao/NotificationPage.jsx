@@ -2,20 +2,71 @@ import classnames from 'classnames/bind'
 import styles from './NotificationPage.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Row, Col, Stack, Container} from 'react-bootstrap'
-import NotificationNormal from './NotificationNormal';
-import NotificationUrgent from './NotificationUrgent';
-import NotificationReaded from './NotificationReaded';
+import {Row, Col, Stack} from 'react-bootstrap'
+import Notification from './Notification';
 import SideBar from '../../../components/GlobalStyles/SideBar';
+import { getNotificationList } from '../../../api/notificationApi';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { io } from 'socket.io-client';
 
 const cx = classnames.bind(styles);
 
 function NotificationPage() {
+  const [notifications, setNotifications] = useState([])
+  const params = useParams()
+
+  const loadData = async function () {
+    await getNotificationList(params.account).then((result) => {
+      result.sort(function (a,b) {
+        if (a.isRead && !b.isRead) {
+          return 1
+        }
+        else if (!a.isRead && b.isRead) {
+          return -1
+        }
+        else if (a.isRead && b.isRead) {
+          return (a.time > b.time) ? -1 : 1
+        }
+        else {
+          if (a.urgent && !b.urgent) {
+            return -1
+          }
+          else if (!a.urgent && b.urgent) {
+            return 1
+          }
+          else {
+            return (a.time > b.time) ? -1 : 1
+          }
+        }
+      })
+      setNotifications(result)
+    })
+  }
+
+  useEffect(() => {
+    const socket = io('http://localhost:3030')
+    socket.emit('notify', params.account)
+    socket.on('connect_error', (error) => {
+      console.log('Connection error:', error);
+    });
+    socket.on('connect_timeout', (timeout) => {
+      console.log('Connection timeout:', timeout);
+    });
+    socket.on('newNotify', () => {
+      loadData()
+    })
+    loadData()
+    return () => {
+      socket.disconnect()
+    }
+  },[])
+
+
   return (
     <div className="row mx-auto container">
-      <SideBar />
+      <SideBar position="notify"/>
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-          <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
           <h1 className="text-center">Thông báo</h1>
           
           <h5>Tìm kiếm: </h5>
@@ -57,9 +108,15 @@ function NotificationPage() {
           </Row>
           <hr />
 
-          <NotificationUrgent />
-          <NotificationNormal />
-          <NotificationReaded />
+          {
+            notifications.map((notification) => 
+              <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
+              isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
+              time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
+              y={notification.coordinates.y}/>
+            )
+          }
+
       </div>
     </div>
   )

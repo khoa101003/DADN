@@ -11,7 +11,7 @@ export const getPrivateRecord = async (garPiece) =>{
 export const getRecordList = async (id) => {
     return await axios.get(`${URL}`)
         .then(res => {
-            // console.log(res.data.filter(elem => elem.id == id))
+            //console.log(res.data.filter(elem => elem.id == id))
             return res.data.filter(elem => elem.id == id)
         })
         .catch((err) => alert('Failure!!!', err))
