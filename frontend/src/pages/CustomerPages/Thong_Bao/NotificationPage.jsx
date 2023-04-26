@@ -65,7 +65,7 @@ function NotificationPage() {
 
   return (
     <div className="row mx-auto container">
-      <SideBar position="notify"/>
+      <SideBar position="notify" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
           <h1 className="text-center">Thông báo</h1>
           
