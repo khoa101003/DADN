@@ -7,7 +7,7 @@ const { turnOn, turnOff } = require('./schedule.controller')
 module.exports.autoPump = function (data) {
     console.log(data)
     if(data['do-am-dat']){
-        device.find({type:"soil",owner:"phongong"})
+        device.find({type:"soil",owner:data.owner})
         .then((device) => {
             console.log(data['do-am-dat'])
             console.log( device[0].threshold.min)

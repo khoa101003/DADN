@@ -46,8 +46,8 @@ const Custom = (props) => {
         setN(n);
         const dates = [];
         var date = new Date(minDate);
-        
-        while(date.getDate() <= maxDate.getDate()){
+        const max = new Date(maxDate);
+        while(date<max){
             dates.push(date);
             const dateCopy = new Date(date);            
             dateCopy.setDate(dateCopy.getDate() + n);
@@ -55,15 +55,11 @@ const Custom = (props) => {
         }
         console.log(dates);
         setCusDate(dates);
-        // const sche = {
-        //     "minDate":minDate,
-        //     "maxDate":maxDate,
-        //     "step":n 
-        // }
-        // setCusDate(sche);
     }
     const handleCancel = () => {
         setCusDate({});
+        setMindate('')
+        setMaxdate('')
     }
     return (
         <>
@@ -77,6 +73,7 @@ const Custom = (props) => {
                         <Col md={{ span: 4}}>
                             <p>Ngày bắt đầu:</p>
                             <DatePicker
+                                minDate={new Date()}
                                 value={minDate}
                                 onChange={changeMinDate}
                                 maxDate={maxDate}
@@ -104,10 +101,7 @@ const Custom = (props) => {
                         value={CusDate} 
                         onChange={handleChange}
                         multiple
-                        // plugins={[
-                        // <DatePanel />
-                        // ]}
-                        minDate={minDate}
+                        minDate={minDate?minDate:new Date()}
                         maxDate={maxDate}
                         />
                     </Row>
