@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import white_user from "../../../assets/user-white.png"
 import write from "../../../assets/write.png";
-
+import { updateUserInfor } from "../../../api/userApi"
 function UpdateUserModal(props) {
     const [show, setShow] = useState(false);
 
@@ -15,12 +15,28 @@ function UpdateUserModal(props) {
         const form = field.current
         const id = props.user.id
         const data = {
+            type: "update",
             email: form['email'].value,
             phone: form['phone'].value,
             password: form['password'].value,
             address: form['address'].value
         }
-        alert('phone ne ' + form['phone'].value)
+
+        if (!data.password) {
+            alert("Không được để trống mật khẩu")
+        } else if (!data.phone) {
+            alert("Không được để trống số điện thoại")
+        } else if (!data.email) {
+            alert("Không được để trống email")
+        } else if (!data.address) {
+            alert("Không được để trống địa chỉ")
+        } else {
+            const isSuccess = updateUserInfor(id, data) 
+            if (isSuccess) {
+                alert("Cập nhật thành công")
+                location.reload()
+            }
+        }
     }
     return (
         <>
@@ -37,7 +53,7 @@ function UpdateUserModal(props) {
                 <Modal.Header className="bg-primary" closeButton>
                     <Modal.Title className="d-flex align-items-center text-white">
                         <img src={white_user} className="user-modal--user-icon me-2" />
-                        Cập nhật thông tin nè   
+                        Cập nhật thông tin nè
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -93,9 +109,9 @@ function UpdateUserModal(props) {
                                 name="address"
                             />
                         </div>
-                        <div className="col-6">
+                        {/* <div className="col-6">
                             id: {props.user.id}
-                        </div>
+                        </div> */}
                     </form>
                 </Modal.Body>
                 <Modal.Footer>

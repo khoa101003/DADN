@@ -31,6 +31,9 @@ function ViewUserModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row my-2">
+                        <div className="my-3">
+                            id: {props.user.id}
+                        </div>
                         <div className="col-6">
                             Họ và tên: {props.user.name}
                         </div>

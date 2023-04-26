@@ -45,7 +45,7 @@ function ManageUser() {
     const loadUser = async () => {
         try {
             let listOfUser = await getUserList()
-            listOfUser = listOfUser.filter(user => user.role == "customer")
+            listOfUser = listOfUser.filter(user => user.role == "customer" && !user.isDelete)
             console.log(('list of user ne'))
             console.log(listOfUser)
             setUser(listOfUser)
@@ -68,7 +68,7 @@ function ManageUser() {
             const newUserList = user.map((item, index) => <UserRow key={index} user={item} />)
             setRenderUser(newUserList)
         } else {
-            const targetUser = user.filter(item => item.account == key)
+            const targetUser = user.filter(item => item.account == key || item.phone == key)
             console.log('tim user ne');
             console.log(targetUser[0]);
             if (targetUser.length == 0) {
@@ -87,7 +87,7 @@ function ManageUser() {
     // console.log(userList)
     return (
         <div className="row mx-auto container">
-            <SideBar />
+            <SideBar position="user" />
             <div className="col-xl-9 col-md-9 mt-5 mx-auto px-5">
                 <h1 className="text-center fw-bold">Quản lý khách hàng</h1>
                 <div className="row my-5">
