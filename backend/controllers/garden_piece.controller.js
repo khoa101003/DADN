@@ -14,9 +14,14 @@ exports.getPrivateGPiece = (req, res)=>{
 }
 
 exports.getGPieceById = (req,res)=>{
-    console.log(req.params['id'])
     const query = { id: req.params['id']}
     Garden_piece.find({})
     .then(piece => res.status(200).send(piece))
+    .catch(err => res.status(400).send(err))
+}
+
+exports.delGPiece = (req,res)=>{
+    Garden_piece.findOneAndDelete({id: req.params['id']})
+    .then(data => console.log(data))
     .catch(err => res.status(400).send(err))
 }

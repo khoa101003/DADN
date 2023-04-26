@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form, Modal } from 'react-bootstrap'
 import { MDBContainer } from "mdb-react-ui-kit";
 import classNames from 'classnames/bind';
 
@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getUserList,postRegisterRequest } from '../../../api/userApi';
+
 
 //component style
 const inputStyled = {
@@ -38,6 +39,32 @@ function Register(){
     const [phone,setPhone] = useState('')
     const [username,setUsername] = useState('');
     const [password, setPassword] = useState('');
+    //alert
+    const [success, setSuccess] = useState(false);
+    const handleCloseSuccess = () => {
+        navigate('/login-as')
+    };
+    
+    const [eAccount, setEAccount] = useState(false);
+    const handleCloseAccount = () => {
+        setEAccount(false)
+    };
+
+    const [eEmail, setEEmail] = useState(false);
+    const handleCloseEmail = () => {
+        setEEmail(false)
+    };
+
+    const [ePhone, setEPhone] = useState(false);
+    const handleClosePhone = () => {
+        setEPhone(false)
+    };
+    
+    const [fill, setFill] = useState(false);
+    const handleCloseFill = () => {
+        setFill(false)
+    };
+
     //navigate
     const navigate = useNavigate()
 
@@ -56,42 +83,126 @@ function Register(){
             account: username,
             password: password
         }
+        if(name == "" || birth == "" || address == "" || email == "" || phone == "" || username == "" || password == "")
+        {
+            setFill(true)
+            return;
+        }
         let dup = false
         const auth = users.filter((user)=>user.role === 'customer')
         if(auth.find(ad=>ad.account===username))
         {
-            alert('Tên đăng nhập đã tồn tại')
+            setEAccount(true)
             dup = true;
         }
 
         if(!dup && auth.find(ad=>ad.email===email)){
-            alert('Email đã được sử dụng')
+            setEEmail(true)
             dup = true;
         }
 
         if(!dup && auth.find(ad=>ad.phone===phone)){
-            alert('Số điện thoại đã được sử dụng')
+            setEPhone(true)
             dup = true;
         }
 
         if(!dup){
             const x = postRegisterRequest(data)
             if(x){
-                alert('Đăng kí thành công')
-                navigate('/login-as')
+                setSuccess(true);
             }
         }    
     }
+
     return(
         <div className={cx('wrapped')}>
+            <Modal
+            show={success}
+            onHide={handleCloseSuccess}
+            backdrop="static"
+            keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Đăng kí thành công</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Tài khoản đã được đăng kí thành công</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseSuccess}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+            show={eAccount}
+            onHide={handleCloseAccount}
+            backdrop="static"
+            keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Tên đăng nhập đã tồn tại</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vui lòng nhập tên đăng nhập khác</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseAccount}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+            show={eEmail}
+            onHide={handleCloseEmail}
+            backdrop="static"
+            keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Email đã tồn tại</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vui lòng nhập email khác</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseEmail}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+            show={ePhone}
+            onHide={handleClosePhone}
+            backdrop="static"
+            keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Số điện thoại đã tồn tại</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vui lòng nhập số điện thoại khác</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClosePhone}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+            show={fill}
+            onHide={handleCloseFill}
+            backdrop="static"
+            keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Điền thiếu thông tin</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vui lòng điền đầy đủ thông tin</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseFill}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
+
+
             <Container>
-            <Alert variant="info" show={false} dismissible>
-                <Alert.Heading>Gửi đăng ký thành công</Alert.Heading>
-                <p>
-                    Yêu cầu của bạn đã được ghi nhận. 
-                    Công ty sẽ liên hệ với bạn sớm nhất có thể!
-                </p>
-            </Alert>
                 <Row className='justify-content-center'>
                     <Col xs='6' className='my-5'>
                         <div className={cx('main')}>
