@@ -5,18 +5,18 @@ const { turnOn, turnOff } = require('./schedule.controller')
 
 
 module.exports.autoPump = function (data) {
-    console.log(data)
+    // console.log(data)
     if(data['do-am-dat']){
-        device.find({type:"soil",owner:"phongong"})
+        device.find({type:"soil",owner:data.owner})
         .then((device) => {
             console.log(data['do-am-dat'])
             console.log( device[0].threshold.min)
             if(data['do-am-dat'] < device[0].threshold.min){
-                console.log("tuoi")
+                // console.log("tuoi")
                 turnOn("system");
             }
             else{
-                console.log("ko tuoi")
+                // console.log("ko tuoi")
                 turnOff("system");
             }
 

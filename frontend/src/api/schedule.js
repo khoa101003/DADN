@@ -2,6 +2,7 @@ import axios from 'axios';
 
 let URL = 'http://localhost:3030/api/schedulee';
 export const postSchedule = async (props) =>{
+    console.log(props)
     return await axios.post(`${URL}`, props).then((res)=>{alert('Thêm thành công')}).catch((err) =>console.log(err));;
 }
 
