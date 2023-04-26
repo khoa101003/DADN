@@ -1,10 +1,14 @@
+const { response } = require('express')
 const Request = require('../models/request.model')
-
-exports.registerGarden = (req, res)=>{
+const mongoose = require("mongoose");
+const Types = mongoose.Types;
+const ObjectId = Types.ObjectId;
+exports.registerGarden = (req, res) => {
     data = req.body
     Request.insertMany([
         {
             status: false,
+            isHidden: false,
             name: 'Register Garden',
             sender: data.sender,
             description: 'Register garden request',
@@ -35,11 +39,12 @@ exports.registerGarden = (req, res)=>{
     ])
 }
 
-exports.modifyGarden = (req, res)=>{
+exports.modifyGarden = (req, res) => {
     data = req.body
     Request.insertMany([
         {
             status: false,
+            isHidden: false,
             name: 'Modify Garden',
             sender: data.sender,
             description: 'Modify garden request',
@@ -70,11 +75,12 @@ exports.modifyGarden = (req, res)=>{
     ])
 }
 
-exports.deleteGarden = (req, res)=>{
+exports.deleteGarden = (req, res) => {
     data = req.body
     Request.insertMany([
         {
             status: false,
+            isHidden: false,
             name: 'Delete Garden',
             sender: data.sender,
             description: 'Delete garden request',
@@ -82,4 +88,46 @@ exports.deleteGarden = (req, res)=>{
             registerGarden: data.registerGarden
         }
     ])
+}
+
+
+exports.getRequest = (req, res) => {
+    Request.find({})
+        .then(user => res.status(200).send(user))
+        .catch(err => res.status(400).send(err))
+}
+
+
+exports.hideRequest = (req, res) => {
+    const data = req.body
+    // console.log('data ne');
+    const id = data.id
+    const key = new ObjectId(id)
+    // console.log('id ne ' + id);
+    const typ = data.type
+    if (typ == "read") {
+        // console.log('vao read ne')
+        // console.log('type of ne')
+        Request.collection.updateOne(
+            { _id: key },
+            {
+                $set: {
+                    status: true
+                }
+            }
+        )
+        .then(item => res.status(200).send(item))
+        .catch(err => res.status(400).send(err))
+    } else {
+        Request.collection.updateOne(
+            { _id: key },
+            {
+                $set: {
+                    isHidden: true
+                }
+            }
+        ).then(item => res.status(200).send(item))
+        .catch(err => res.status(400).send(err))
+    }
+    // res.status(200).send('hide request OK')
 }
