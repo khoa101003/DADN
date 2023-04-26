@@ -58,18 +58,22 @@ const Schedule = () => {
         }))
     }
     const handleClick = () => {
-        setSchedule((sche) => ({
-            ...sche,
-            owner:user.account
-        }))
-        postSchedule(schedule)
-        navigate(`../${user.account}/controlPump`)
-        // window.location.href = `http://localhost:5173/${user.account}/controlPump`;
+        if(Number(schedule.water) < 0){
+            alert("Lượng nước không thể âm")
+        }
+        else{
+            setSchedule((sche) => ({
+                ...sche,
+                owner:user.account
+            }))
+            postSchedule(schedule)
+            navigate(`../${user.account}/controlPump`)
+        }
     }
     return (
         <Container>
             <Row>
-                <SideBar />
+                <SideBar position = "garden"/>
                 <Col>
                     <h1>Thêm lịch tưới</h1>
                     <Form>

@@ -1,10 +1,8 @@
 
-const logger = require('./autoPump')
-
 const observers = [];
 module.exports = Object.freeze({
   notify: (data) => observers.forEach((observer) =>{
-    // console.log(data)
+    console.log(observer)
     observer(data)
   }),
   subscribe: (func) => observers.push(func),

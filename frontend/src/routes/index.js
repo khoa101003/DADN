@@ -50,7 +50,7 @@ const routes = [
 
     { path: '/:account/dashboard', component: GardenDashboard },
     { path: '/:account/InputValue', component: InputValue },
-    { path: '/ManageSensor', component: ManageSensor },
+    { path: '/:account/ManageSensor', component: ManageSensor },
     { path: '/:account/controlPump', component: ControlPump },
     { path: '/:account/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },

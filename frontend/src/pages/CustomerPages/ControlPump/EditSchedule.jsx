@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal} from 'react-bootstrap';
 import write from '../../../assets/write.png'
 import { updateSchedule } from '../../../api/schedule';
 const EditSchedule = (props) => {
     const [show,setShow] = useState(false);
-    const [schedule, setSchedule] = useState({...props.schedule});
+    const [schedule, setSchedule] = useState({});
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+    useEffect(() => {   
+        setSchedule(props.schedule)
+    },[props.schedule])
     const handleChangeTime = (e) => {
-        setSchedule((sche)=>({
-            ...props.schedule,
-            "time":e.target.value,
-        }))
+        console.log(schedule)
+        const time = e.target.value
+        schedule.time = time
+        setSchedule(schedule)
+        console.log(schedule)
     }
     const handleChangeWater = (e) => {
-        setSchedule((sche)=>({
-            ...props.schedule,
-            "water":e.target.value,
-        }))
+        const water = e.target.value
+        schedule.water = water
+        setSchedule(schedule)
+        // console.log(schedule)
+
     }
     const handleClick = () => {
-        // console.log(schedule)
-        // console.log(props.schedule._id)
         updateSchedule(props.schedule._id,schedule)
         props.onEdit(props.schedule._id,schedule)
         setShow(false)
