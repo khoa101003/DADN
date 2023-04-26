@@ -10,7 +10,7 @@ function ManageRequest() {
     const requestList = data.map(request => < RequestRow key={request.id} request={request} />);
     return (
         <div className="row container mx-auto">
-            <SideBar />
+            <SideBar position="request" />
             <div className="col-xl-9 col-md-9 mt-5 px-5 mx-auto">
                 <h1 className="text-center fw-bold">Yêu cầu của khách hàng</h1>
                 <div className="row my-5">

@@ -1,7 +1,10 @@
-import "./Search.css"
 import { getUserList } from '../../../api/userApi';
+import SideBar from '../SideBar';
+import "./Search.css"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { Button, Container, Row, Col } from 'react-bootstrap';
+
 function Search() {
     const navigate = useNavigate()
     const [users, setUsers] = useState([])
@@ -44,12 +47,21 @@ function Search() {
         }
     }
     return (
-        <div className="row">
+        <div className='row'>
             <div className="left col-2"></div>
             <div className="col-8">
-                <div className="box  text-center align-items-center">
-                    <input type="text" className="form-control w-100 mx-auto" id="account" placeholder="Nhập số điện thoại hoặc tài khoản khách hàng"></input>
-                    <div className="btn btn-success my-5" onClick={handleClick}>Tìm kiếm <i className="fa-solid fa-magnifying-glass  ms-5 fs-3"></i></div>
+                <div className="box text-center align-items-center">
+                    <input
+                        type="text"
+                        className="form-control w-100 mx-auto"
+                        id="account"
+                        placeholder="Nhập số điện thoại hoặc tài khoản khách hàng"
+                    ></input>
+                    <button
+                        className="btn btn-success my-5"
+                        onClick={handleClick}
+                    >Tìm kiếm <i className="fa-solid fa-magnifying-glass  ms-5 fs-3"></i>
+                    </button>
                 </div>
             </div>
             <div className="right col-2"></div>

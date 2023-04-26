@@ -3,13 +3,19 @@ import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import del from "../../../assets/delete.png";
 import white_user from "../../../assets/user-white.png";
-function DeleteUserModal() {
+import { updateUserInfor } from '../../../api/userApi';
+function DeleteUserModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const id = props.user.id
     function handleDeleteUser() {
-
+        const isSuccess = updateUserInfor(id, {})
+        if (isSuccess) {
+            alert("Thành công")
+            location.reload();
+        }    
     }
     return (
         <>

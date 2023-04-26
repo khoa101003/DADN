@@ -5,7 +5,7 @@
   "name": "Mảnh vườn 1",
   "type": "Chuối",
   "location": "Đâu đó trong thủ đức",
-  "owner": "giaukiien",
+  "owner": "phongong",
   "area": 30,
   "days": 20,
   "id": 1
@@ -16,7 +16,7 @@
   "name": "Mảnh vườn a",
   "type": "Sầu riêng",
   "location": "Đâu đó ở Đồng Nai",
-  "owner": "phongong",
+  "owner": "giaukiien",
   "area": 30,
   "days": 20,
   "id": 2
