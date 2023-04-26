@@ -26,7 +26,7 @@ const RowSchedule = (props) => {
     const row = listSchedule.map((date,index) =>{ 
         let dateObj = "";
         if(date.type === "weekly" && date.dates.length > 3) {
-            dateObj = new Date(date.dates).toString().substring(0,3);
+            dateObj = new Date(date.dates).toString().substring(0,10);
         }
         else {
             dateObj = date.type === "weekly"?date.dates:date.dates.substring(0,10)

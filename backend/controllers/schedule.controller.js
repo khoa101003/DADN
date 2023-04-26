@@ -41,7 +41,7 @@ exports.turnOn = (ctrl) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_BJDx68ri1yIqOBSfSqujdL0R7ZU4'
+    'X-AIO-Key':'aio_PQVP37oLjzSRFu0Sq1hpjwvnU4E6'
   }
   const data2 = {
     "datum":
@@ -93,7 +93,7 @@ exports.turnOff = (ctrl) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_BJDx68ri1yIqOBSfSqujdL0R7ZU4'
+    'X-AIO-Key':'aio_PQVP37oLjzSRFu0Sq1hpjwvnU4E6'
   }
   const data2 = {
     "datum":

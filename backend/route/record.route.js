@@ -15,7 +15,7 @@ module.exports = (app, io) => {
     const intervalObj = setInterval(()=>{
 
         RecordController.autoUpdate(io)
-    },2000);
+    },1000);
     router.get('/', RecordController.getRecord)
     router.get('/:piece', RecordController.getPrivateRec)
     app.use('/api/record', router)

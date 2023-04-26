@@ -40,7 +40,7 @@ require('./route/user.route')(app)
 
 require('./route/record.route')(app, io)
 
-//require('./route/schedule.route')(app)
+require('./route/schedule.route')(app)
 require('./route/static_record.route')(app)
 require('./route/device.route')(app)
 require('./route/garden_piece.route')(app)
