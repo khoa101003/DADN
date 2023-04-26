@@ -49,6 +49,7 @@ require('./route/Factory.route')(app)
 require('./route/controlObserver.route')(app)
 // require('./route/controlObserver.route')(app)
 
+
 const { checkThreshold } = require('./controllers/checkThreshold')
 const Observable = require('./controllers/Observer')
 Observable.subscribe(checkThreshold)
