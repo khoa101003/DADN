@@ -49,7 +49,9 @@ function ManageRequest() {
             console.log('request list ne')
             console.log(listOfRequest);
             listOfRequest = listOfRequest.map((item, index) => <RequestRow key={index} request={item} />)
+            listOfRequest = listOfRequest.reverse()
             setRequest(listOfRequest)
+            
         } catch (err) {
             console.log(err)
         }
@@ -74,7 +76,7 @@ function ManageRequest() {
                         < UpdateGarden />
                     </div>
                 </div> */}
-                <table className="table align-middle">
+                <table className="table align-middle mx-auto">
                     <thead>
                         <tr>
                             <th scope="col">Nội dung</th>

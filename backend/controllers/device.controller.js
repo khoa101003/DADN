@@ -74,3 +74,37 @@ exports.getThreshold = (req,res) => {
     .catch((err) => console.log(err))
 
 }
+
+exports.handleDeviceRequest = (req, res) => {
+    let data = req.body
+    const request = data.request 
+    if (request == "add") {
+        Device.findOne({})
+            .sort({ id: 'desc' })
+            .then(latest => {
+                data.id = latest.id + 1;
+
+                Device.insertMany([
+                    {
+                        id: data.id,
+                        name: data.name,
+                        type: data.type,
+                        owner: data.owner,
+                        coordinates: data.coordinates,
+                        status: true,
+                        threshold: data.threshold,
+                        water: data.water,
+                        time: data.time,
+                        garPiece: data.garPiece
+                    }
+                ])
+            })
+            .then(item => res.status(200).send(item))
+            .catch(err => res.status(400).send(err))
+    } else if (request == "update") {
+
+    } else {
+
+    }
+    res.status(200).send("handle device request OK")
+}

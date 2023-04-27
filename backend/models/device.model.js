@@ -7,7 +7,7 @@ const Device = new Schema({
     name: String, // tên của device
     type: String, // loại của device, đèn, máy bơm hoặc cảm biến
     owner: String, // Dùng để biết thiết bị thuộc khu vườn nào. owner = customer
-    coord: {
+    coordinates: {
         x: Number,
         y: Number
     },
@@ -18,7 +18,8 @@ const Device = new Schema({
         max: Number
     },
     water: Number,
-    time: Number
+    time: Number,
+    garPiece: Number
 });
 
 module.exports = mongoose.model('device', Device)

@@ -19,14 +19,13 @@ function SideBar(props) {
         textDecoration: "none",
         color: 'white'
     };
-    // const location = useLocation();
-    // const path = location.pathname;
+
+
     const postion = props.position
     const userLogo = (postion == "user") ? active_user : user;
     const requestLogo = (postion == "request") ? active_request : request;
-    const logOut = () => {
-        
-    }
+
+    const navigate = useNavigate()
     return (
         <div className="side-bar col-xl-3 col-md-3 container p-auto" style={sbstyle}>
             <img className="admin-logo img-fluid mx-auto d-block py-5" src={logo}></img>
@@ -58,7 +57,7 @@ function SideBar(props) {
             <hr className="w-75 mx-auto" />
             <div
                 className="logout text-center mt-5"
-                onClick={logOut}
+                onClick={() => navigate('/')}
             >Đăng xuất</div>
         </div>
     );

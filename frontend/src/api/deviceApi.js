@@ -16,3 +16,11 @@ export const postUserInput = async (props) => {
 export const getThreshold = async () => {
     return await axios.get(`${URL}/threshold`).then((res) => res.data).catch((err) => console.log(err))
 }
+
+export const handleDeviceRequest = async (data) => {
+    console.log('data ne');
+    console.log(data);
+    return await axios.post(`${URL}/request`, data)
+        .then((res) => true)
+        .catch((err) => alert('Failure!!!', err));
+}
