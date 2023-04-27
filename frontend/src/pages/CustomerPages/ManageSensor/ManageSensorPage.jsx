@@ -1,11 +1,11 @@
 import classnames from 'classnames/bind'
-import styles from './SensorInfoPage.module.scss'
+import styles from './ManageSensorPage.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Row, Col, Stack, Pagination} from 'react-bootstrap'
 import SensorInfo from './SensorInfo';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { getDeviceList } from '../../../api/deviceApi';
 
@@ -32,9 +32,7 @@ function SensorInfoPage() {
   const sensorPerPage = 5
 
   const loadData = async function () {
-    const res = await getDeviceList(params.account).then((res) => {
-        return res.filter(elem => elem.garPiece === parseInt(params.garden_id))
-    })
+    const res = await getDeviceList(params.account)
 
     const newLastPage = Math.ceil(res.length / 5)
    
@@ -129,6 +127,8 @@ function SensorInfoPage() {
       }
     })
 
+    setCurrentPage(1)
+    setStartIndex(1)
     setLastPage(newLastPage)
     setSensorShow(newSensorShow)
   }
@@ -144,19 +144,16 @@ function SensorInfoPage() {
     time.value = time.defaultValue
     isRead.value = "DEFAULT"
 
+    setCurrentPage(1)
+    setStartIndex(1)
     loadData()
-  }
-
-  const returnGardenDetail = () => {
-    navigate(`/${params.account}/garden-detail/${params.garden_id}`)
   }
 
   return (
     <div className="row mx-auto container">
-      <SideBar position="garden" account={params.account} />
+      <SideBar position="sensor" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-      <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
-        <h1 className="text-center">Thông tin cảm biến</h1>
+        <h1 className="text-center">Quản lý sensor</h1>
         
         <h5>Tìm kiếm: </h5>
         <Form className={cx("search-form")}>
@@ -199,9 +196,8 @@ function SensorInfoPage() {
 
         <Row className={cx('title')}>
           <Col md={{span: 3, offset:1}}>Tên sensor</Col>
-          <Col md={{span: 2}}>Hàng</Col>
-          <Col md={{span: 2}}>Cột</Col> 
-          <Col md={{span: 2}}>Thời gian lắp đặt</Col>
+          <Col md={{span: 3}}>Mảnh vườn</Col>
+          <Col md={{span: 3}}>Thời gian lắp đặt</Col>
           <Col md={{span: 2}}>Trạng thái</Col>
         </Row>
         <hr />
@@ -209,7 +205,7 @@ function SensorInfoPage() {
         {
         sensorShow.slice(currentPage * sensorPerPage - 5, currentPage * sensorPerPage).map((sensor, i) => {
           if (sensor) {
-            return <SensorInfo key={i} type={sensor.type} name={sensor.name} x={sensor.coordinates.x} y={sensor.coordinates.y} install_date={sensor.install_date} status={sensor.status} />
+            return <SensorInfo key={i} type={sensor.type} name={sensor.name} gardenID={sensor.garPiece} install_date={sensor.install_date} status={sensor.status} />
           }
           else {
             return <Row key={i} className='my-3' style={{height : '24px'}}></Row>

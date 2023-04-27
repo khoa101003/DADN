@@ -7,18 +7,19 @@ const Device = new Schema({
     name: String, // tên của device
     type: String, // loại của device, đèn, máy bơm hoặc cảm biến
     owner: String, // Dùng để biết thiết bị thuộc khu vườn nào. owner = customer
-    coord: {
+    coordinates: {
         x: Number,
         y: Number
     },
     status: Boolean, // true = hoạt động, false = đang hỏng     
-    sensorType: String,
     threshold: {
         min: Number,
         max: Number
     },
     water: Number,
-    time: Number
+    time: Number,
+    garPiece: Number,
+    install_date: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('device', Device)

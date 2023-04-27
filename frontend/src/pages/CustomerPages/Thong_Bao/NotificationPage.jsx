@@ -2,7 +2,7 @@ import classnames from 'classnames/bind'
 import styles from './NotificationPage.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Row, Col, Stack} from 'react-bootstrap'
+import {Row, Col, Stack, Pagination} from 'react-bootstrap'
 import Notification from './Notification';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { getNotificationList } from '../../../api/notificationApi';
@@ -28,6 +28,10 @@ function NotificationPage() {
   const realTime = useRef(true)
   const params = useParams()
 
+  const [ lastPage, setLastPage ] = useState(1)
+  const notiPerPage = 5
+
+
   const loadData = async function () {
     await getNotificationList(params.account).then((result) => {
       result.sort(function (a,b) {
@@ -52,8 +56,21 @@ function NotificationPage() {
           }
         }
       })
-      setNotifications(result)
-      setNotiShow(result)
+
+    const newLastPage = Math.ceil(result.length / 5)
+
+    const newNotiShow = Array.from({length : newLastPage * 5}, (_, i) => i + 1).map((i) => {
+      if (i <= result.length) {
+        return result[i - 1];
+      }
+      else {
+        return undefined;
+      }
+    })
+
+    setLastPage(newLastPage)
+    setNotifications(result)
+    setNotiShow(newNotiShow)
     })
   }
 
@@ -75,6 +92,38 @@ function NotificationPage() {
     }
   },[])
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [startIndex, setStartIndex] = useState(1)
+
+  const onPrev = () => {
+    if (currentPage !== 1) {
+      if (currentPage === startIndex) {
+        setStartIndex(currentPage - 1)
+      }
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const onNext = () => {
+    if (currentPage !== lastPage) {
+      if (currentPage === startIndex + 2) {
+        setStartIndex(startIndex + 1)
+      }
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const onFirst = () => {
+    setCurrentPage(1)
+    setStartIndex(1)
+  }
+
+  const onLast = () => {
+    setCurrentPage(lastPage)
+    setStartIndex(lastPage >= 3 ? lastPage - 2 : 1)
+  }
+
+
   const handleClick = function (e) {
     e.preventDefault();
     let type = document.getElementById("notificationType").value;
@@ -87,7 +136,7 @@ function NotificationPage() {
       : "DEFAULT";
 
 
-    const newNotiShow = notifications.filter((nt) => {
+    const res = notifications.filter((nt) => {
       if (type !== "DEFAULT" && nt.type !== type) {
         return false;
       }
@@ -101,7 +150,23 @@ function NotificationPage() {
       }
       return true;
     })
+
+    const newLastPage = Math.ceil(res.length / 5)
+   
+    const newNotiShow = Array.from({length : newLastPage * 5}, (_, i) => i + 1).map((i) => {
+      if (i <= res.length) {
+        return res[i - 1];
+      }
+      else {
+        return undefined;
+      }
+    })
+
+    setCurrentPage(1)
+    setStartIndex(1)
+
     realTime.current = false
+    setLastPage(newLastPage)
     setNotiShow(newNotiShow)
   }
 
@@ -115,6 +180,8 @@ function NotificationPage() {
     isRead.value = "DEFAULT"
 
     realTime.current = true
+    setCurrentPage(1)
+    setStartIndex(1)
     loadData()
   }
 
@@ -166,13 +233,29 @@ function NotificationPage() {
           <hr />
 
           {
-            notiShow.map((notification) => 
-              <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
-              isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
-              time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
-              y={notification.coordinates.y}/>
+            notiShow.slice(currentPage * notiPerPage - 5, currentPage * notiPerPage).map((notification, i) => { 
+              if (notification) {
+                return <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
+                isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
+                time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
+                y={notification.coordinates.y}/>
+              }
+              else {
+                return <Row key={i} className='my-3' style={{height : '24px'}}></Row>
+              }
+            }
             )
           }
+
+        <Pagination className='justify-content-center'>
+          <Pagination.First onClick={onFirst} />
+          <Pagination.Prev onClick={onPrev}/>
+          <Pagination.Item onClick={()=>setCurrentPage(startIndex)} key='first' className={currentPage - startIndex === 0 ? 'active' : ''}>{startIndex}</Pagination.Item>
+          {lastPage > 1 && <Pagination.Item onClick={()=>setCurrentPage(startIndex + 1)} key='second' className={currentPage - startIndex === 1 ? 'active' : ''}>{startIndex + 1}</Pagination.Item>}
+          {lastPage > 2 && <Pagination.Item onClick={()=>setCurrentPage(startIndex + 2)} key='third' className={currentPage - startIndex === 2 ? 'active' : ''}>{startIndex + 2}</Pagination.Item>}
+          <Pagination.Next onClick={onNext} />
+          <Pagination.Last onClick={onLast}/>
+        </Pagination>
 
       </div>
     </div>

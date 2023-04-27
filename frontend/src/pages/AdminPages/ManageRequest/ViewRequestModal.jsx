@@ -14,7 +14,7 @@ function ViewRequestModal(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => {
         setShow(true);
-    } 
+    }
 
 
     const typ = props.request.name
@@ -37,7 +37,7 @@ function ViewRequestModal(props) {
     } else {
         content = <UpdateRequest request={props.request} />
         data = {
-            
+
             type: "update",
             id: props.request.registerGarden.id,
             name: props.request.registerGarden.name,
@@ -48,35 +48,40 @@ function ViewRequestModal(props) {
         }
         console.log('data ne');
         console.log(data);
-    } 
+    }
     function handleAcceptRequest() {
-        const flag = {
-            id: props.request._id, 
-            type: "read"
-        }
-        hideRequest(flag)
-        console.log('flag ne');
-        console.log(flag);
-        if (typ == "Delete Garden") {
-            const isSuccess = delPieceById(props.request.registerGarden.id)
-            if (isSuccess) {
-                alert('Xóa thành công')
-                location.reload();
-            }
-        } else if (typ == "Register Garden") {
-            const isSuccess = handleRequest(data)
-            if (isSuccess) {
-                alert('Thêm thành công')
-                location.reload();
-            }
+        if (props.request.status) {
+            alert('Bạn đã xử lý yêu cầu này rồi')
         } else {
-            const isSuccess = handleRequest(data)
-            if (isSuccess) {
-                alert('Sửa thành thành công')
-                location.reload();
+            const flag = {
+                id: props.request._id,
+                type: "read"
+            }
+            hideRequest(flag)
+            console.log('flag ne');
+            console.log(flag);
+            if (typ == "Delete Garden") {
+                const isSuccess = delPieceById(props.request.registerGarden.id)
+                if (isSuccess) {
+                    alert('Xóa thành công')
+                    location.reload();
+                }
+            } else if (typ == "Register Garden") {
+                const isSuccess = handleRequest(data)
+                if (isSuccess) {
+                    alert('Thêm thành công')
+                    location.reload();
+                }
+            } else {
+                const isSuccess = handleRequest(data)
+                if (isSuccess) {
+                    alert('Sửa thành thành công')
+                    location.reload();
+                }
             }
         }
-    }  
+
+    }
     return (
         <>
             <Button variant="success" onClick={handleShow} className="mx-2">

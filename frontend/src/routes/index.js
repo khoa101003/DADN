@@ -14,7 +14,7 @@ import StatisticPage from "../pages/CustomerPages/Thong_Ke_Lich_SU/StatisticPage
 
 
 import GardenDashboard from "../pages/CustomerPages/GardenDashboard/GardenDashboard";
-import ManageSensor from "../pages/CustomerPages/ManageSensor/ManageSensor";
+import ManageSensorPage from "../pages/CustomerPages/ManageSensor/ManageSensorPage";
 import InputValue from "../pages/CustomerPages/InputValue/InputValue";
 import ManageUser from "../pages/AdminPages/ManageUser/ManageUser.jsx";
 import ManageRequest from "../pages/AdminPages/ManageRequest/ManageRequest.jsx";
@@ -50,7 +50,7 @@ const routes = [
 
     { path: '/:account/dashboard', component: GardenDashboard },
     { path: '/:account/InputValue', component: InputValue },
-    { path: '/:account/ManageSensor', component: ManageSensor },
+    { path: '/:account/ManageSensor', component: ManageSensorPage },
     { path: '/:account/controlPump', component: ControlPump },
     { path: '/:account/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },

@@ -38,15 +38,10 @@ const ButtonStyled = {
 
 function GardenLst() {
     const [gardens, setGardens] = useState([])
-    const params = useParams()
 
     const loadData = async () => {
         return await getPrivatePiece(params.account).then((res) => setGardens(res))
     }
-
-
-    // useEffect(() => {
-
 
     useEffect(() => {
 
@@ -54,10 +49,11 @@ function GardenLst() {
     }, [])
 
 
+
     const Garden = ({ gar }) => {
         // const dtail = gar       
         return (
-            <Col xs='8' className='mx-5 my-3' onClick={() => detail(gar)}>
+            <Col xs='6' className=' my-3' onClick={() => detail(gar)}>
                 <div className={cx('garden')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 15 15"><path fill="green" fillRule="evenodd" d="M7 4.5A4.5 4.5 0 0 1 11.5 0H15v3.5A4.5 4.5 0 0 1 10.5 8H8v7H7v-4H4.5A4.5 4.5 0 0 1 0 6.5V3h3.5c1.414 0 2.675.652 3.5 1.671V4.5Zm1.146 1.646l3-3l.708.708l-3 3l-.708-.708Zm-2 3.708l-3-3l.708-.708l3 3l-.708.708Z" clipRule="evenodd" /></svg>
                     <p>{gar.name}</p>
@@ -70,9 +66,11 @@ function GardenLst() {
     }
 
     const navigate = useNavigate()
-    const newRegis = () => {
-        navigate('/garden-regis')
-    }
+    const params = useParams()
+
+    // const newRegis = () => {
+    //     navigate('/garden-regis')
+    // }
 
     const detail = (gar) => {
         console.log(gar)
@@ -86,7 +84,7 @@ function GardenLst() {
             <div className="left col-2"></div>
             <div className='col-8'>
                 <h1 className={cx('title')}>Danh sách mảnh vườn</h1>
-                <Row className='my-4 col-8'>
+                <Row className=' mx-5 my-4'>
                     {gardens.map((garden, index) =>
                         <Garden key={index} gar={garden} />
                     )}

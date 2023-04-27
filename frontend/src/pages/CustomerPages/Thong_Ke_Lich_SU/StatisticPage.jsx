@@ -29,7 +29,24 @@ function StatisticPage() {
 
   const loadData = async function (id) {
     return await getRecordList(id).then((res) => {
-      const valueList = res[0].valueList
+      let valueList;
+      if (res[0].type === 'pump' || res[0].type === 'led') {
+        valueList = res[0].valueList.map((vl) => {
+          let newVal;
+          if (vl.value === "ON")
+            newVal = 1
+          else
+            newVal = 0 
+          return {
+            'value' : newVal,
+            'log_time' : vl.log_time
+          }
+        });
+      }
+      else { 
+        valueList = res[0].valueList;
+      }
+
       setType(res[0].type)
       setChartData(valueList)
       const newChartData = valueList.slice(valueList.length - 10, valueList.length).map((data) => {
@@ -111,7 +128,7 @@ function StatisticPage() {
 
   return (
     <div className="row mx-auto container">
-      <SideBar />
+      <SideBar position="garden" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
         <i className="fa-solid fa-arrow-left" onClick={returnToHistory}></i>
         <h1 className="text-center">Thống kê lịch sử</h1>
