@@ -16,7 +16,7 @@ exports.getPrivateGPiece = (req, res) => {
 
 exports.getGPieceById = (req, res) => {
     const query = { id: req.params['id'] }
-    Garden_piece.find({ id: req.params['id'] })
+    Garden_piece.find()
         .then(piece => res.status(200).send(piece))
         .catch(err => res.status(400).send(err))
 }
