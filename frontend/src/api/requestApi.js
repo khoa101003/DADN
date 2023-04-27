@@ -20,3 +20,18 @@ export const deleteGardenRequest = async (props) =>{
         .then((res) => true)
         .catch((err) => alert('Failure!!!', err));
 }
+
+
+export const getRequestList = async () => {
+    return await axios.get(`${URL}`)
+        .then((res) => res.data)
+        .catch((err) => alert('Failure!!!', err));
+}
+
+export const hideRequest = async (data) => {
+    console.log('hide request ne');
+    console.log(data);
+    return await axios.post(`${URL}`, data)
+        .then((res) => true)
+        .catch((err) => alert('Failure!!!', err));
+}

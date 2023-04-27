@@ -5,9 +5,9 @@ import DeleteRequestModal from "./DeleteRequestModal";
 function RequestRow(props) {
     const trRef = useRef(null);
     return (
-        <tr ref={trRef} className={props.request.isRead ? "text-muted" : undefined}>
-            <td>{props.request.content}</td>
-            <td>{props.request.account}</td>
+        <tr ref={trRef} className={props.request.status ? "text-muted" : undefined}>
+            <td>{props.request.name}</td>
+            <td>{props.request.sender}</td>
             <td>{props.request.date}</td>
             <td>
                 < ViewRequestModal par={trRef} request={props.request} />

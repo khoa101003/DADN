@@ -112,7 +112,7 @@ function GardenDetail(){
         loadData3()
         const interValid = setInterval(()=>{
             loadData3()
-        },3000)
+        },1000)
 
         return ()=>clearInterval(interValid)
     },[])
@@ -268,9 +268,9 @@ function GardenDetail(){
 
                         <Col xs={{span:7, offset: 1}}>
                             <Row className={cx('control')}>
-                                <Col xs='6'><Button variant="success" style={ButtonStyled} href='/SensorInfoPage'>Thông tin cảm biến</Button></Col>
+                                <Col xs='6'><Button variant="success" style={ButtonStyled} href={`/${params.account}/SensorInfoPage/${params.id}`}>Thông tin cảm biến</Button></Col>
                                 <Col xs='6'><Button variant="success" style={ButtonStyled} href={`/${params.account}/controlPump`}>Quản lí tưới cây</Button></Col>
-                                <Col xs='6'><Button variant="success" style={ButtonStyled} href={`/${params.account}/SensorHistory/1`}>Lịch sử hoạt động</Button></Col>
+                                <Col xs='6'><Button variant="success" style={ButtonStyled} href={`/${params.account}/SensorHistory`}>Lịch sử hoạt động</Button></Col>
                                 <Col xs='6'><Button variant="success" style={ButtonStyled} href={`/${params.account}/dashboard`}>Giám sát khu vườn</Button></Col>
                             </Row>
                         </Col>

@@ -11,8 +11,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const getNotification = (req, res) => {
-    const URL = req.ip
-    console.log(`Receive get notification request from ${URL}`)
     Notification.find({userID: req.params.account})
         .then((data) => {
             res.status(200).send(data)
@@ -83,9 +81,6 @@ const createNotification = async (typeN, userIDN, urgentN, measureN, thresholdN,
     })
 
     await newNotification.save()
-        .then(res => {
-            console.log(res)
-        })
         .catch(err => {
             res.status(400).send(err.message)
         })
@@ -98,9 +93,6 @@ const deleteNotification = (req, res) => {
     console.log(`Receive delete notification request from ${URL}`)
 
     Notification.findByIdAndDelete(req.query._id)
-        .then((doc) => {
-            console.log(doc)
-        })
         .catch(err => {
             res.status(400).send(err.message)
         })
@@ -113,9 +105,6 @@ const markReadedNotification = (req, res) => {
     console.log(`Receive mark read notification request from ${URL}`)
 
     Notification.findOneAndUpdate({_id : req.query._id}, {isRead: true}, {new: true})
-        .then((doc) => {
-            console.log(doc)
-        })
         .catch(err => {
             res.status(400).send(err.message)
         })

@@ -65,7 +65,7 @@ function LineChart({ chartData, type }) {
           plugins: {
             legend: {
               display: true
-            }
+            },
           },
           // Change font size
           scales: {

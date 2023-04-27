@@ -24,3 +24,9 @@ export const delPieceById = async (id)=>{
         .then((res) => true)
         .catch((err)=>alert('Failure!!!', err))
 }
+
+export const handleRequest = async (data) => {
+    return await axios.post(`${URL}`, data)
+        .then((res) => true)
+        .catch((err) => alert('Failure!!!', err))
+}

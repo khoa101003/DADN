@@ -104,7 +104,7 @@ const ControlPump = () => {
             getThreshold().then((res) => setSoil(res.soil)).catch((err)=>console.log(err))
         }
         getData();
-    },[])
+    },[pumpManual])
 
     
     // const intervalObj = setInterval(()=>{
@@ -120,7 +120,7 @@ const ControlPump = () => {
                 else if(res.find(obj => obj.type === 'pump').curValue === 'ON') setPumpManual(true)
             }).catch(err => console.log(err))
         }
-        const interval = setInterval(() => getDataAdafruit(),3000)
+        const interval = setInterval(() => getDataAdafruit(),1000)
         return () => {
             clearInterval(interval);
         }
@@ -133,7 +133,7 @@ const ControlPump = () => {
     return (
         <Container>
             <Row>
-                <SideBar position="garden"/>
+                <SideBar position="garden" account={user.account}/>
                 
                 <Col className="mx-2">
                     <h1>Quản lý tưới cây</h1>  

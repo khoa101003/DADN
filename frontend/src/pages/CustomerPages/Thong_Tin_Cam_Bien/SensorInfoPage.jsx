@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import {Row, Col, Stack, Pagination} from 'react-bootstrap'
 import SensorInfo from './SensorInfo';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { getDeviceList } from '../../../api/deviceApi';
 
@@ -23,6 +23,8 @@ function isSameDate(date1, date2) {
 }
 
 function SensorInfoPage() {
+  const navigate = useNavigate()
+
   const [ sensorShow, setSensorShow ] = useState([])
   const [ sensorList, setSensorList ] = useState([])
   const [ lastPage, setLastPage ] = useState(1)
@@ -31,7 +33,7 @@ function SensorInfoPage() {
 
   const loadData = async function () {
     const res = await getDeviceList(params.account).then((res) => {
-        return res.filter(elem => elem.garden === parseInt(params.garden_id))
+        return res.filter(elem => elem.garPiece === parseInt(params.garden_id))
     })
 
     const newLastPage = Math.ceil(res.length / 5)
@@ -145,11 +147,15 @@ function SensorInfoPage() {
     loadData()
   }
 
+  const returnGardenDetail = () => {
+    navigate(`/${params.account}/garden-detail/${params.garden_id}`)
+  }
+
   return (
     <div className="row mx-auto container">
-      <SideBar />
+      <SideBar position="garden" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-        <a href="" className={cx("return")}>{'<-- Trở lại'}</a>
+      <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
         <h1 className="text-center">Thông tin cảm biến</h1>
         
         <h5>Tìm kiếm: </h5>
@@ -220,7 +226,7 @@ function SensorInfoPage() {
           <Pagination.Next onClick={onNext} />
           <Pagination.Last onClick={onLast}/>
         </Pagination>
-        <Button className='my-2 me-5 float-end' variant='secondary' as='a' href=''>Thiết lập</Button>
+        <Button className='my-2 me-5 float-end' variant='secondary' as='a' onClick={() => navigate(`/${params.account}/InputValue`)}>Thiết lập</Button>
       </div>
     </div>
   )

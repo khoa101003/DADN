@@ -33,7 +33,7 @@ function SideBar(props) {
     },[])
     const navigate = useNavigate()
     function handleMangeUser() {
-        navigate('/SensorInfoPage')
+        navigate(`/${props.account}/ManageSensor`)
     }
     function handleManageRequest() {
         navigate(`/${props.account}`)

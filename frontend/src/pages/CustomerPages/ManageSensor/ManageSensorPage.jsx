@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import {Row, Col, Stack, Pagination} from 'react-bootstrap'
 import SensorInfo from './SensorInfo';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { getDeviceList } from '../../../api/deviceApi';
 
@@ -23,6 +23,8 @@ function isSameDate(date1, date2) {
 }
 
 function SensorInfoPage() {
+  const navigate = useNavigate()
+
   const [ sensorShow, setSensorShow ] = useState([])
   const [ sensorList, setSensorList ] = useState([])
   const [ lastPage, setLastPage ] = useState(1)
@@ -125,6 +127,8 @@ function SensorInfoPage() {
       }
     })
 
+    setCurrentPage(1)
+    setStartIndex(1)
     setLastPage(newLastPage)
     setSensorShow(newSensorShow)
   }
@@ -140,14 +144,16 @@ function SensorInfoPage() {
     time.value = time.defaultValue
     isRead.value = "DEFAULT"
 
+    setCurrentPage(1)
+    setStartIndex(1)
     loadData()
   }
 
   return (
     <div className="row mx-auto container">
-      <SideBar />
+      <SideBar position="sensor" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-        <h1 className="text-center">Cảm biến của khách hàng</h1>
+        <h1 className="text-center">Quản lý sensor</h1>
         
         <h5>Tìm kiếm: </h5>
         <Form className={cx("search-form")}>
@@ -199,7 +205,7 @@ function SensorInfoPage() {
         {
         sensorShow.slice(currentPage * sensorPerPage - 5, currentPage * sensorPerPage).map((sensor, i) => {
           if (sensor) {
-            return <SensorInfo key={i} type={sensor.type} name={sensor.name} gardenID={sensor.garden} install_date={sensor.install_date} status={sensor.status} />
+            return <SensorInfo key={i} type={sensor.type} name={sensor.name} gardenID={sensor.garPiece} install_date={sensor.install_date} status={sensor.status} />
           }
           else {
             return <Row key={i} className='my-3' style={{height : '24px'}}></Row>
@@ -216,7 +222,7 @@ function SensorInfoPage() {
           <Pagination.Next onClick={onNext} />
           <Pagination.Last onClick={onLast}/>
         </Pagination>
-        <Button className='my-2 me-5 float-end' variant='secondary' as='a' href=''>Thiết lập</Button>
+        <Button className='my-2 me-5 float-end' variant='secondary' as='a' onClick={() => navigate(`/${params.account}/InputValue`)}>Thiết lập</Button>
       </div>
     </div>
   )
