@@ -15,7 +15,7 @@ export const getPrivatePiece = async (owner) =>{
 
 export const getPieceById = async (id)=>{
     return await axios.get(`${URL}/detail/${id}`)
-        .then((res) => res.data)
+        .then((res) => { console.log(res.data); res.data; })
         .catch((err) => alert('Failure!!!', err));
 }
 
