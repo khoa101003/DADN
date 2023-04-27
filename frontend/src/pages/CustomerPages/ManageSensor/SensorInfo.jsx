@@ -6,11 +6,7 @@ function SensorInfo({type, name, gardenID, install_date, status}) {
     const [ gardenName, setGardenName ] = useState('')
 
     async function loadGardenName (id) {
-        const gardenPName = await getPieceById(id).then((res) => {
-            for (let i = 0; i < res.length; i++) {
-                if (res[i].id === gardenID) return res[i].name
-            };
-        });
+        const gardenPName = await getPieceById(id).then(res => res[0].name);
         setGardenName(gardenPName)
     }
 
@@ -44,7 +40,7 @@ function SensorInfo({type, name, gardenID, install_date, status}) {
     const date = new Date(install_date)
 
     useEffect(() => {
-        loadGardenName()
+        loadGardenName(gardenID)
     }, [])
 
     return (
