@@ -15,6 +15,15 @@ exports.getDevices = (req, res) => {
         .catch(err => res.status(400).send(err))
 }
 
+exports.getDevicesByID = async (id) => {
+    const device = await Device.find({'id' : id})
+        .then(res => res[0])
+        .catch(err => console.log(err))
+
+    return device
+}
+
+
 exports.postThreshold = (req,res) => {
     // console.log(req.body)
     var a = 0;

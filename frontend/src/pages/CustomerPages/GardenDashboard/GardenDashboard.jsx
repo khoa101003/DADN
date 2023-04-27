@@ -75,11 +75,16 @@ const GardenDashboard = () => {
         }
     },[])
 
+    const returnGardenDetail = () => {
+        navigate(`/${user.account}/garden-detail/${user.garden_id}`)
+      }
+
     return (
         <Container>
             <Row>
                 <SideBar position="garden" account={user.account}/>
                 <Col xs='8' >
+                <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
                     <h1 className={cx('title')}>Giám sát khu vườn</h1>
                     <Row className='my-4'>
                         <Col>
@@ -170,7 +175,7 @@ const GardenDashboard = () => {
                         </Col>
                         <Col xs={{span:2, offset:9 }} className='mb-3'>
                             {/* <Link to={{pathname:`../${user.account}/InputValue`, state: { prevPath: location.pathname }}}> */}
-                                <Button variant="success" onClick={() => {navigate(`../${user.account}/InputValue`,{state: { prevPath: location.pathname}} )}}>Thiết Lập</Button>
+                                <Button variant="success" onClick={() => {navigate(`../${user.account}/InputValue/${user.garden_id}`,{state: { prevPath: location.pathname}} )}}>Thiết Lập</Button>
                             {/* </Link>      */}
                         </Col> 
                     </Row>

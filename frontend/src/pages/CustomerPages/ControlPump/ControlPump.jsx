@@ -130,12 +130,17 @@ const ControlPump = () => {
         setData([])
         setShow(false)
     }
+    const returnGardenDetail = () => {
+        navigate(`/${user.account}/garden-detail/${user.garden_id}`)
+      }
+
     return (
         <Container>
             <Row>
                 <SideBar position="garden" account={user.account}/>
                 
                 <Col className="mx-2">
+                    <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
                     <h1>Quản lý tưới cây</h1>  
                     <Row className={cx('box')}>
                         <Col xs={3} className={cx('center')}>

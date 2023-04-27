@@ -90,7 +90,6 @@ const createNotification = async (typeN, userIDN, urgentN, measureN, thresholdN,
 
 const deleteNotification = (req, res) => {
     const URL = req.ip
-    console.log(`Receive delete notification request from ${URL}`)
 
     Notification.findByIdAndDelete(req.query._id)
         .catch(err => {
@@ -102,7 +101,6 @@ const deleteNotification = (req, res) => {
 
 const markReadedNotification = (req, res) => {
     const URL = req.ip
-    console.log(`Receive mark read notification request from ${URL}`)
 
     Notification.findOneAndUpdate({_id : req.query._id}, {isRead: true}, {new: true})
         .catch(err => {

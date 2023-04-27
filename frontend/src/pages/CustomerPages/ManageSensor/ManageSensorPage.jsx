@@ -222,7 +222,7 @@ function SensorInfoPage() {
           <Pagination.Next onClick={onNext} />
           <Pagination.Last onClick={onLast}/>
         </Pagination>
-        <Button className='my-2 me-5 float-end' variant='secondary' as='a' onClick={() => navigate(`/${params.account}/InputValue`)}>Thiết lập</Button>
+    
       </div>
     </div>
   )

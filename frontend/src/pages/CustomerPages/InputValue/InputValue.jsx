@@ -68,11 +68,17 @@ const InputValue = () => {
             })
         }
     }
+
+    function returnGardenDashboard() {
+        navigate(`/${user.account}/dashboard/${user.garden_id}`)
+    }
+
     return (
         <Container>
         <Row>
             <SideBar position="garden" account={user.account}/>
             <Col xs='9'>
+                <i className="fa-solid fa-arrow-left" onClick={returnGardenDashboard}></i>
                 <h1 className={cx('title')}>Thiết lập ngưỡng giá trị</h1>
                 <div className={cx('input-form')}>
                     <Form>

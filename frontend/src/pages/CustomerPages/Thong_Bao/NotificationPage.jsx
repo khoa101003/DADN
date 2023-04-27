@@ -27,6 +27,9 @@ function NotificationPage() {
   const [ notiShow, setNotiShow ] = useState([])
   const realTime = useRef(true)
   const params = useParams()
+  const onDelete = function () {
+    loadData()
+  }
 
   const [ lastPage, setLastPage ] = useState(1)
   const notiPerPage = 5
@@ -238,7 +241,7 @@ function NotificationPage() {
                 return <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
                 isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
                 time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
-                y={notification.coordinates.y}/>
+                y={notification.coordinates.y} onDelete={onDelete}/>
               }
               else {
                 return <Row key={i} className='my-3' style={{height : '24px'}}></Row>

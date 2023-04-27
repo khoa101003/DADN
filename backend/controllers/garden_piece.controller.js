@@ -1,6 +1,16 @@
 const { response } = require('express')
 const Garden_piece = require('../models/garden_piece.model')
 
+exports.getGardenPName = async (id) => {
+    const name = await Garden_piece.find({'id' : id})
+        .then(piece =>  {
+            return piece[0].name
+        })
+        .catch(err => console.log(err))
+
+    return name
+}
+
 exports.getGPieceList = (req, res) => {
     Garden_piece.find({})
         .then(piece => res.status(200).send(piece))
