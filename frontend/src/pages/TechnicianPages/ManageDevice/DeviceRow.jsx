@@ -9,12 +9,11 @@ function DeviceRow(props) {
     // props = props.filter(props => props.device.type === window.TYPE);
     return (
         // <tr ref={trRef} className={props.device.status == "bình thường" ? "text-muted" : undefined}>
-        <tr ref={trRef} style={{ display: props.device.type !== window.TYPE ? "none" : undefined }}>
+        <tr>
             <td>{props.device.id}</td>
             <td>{props.device.name}</td>
-            <td>{props.device.timeStart}</td>
-            <td>{props.device.timeExpire}</td>
-            <td>{props.device.status}</td>
+            <td>({props.device.coordinates.x},{props.device.coordinates.y})</td>
+            <td className={props.device.status ?  undefined: "text-danger"}>{props.device.status ? "Hoạt động" : "Đang hỏng"}</td>
             <td className="text-center">
                 <ViewDeviceModal par={trRef} device={props.device} />
                 <UpdateDeviceModal device={props.device} />
