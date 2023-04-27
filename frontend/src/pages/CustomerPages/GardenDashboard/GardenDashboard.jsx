@@ -78,7 +78,7 @@ const GardenDashboard = () => {
     return (
         <Container>
             <Row>
-                <SideBar position="garden"/>
+                <SideBar position="garden" account={user.account}/>
                 <Col xs='8' >
                     <h1 className={cx('title')}>Giám sát khu vườn</h1>
                     <Row className='my-4'>

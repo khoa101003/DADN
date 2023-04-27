@@ -6,7 +6,6 @@ module.exports.checkThreshold = async (context) => {
         const dt = context['record']
         const io = context['io']
         const newValue = context['new-value']
-
         const {min, max} = await getThresholdById(dt.id)
         if (newValue.value < min || newValue.value > max) {
           const threshold = newValue.value < min ? min : max;

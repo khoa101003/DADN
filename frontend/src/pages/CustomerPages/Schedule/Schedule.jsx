@@ -86,7 +86,7 @@ const Schedule = () => {
     return (
         <Container>
             <Row>
-                <SideBar position = "garden"/>
+                <SideBar position = "garden" account={user.account}/>
                 <Col>
                     <h1>Thêm lịch tưới</h1>
                     <Form>
