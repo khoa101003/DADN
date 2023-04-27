@@ -104,6 +104,7 @@ function ManageDevice() {
                             <th scope="col"><i>ID</i></th>
                             <th scope="col"><i>Tên</i></th>
                             <th scope="col"><i>Tọa độ</i></th>
+                            <th scope="col"><i>Thời gian lắp đặt</i></th>
                             <th scope="col"><i>Trạng thái</i></th>
                             <th scope="col" className="text-center"><i>Thao tác</i></th>
                         </tr>

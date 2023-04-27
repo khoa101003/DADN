@@ -18,6 +18,9 @@
   },
   "water": null,
   "time": null,
+  "install_date": {
+    "$date": "2023-04-26T02:07:41.280Z"
+  },
   "garPiece": 1
 },{
   "_id": {
@@ -39,6 +42,9 @@
   },
   "water": null,
   "time": null,
+  "install_date": {
+    "$date": "2023-04-26T02:07:41.280Z"
+  },
   "garPiece": 1
 },{
   "_id": {
@@ -60,6 +66,9 @@
   },
   "water": 300,
   "time": null,
+  "install_date": {
+    "$date": "2023-04-26T02:07:41.280Z"
+  },
   "garPiece": 1
 },{
   "_id": {
@@ -81,6 +90,9 @@
   },
   "water": null,
   "time": null,
+  "install_date": {
+    "$date": "2023-04-26T02:07:41.280Z"
+  },
   "garPiece": 1
 },{
   "_id": {
@@ -102,68 +114,32 @@
   },
   "water": null,
   "time": 3000,
+  "install_date": {
+    "$date": "2023-04-26T02:07:41.280Z"
+  },
   "garPiece": 1
 },{
   "_id": {
-    "$oid": "6449e7b7af9e66f03fc1be83"
+    "$oid": "6448d4390d26b99512416b1b"
   },
   "id": 6,
-  "name": "Máy bơm 2",
-  "type": "pump",
+  "name": "Sensor ánh sáng 2",
+  "type": "light",
   "owner": "phongong",
   "coordinates": {
     "x": 4,
     "y": 4
   },
-  "status": false,
+  "status": true,
   "sensor_type": null,
   "threshold": {
     "min": null,
     "max": null
   },
-  "water": 250,
-  "time": null,
+  "water": null,
+  "time": 3000,
+  "install_date": {
+    "$date": "2023-04-26T02:07:41.280Z"
+  },
   "garPiece": 1
-},{
-  "_id": {
-    "$oid": "644a0a6a54867e4a018c0a7e"
-  },
-  "id": 7,
-  "name": "12",
-  "type": "light",
-  "owner": "phongong",
-  "coordinates": {
-    "x": 12,
-    "y": 12
-  },
-  "status": true,
-  "threshold": {
-    "min": 12,
-    "max": 12
-  },
-  "water": null,
-  "time": null,
-  "garPiece": 1,
-  "__v": 0
-},{
-  "_id": {
-    "$oid": "644a0a9b54867e4a018c0b93"
-  },
-  "id": 8,
-  "name": "Đèn",
-  "type": "led",
-  "owner": "phongong",
-  "coordinates": {
-    "x": 9,
-    "y": 12
-  },
-  "status": true,
-  "threshold": {
-    "min": null,
-    "max": null
-  },
-  "water": null,
-  "time": 302,
-  "garPiece": 1,
-  "__v": 0
 }]
