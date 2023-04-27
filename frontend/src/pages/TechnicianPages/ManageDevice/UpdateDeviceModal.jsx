@@ -4,26 +4,31 @@ import { Modal } from 'react-bootstrap';
 import white_user from "../assets/user-white.png"
 import write from "../../../assets/write.png";
 import { useParams } from 'react-router-dom';
+import { handleDeviceRequest } from "../../../api/deviceApi"
 function UpdateDeviceModal(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // form data
-    const [piece, setPiece] = useState(props.device.garPiece)
-    const [x, setX] = useState(props.device.coordinates.x);
-    const [y, setY] = useState(props.device.coordinates.y);
-    const [min, setMin] = useState(props.device.threshold.min);
-    const [max, setMax] = useState(props.device.threshold.max)
-    const [water, setWater] = useState(props.device.water);
-    const [time, setTime] = useState(props.device.time);
+
 
     const params = useParams()
     const type = params.device_type
     const sensor = ['soil', 'air', 'temp', 'light']
+    // form data
+    const [piece, setPiece] = useState(props.device.garPiece)
+    const [x, setX] = useState(props.device.coordinates.x);
+    const [y, setY] = useState(props.device.coordinates.y);
+    const [min, setMin] = useState(sensor.includes(type) ? props.device.threshold.min: null);
+    const [max, setMax] = useState(sensor.includes(type) ? props.device.threshold.min: null)
+    const [water, setWater] = useState((type == "pump") ? props.device.water : null);
+    const [time, setTime] = useState((type == "led") ? props.device.time : null);
+
+    
     let content
     if (sensor.includes(type)) {
+
         content = <>
             <div className="d-flex my-3 align-items-center">
                 Ngưỡng dưới:
@@ -45,6 +50,7 @@ function UpdateDeviceModal(props) {
             </div>
         </>
     } else if (type == "pump") {
+
         content = <>
             <div className="d-flex my-3 align-items-center">
                 Lượng nước:
@@ -57,6 +63,7 @@ function UpdateDeviceModal(props) {
             </div>
         </>
     } else {
+
         content = <>
             <div className="d-flex my-3 align-items-center">
                 Thời gian chiếu sáng:
@@ -84,20 +91,30 @@ function UpdateDeviceModal(props) {
             } else if (type == "led" && !time) {
                 alert('Vui lòng nhập thời gian chiếu sáng')
             } else {
-                const data = {
-                    garPiece: piece,
-                    coordinates: {
-                        x: x,
-                        y: y
-                    },
-                    threshold: {
-                        min: min,
-                        max: max
-                    }, 
-                    water: water, 
-                    time: time
+                if (min > max) {
+                    alert("Ngưỡng dưới phải nhỏ hơn ngưỡng trên")
+                } else {
+                    const data = {
+                        request: "update",
+                        id: props.device.id,
+                        garPiece: parseInt(piece),
+                        coordinates: {
+                            x: parseInt(x),
+                            y: parseInt(y)
+                        },
+                        threshold: {
+                            min: parseInt(min),
+                            max: parseInt(max)
+                        },
+                        water: water,
+                        time: time
+                    }
+                    const isSuccess = handleDeviceRequest(data)
+                    if (isSuccess) {
+                        alert("Cập nhật thông tin thiết bị thành công")
+                        location.reload();
+                    }
                 }
-                alert('water ne ' + water )
             }
         }
     }
@@ -165,7 +182,7 @@ function UpdateDeviceModal(props) {
                         <input
                             type="text"
                             className="form-control w-25 mx-3"
-                            defaultValue={props.device.coordinates.x}
+                            defaultValue={props.device.coordinates.y}
                             onChange={e => setY(e.target.value)}
                         />
                     </div>

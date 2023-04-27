@@ -8,7 +8,9 @@ import DeviceRow from "./DeviceRow";
 import { useNavigate, useParams } from 'react-router-dom';
 import AddSensor from "./AddSensor"
 import { useState, useEffect } from 'react';
-import { getDeviceList } from '../../../api/deviceApi';
+// import { getDeviceList } from '../../../api/deviceApi';
+import { getPieceList } from '../../../api/garden_pieceApi'
+import { generateDevice } from '../../../api/FactoryApi';
 import { Pagination } from 'react-bootstrap'
 
 function ManageDevice() {
@@ -68,10 +70,23 @@ function ManageDevice() {
     const typ = params.device_type
     // alert('device type ne ' + typ)
     const [device, setDevice] = useState([])
+    const [garden, setGarden] = useState([])
+
+    const loadGarden = async () => {
+        try {
+            const garList = await getPieceList(params.account)
+            const target = garList.filter(elem => elem.id == params.gar_id)
+            console.log('target ne');
+            console.log(target);
+            setGarden(target[0])
+        } catch (err) {
+            console.log(err)
+        }
+    }
     const loadDevice = async () => {
         try {
-            let data = await getDeviceList(username)
-            data = data.filter(elem => elem.garPiece == pieceId && elem.type == typ)
+            let data = await generateDevice(params.account, params.gar_id, params.device_type)
+            // data = data.filter(elem => elem.garPiece == pieceId && elem.type == typ)
             console.log('data ne ');
             console.log(data);
             data = data.map((elem, index) => <DeviceRow key={index} device={elem} />)
@@ -83,7 +98,7 @@ function ManageDevice() {
         }
     }
     useEffect(() => {
-        loadDevice()
+        loadDevice(), loadGarden()
     }, [])
 
     // const deviceList = data.map(device => <DeviceRow key={device.type} device={device} />)
@@ -92,7 +107,7 @@ function ManageDevice() {
         <div className="row">
             <div className="left col-2"></div>
             <div className="col-8 mx-auto px-5">
-                <div className='fs-2 text-center mt-5'>{params.account}/Mảnh vườn {params.gar_id}/{device_type}</div>
+                <div className='fs-2 text-center mt-5'>{params.account}/{garden.name}/{device_type}</div>
                 <div className='row my-5'>
                     {/* <div className='col-6 text-center my-auto'>Số lượng: 10</div> */}
                     <div className='col-6 text-center my-auto'></div>

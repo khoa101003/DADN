@@ -102,9 +102,31 @@ exports.handleDeviceRequest = (req, res) => {
             .then(item => res.status(200).send(item))
             .catch(err => res.status(400).send(err))
     } else if (request == "update") {
-
+        const id = data.id
+        Device.collection.updateOne(
+            { "id": parseInt(id) },
+            {
+                $set: {
+                    garPiece: data.garPiece,
+                    coordinates: data.coordinates,
+                    threshold: data.threshold,
+                    water: data.water,
+                    time: data.time,
+                }
+            }
+        ).then(item => res.status(200).send(item))
+        .catch(err => res.status(400).send(err))
     } else {
-
+        const id = data.id
+        Device.collection.updateOne(
+            { "id": parseInt(id) },
+            {
+                $set: {
+                    status: data.status
+                }
+            }
+        ).then(item => res.status(200).send(item))
+            .catch(err => res.status(400).send(err))
     }
-    res.status(200).send("handle device request OK")
+    // res.status(200).send("handle device request OK")
 }
