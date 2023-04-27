@@ -19,20 +19,6 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  // const obj = {
-  //   arr:[
-  //     {
-  //       log:"123",
-  //       value:"11"
-  //     }
-  //   ]
-  // }
-  // obj.arr.push({log:"9999",value:"1234"});
-  // res.send(obj);
-})
-
-
 require('./route/garden.route')(app)
 // require('./route/axios.route')(app)
 require('./route/notification.route')(app)
@@ -49,10 +35,10 @@ require('./route/Factory.route')(app)
 require('./route/controlObserver.route')(app)
 // require('./route/controlObserver.route')(app)
 
-const { logger } = require('./controllers/autoPump')
+//const { autoPump } = require('./controllers/autoPump')
 const { checkThreshold } = require('./controllers/checkThreshold')
 const Observable = require('./controllers/Observer')
-Observable.subscribe(logger)
+//Observable.subscribe(autoPump)
 Observable.subscribe(checkThreshold)
 const port = 3030
 
@@ -63,10 +49,6 @@ io.on('connection', (socket) => {
 
   socket.on('statis', (acc, id) => {
     socket.join(`statis-${acc}-${id}`)
-  })
-
-  socket.on("disconnect", () => {
-    console.log('Disconnected')
   })
 })
 
