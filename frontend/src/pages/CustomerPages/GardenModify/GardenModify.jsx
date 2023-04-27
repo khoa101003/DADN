@@ -195,7 +195,7 @@ function GardenModify(){
                 <Modal.Header closeButton>
                     <Modal.Title>Ấn xác nhận để gửi yêu cầu</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Hãy chắc chắn bạn muốn gửi yêu cầu tạo mảnh vườn này</Modal.Body>
+                <Modal.Body>Hãy chắc chắn bạn muốn gửi yêu cầu chỉnh sửa mảnh vườn này</Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleCloseAccept}>
                     Close
