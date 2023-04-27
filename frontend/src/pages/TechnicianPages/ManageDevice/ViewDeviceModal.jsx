@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import read from "../assets/read.png";
 import white_user from "../../../assets/user-white.png"
-
+import { useParams } from 'react-router-dom';
 function ViewDeviceModal(props) {
     const [show, setShow] = useState(false);
 
@@ -12,7 +12,33 @@ function ViewDeviceModal(props) {
         setShow(true);
         // props.par.current.setAttribute("class", "text-muted");
     }
-
+    const params = useParams()
+    // alert('params ne ' + params.account);
+    const typ = params.device_type
+    let content
+    const sensor = ['soil', 'air', 'temp', 'light']
+    if (sensor.includes(typ)) {
+        content = <>
+            <div className="my-3">
+                Ngưỡng dưới: {props.device.threshold.min}
+            </div>
+            <div className="my-3">
+                Ngưỡng trên: {props.device.threshold.max}
+            </div>
+        </>
+    } else if (typ == "led") {
+        content = <>
+            <div className="my-3">
+                Thời gian chiếu sáng: {props.device.time}
+            </div>
+        </>
+    } else {
+        content = <>
+            <div className="my-3">
+                Lượng nước: {props.device.water}
+            </div>
+        </>
+    }
     return (
         <>
             <Button variant="success" onClick={handleShow} className="mx-2">
@@ -31,23 +57,22 @@ function ViewDeviceModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="row my-2">
-                        <div className="col-6">
-                            Tên thiết bị: {props.device.name}
-                        </div>
-                        <div className="col-6">
-                            ID: {props.device.id}
-                        </div>
-                    </div>
                     <div className="my-3">
-                        Ngày lắm đặt: {props.device.timeStart}
-                    </div>
-                    <div className="my-3">
-                        Ngày bảo trì: {props.device.timeExpire}
+                        ID: {props.device.id}
                     </div>
                     <div className="my-3">
                         Chủ vườn: {props.device.owner}
                     </div>
+                    <div className="my-3">
+                        Tên thiết bị: {props.device.name}
+                    </div>
+                    <div className="my-3">
+                        Tọa độ x: {props.device.coordinates.x}
+                    </div>
+                    <div className="my-3">
+                        Tọa độ y: {props.device.coordinates.y}
+                    </div>
+                    {content}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

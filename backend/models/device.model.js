@@ -12,14 +12,14 @@ const Device = new Schema({
         y: Number
     },
     status: Boolean, // true = hoạt động, false = đang hỏng     
-    sensorType: String,
     threshold: {
         min: Number,
         max: Number
     },
     water: Number,
     time: Number,
-    garPiece: Number
+    garPiece: Number,
+    install_date: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('device', Device)
