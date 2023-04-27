@@ -42,16 +42,16 @@ const routes = [
     {path: '/:account/garden-regis', component: GardenRegis},
     {path: '/:account/garden-mod/:id', component: GardenModify},
 
-    { path: '/:account/SensorHistory', component: SensorHistory },
+    { path: '/:account/SensorHistory/:garden_id', component: SensorHistory },
     { path: '/:account/SensorInfoPage/:garden_id', component: SensorInfoPage },
     { path: '/:account/NotificationPage', component: NotificationPage },
-    { path: '/:account/SensorHistory/:device_id', component: StatisticPage },
+    { path: '/:account/SensorHistory/:garden_id/:device_id', component: StatisticPage },
 
 
-    { path: '/:account/dashboard', component: GardenDashboard },
-    { path: '/:account/InputValue', component: InputValue },
+    { path: '/:account/dashboard/:garden_id', component: GardenDashboard },
+    { path: '/:account/InputValue/:garden_id', component: InputValue },
     { path: '/:account/ManageSensor', component: ManageSensorPage },
-    { path: '/:account/controlPump', component: ControlPump },
+    { path: '/:account/controlPump/:garden_id', component: ControlPump },
     { path: '/:account/schedule', component: Schedule },
     { path: '/admin', component: ManageUser },
     { path: '/admin/request', component: ManageRequest },

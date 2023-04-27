@@ -123,7 +123,7 @@ function StatisticPage() {
   }
  
   const returnToHistory = () => {
-    navigate(`/${params.account}/SensorHistory`)
+    navigate(`/${params.account}/SensorHistory/${params.garden_id}`)
   }
 
   return (
