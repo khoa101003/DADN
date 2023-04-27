@@ -3,7 +3,7 @@ import { Container, Modal, Row, Col, Button } from "react-bootstrap";
 import { markReadNotification, deleteNotification } from "../../../api/notificationApi";
 
 
-function Notification({id, type, urgent, isReadN, measure, threshold, time, gardenName, x, y}) {
+function Notification({id, type, urgent, isReadN, measure, threshold, time, gardenName, x, y, onDelete}) {
     const [visible, setVisiable] = useState(true)
 
     // Confirm modal
@@ -23,6 +23,7 @@ function Notification({id, type, urgent, isReadN, measure, threshold, time, gard
     const hideModalSuccess = () => {
         setShowSuccess(false)
         setVisiable(false)
+        onDelete()
     }
 
     // Detail Modal
