@@ -5,6 +5,7 @@ const ObjectId = Schema.ObjectId;
 const Request = new Schema({
     id: ObjectId,
     status: Boolean,
+    isHidden: Boolean,
     name: String,
     sender: String,
     date: { type: Date, default: Date.now },

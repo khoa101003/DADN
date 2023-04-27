@@ -1,16 +1,7 @@
-// const Record = require('../models/axios.model.js')
-
-// const getRecord = (req, res) => {
-//     Record.find({})
-//         .then(record => res.status(200).send(record))
-//         .catch(err => res.status(400).send(err))
-// }
-
-// module.exports = getRecord;
 const Observable = require('./Observer')
 const Record = require('../models/record.model')
-const { createNotification } = require('./notification.controller')
-const { getThresholdById } = require('./device.controller')
+//const { createNotification } = require('./notification.controller')
+//const { getThresholdById } = require('./device.controller')
 
 const devices = [
   {
@@ -52,7 +43,10 @@ exports.autoUpdate = (io)=>{
     const valueList = dt.valueList;
     if(valueList[valueList.length-1].log_time != newValue.log_time){
       if(dt.type === 'soil'){
-        Observable.notify({[device.key]:newValue.value})
+        Observable.notify({
+          [device.key]:newValue.value,
+          owner:dt.owner
+        })
       }
       valueList.push(newValue)
       await Record.collection.updateOne(
@@ -75,17 +69,22 @@ exports.autoUpdate = (io)=>{
 
       // Kiểm tra ngưỡng giá trị
       if (dt.type !== 'pump' && dt.type !== 'led' && dt.type !== 'light') {
-        const {min, max} = await getThresholdById(dt.id)
-        if (newValue.value < min || newValue.value > max) {
-          const threshold = newValue.value < min ? min : max;
-          const type = dt.type === 'air' ? "Air Humidity"
-                  : dt.type === 'temp' ? "Temperature" 
-                  : "Soil Humidity";
-          await createNotification(type, dt.owner, false, newValue.value, threshold, newValue.log_time, "SuperGarden", 1, 5)
-        }
-        if (io.sockets.adapter.rooms.has(`notify-${dt.owner}`)) {
-          io.to(`notify-${dt.owner}`).emit('newNotify')
-        }
+        // const {min, max} = await getThresholdById(dt.id)
+        // if (newValue.value < min || newValue.value > max) {
+        //   const threshold = newValue.value < min ? min : max;
+        //   const type = dt.type === 'air' ? "Air Humidity"
+        //           : dt.type === 'temp' ? "Temperature" 
+        //           : "Soil Humidity";
+        //   await createNotification(type, dt.owner, false, newValue.value, threshold, newValue.log_time, "SuperGarden", 1, 5)
+        //   if (io.sockets.adapter.rooms.has(`notify-${dt.owner}`)) {
+        //     io.to(`notify-${dt.owner}`).emit('newNotify')
+        //   }
+        // }
+        Observable.notify({
+          'record' : dt,
+          'io' : io,
+          'new-value' : newValue,
+        })
       }
       ////////////////////////
     }

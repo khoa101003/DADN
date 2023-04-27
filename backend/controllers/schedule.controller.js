@@ -10,6 +10,7 @@ const axios = require('axios')
 
 exports.postSchedule = (req, res) => {
     const scheduleList = req.body
+    console.log(scheduleList)
     const dates = scheduleList.dates
     // console.log(dates)
     // đổi chế độ tưới -> xóa hết chế độ cũ
@@ -41,7 +42,7 @@ exports.turnOn = (ctrl) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_PQVP37oLjzSRFu0Sq1hpjwvnU4E6'
+    'X-AIO-Key':'aio_uSGF37H9XmlOIKuRXnKjb8lHjLbT'
   }
   const data2 = {
     "datum":
@@ -53,7 +54,7 @@ exports.turnOn = (ctrl) => {
       headers: headers
     })
     .then((response) => {
-      console.log("OK")
+      // console.log("OK")
     })
     .catch((error) => {
       console.log(error)
@@ -72,19 +73,34 @@ exports.turnOn = (ctrl) => {
         }
       )
       .then((data) => {
-        const list = data.controlList
-        list.push({
-          index:index,
-          controller: ctrl,
-          value: "ON"
-        })
-        controller.collection.updateOne({type:"pump"},{
-          $set:{
-            controlList:list
-          }
-        })
+        if(!data){
+          controller.collection.insertOne({
+            id: 5,
+            type: "pump",
+            controlList: [
+            {
+              index:index,
+              controller: ctrl,
+              value: "ON"
+            }
+            ]
+          })
+        }
+        else{
+          const list = data.controlList
+          list.push({
+            index:index,
+            controller: ctrl,
+            value: "ON"
+          })
+          controller.collection.updateOne({type:"pump"},{
+            $set:{
+              controlList:list
+            }
+          })
+        }
       })
-
+      .catch(err => console.log(err))
     })
     
 }
@@ -93,7 +109,7 @@ exports.turnOff = (ctrl) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key':'aio_PQVP37oLjzSRFu0Sq1hpjwvnU4E6'
+    'X-AIO-Key':'aio_uSGF37H9XmlOIKuRXnKjb8lHjLbT'
   }
   const data2 = {
     "datum":
@@ -105,7 +121,7 @@ exports.turnOff = (ctrl) => {
       headers: headers
     })
     .then((response) => {
-      console.log("OK")
+      // console.log("OK")
     })
     .catch((error) => {
       console.log(error)
@@ -117,27 +133,43 @@ exports.turnOff = (ctrl) => {
       }
     )
     .then((data) => {
-      const index = data.valueList.length
-      controller.collection.findOne(
-        {
-          type:"pump"
-        }
-      )
-      .then((data) => {
-        const list = data.controlList
-        list.push({
-          index:index,
-          controller:ctrl,
-          value: "OFF"
-        })
-        controller.collection.updateOne({type:"pump"},{
-          $set:{
-            controlList:list
+        const index = data.valueList.length
+        controller.collection.findOne(
+          {
+            type:"pump"
+          }
+        )
+        .then((data) => {
+          if(!data){
+            controller.collection.insertOne({
+              id: 5,
+              type: "pump",
+              controlList: [
+              {
+                index:index,
+                controller: ctrl,
+                value: "OFF"
+              }
+              ]
+            })
+          }
+          else{
+            const list = data.controlList
+            list.push({
+              index:index,
+              controller:ctrl,
+              value: "OFF"
+            })
+            controller.collection.updateOne({type:"pump"},{
+              $set:{
+                controlList:list
+              }
+            })
           }
         })
+        .catch(err => console.log(err))
       })
-    })
-    
+      .catch(err => console.log(err))
 }
 
 exports.manualPump = (req,res) => {

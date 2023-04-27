@@ -35,6 +35,7 @@ const Monthly = (props) => {
                 <Row> 
                     <p>Chọn ngày lặp lại theo tháng:</p>                
                     <DatePicker 
+                        minDate={new Date()}
                         value={date} 
                         onChange={handleChange}
                         multiple

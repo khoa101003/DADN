@@ -6,14 +6,26 @@ import {Row, Col, Stack} from 'react-bootstrap'
 import Notification from './Notification';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import { getNotificationList } from '../../../api/notificationApi';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
 const cx = classnames.bind(styles);
 
+function isSameDate(date1, date2) {
+  if (date1.getFullYear() !== date2.getFullYear())
+    return false
+  if (date1.getMonth() !== date2.getMonth())
+    return false
+  if (date1.getDate() !== date2.getDate())
+    return false
+  return true
+}
+
 function NotificationPage() {
   const [notifications, setNotifications] = useState([])
+  const [ notiShow, setNotiShow ] = useState([])
+  const realTime = useRef(true)
   const params = useParams()
 
   const loadData = async function () {
@@ -41,6 +53,7 @@ function NotificationPage() {
         }
       })
       setNotifications(result)
+      setNotiShow(result)
     })
   }
 
@@ -54,7 +67,7 @@ function NotificationPage() {
       console.log('Connection timeout:', timeout);
     });
     socket.on('newNotify', () => {
-      loadData()
+      if (realTime.current) loadData()
     })
     loadData()
     return () => {
@@ -62,6 +75,48 @@ function NotificationPage() {
     }
   },[])
 
+  const handleClick = function (e) {
+    e.preventDefault();
+    let type = document.getElementById("notificationType").value;
+
+    let time = document.getElementById("date").value;
+
+    let isRead =  document.getElementById("status").value;
+    isRead = isRead === "true" ? true
+      : isRead === "false" ? false
+      : "DEFAULT";
+
+
+    const newNotiShow = notifications.filter((nt) => {
+      if (type !== "DEFAULT" && nt.type !== type) {
+        return false;
+      }
+      if (time) {
+        let notiDate = new Date(nt.time)
+        let filterDate = new Date(time)
+          if (!isSameDate(notiDate, filterDate)) return false;
+      }
+      if (isRead !== "DEFAULT" && nt.isRead !== isRead) {
+        return false;
+      }
+      return true;
+    })
+    realTime.current = false
+    setNotiShow(newNotiShow)
+  }
+
+  const handleReset = function (e) {
+    const type = document.getElementById("notificationType");
+    const time = document.getElementById("date");
+    const isRead =  document.getElementById("status");
+
+    type.value = "DEFAULT"
+    time.value = time.defaultValue
+    isRead.value = "DEFAULT"
+
+    realTime.current = true
+    loadData()
+  }
 
   return (
     <div className="row mx-auto container">
@@ -75,11 +130,12 @@ function NotificationPage() {
                   <Form.Group controlId="notificationType">
                       <Form.Label>Loại thông báo</Form.Label>
                       <Form.Select size="sm">
-                        <option>{'-----Vui lòng chọn-----'}</option>
-                        <option value={1}>Nhiệt độ</option>
-                        <option value={2}>Độ ẩm không khí</option>
-                        <option value={3}>Độ ẩm đất</option>
-                        <option value={4}>Thu hoạch</option>
+                        <option value={"DEFAULT"}>{'-----Vui lòng chọn-----'}</option>
+                        <option value={"Temperature"}>Nhiệt độ</option>
+                        <option value={"Air Humidity"}>Độ ẩm không khí</option>
+                        <option value={"Soil Humidity"}>Độ ẩm đất</option>
+                        <option value={"Harvest"}>Thu hoạch</option>
+                        <option value={"Device"}>Thiết bị</option>
                       </Form.Select>
                   </Form.Group>
 
@@ -91,13 +147,14 @@ function NotificationPage() {
                   <Form.Group controlId="status">
                       <Form.Label>Trạng thái</Form.Label>
                       <Form.Select size="sm">
-                        <option>{'-----Vui lòng chọn-----'}</option>
-                        <option value={1}>Chưa đọc</option>
-                        <option value={2}>Đã đọc</option>
+                        <option value={"DEFAULT"}>{'-----Vui lòng chọn-----'}</option>
+                        <option value={false}>Chưa đọc</option>
+                        <option value={true}>Đã đọc</option>
                       </Form.Select>
                   </Form.Group>
 
-                  <Button size='lg' variant='secondary'>Lọc</Button>
+                  <Button size='lg' variant='primary' onClick={handleClick}>Lọc</Button>
+                  <Button size='lg' variant='secondary' onClick={handleReset}>Reset</Button>
               </Stack>
           </Form>
 
@@ -109,7 +166,7 @@ function NotificationPage() {
           <hr />
 
           {
-            notifications.map((notification) => 
+            notiShow.map((notification) => 
               <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
               isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
               time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}

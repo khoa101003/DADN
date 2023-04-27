@@ -117,7 +117,7 @@ function SensorHistory() {
 
         const stat = document.getElementById('stat')
         stat.setAttribute('href', window.location.href + '/' + device_id)
-
+        document.getElementById('device_id').innerHTML = `id: ${device_id}`
         loadRecord(device_id)
     };
 
@@ -201,7 +201,8 @@ function SensorHistory() {
                         </form>
                     </div>
                     <div className="col-4 text-center my-4">
-                        <Button type='submit' size='lg' variant='dark'>Tải về</Button>
+                        {/* <Button type='submit' size='lg' variant='dark'>Tải về</Button> */}
+                        <div id="device_id" className='my-2'>id: </div>
                     </div>
                     <div className="col-4 text-center my-4">
                         <Button id='stat' className='me-5 float-end' size='lg' variant='dark' as='a' href='/StatisticPage'>Thống kê hoạt động</Button>

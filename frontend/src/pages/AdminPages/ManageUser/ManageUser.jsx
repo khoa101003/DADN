@@ -3,7 +3,7 @@ import data from "../userData.js";
 import UserRow from "./UserRow";
 import AddUser from "./AddUser";
 import SideBar from "../../../components/GlobalStyles/AdminSideBar";
-import { Button, Form, Table, Container, Dropdown, DropdownButton, Col, Row, Stack, Pagination } from 'react-bootstrap'
+import { Pagination } from 'react-bootstrap'
 // import "../Admin.css";
 import { useState, useEffect } from 'react';
 import { getUserList } from "../../../api/userApi"
