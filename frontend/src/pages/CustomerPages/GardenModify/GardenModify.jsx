@@ -77,7 +77,7 @@ function GardenModify(){
 
         setAccept(true)
         setDataSend({
-            sender: user.name,
+            sender: user.account,
             device: [
                 {
                     name: 'Do am',

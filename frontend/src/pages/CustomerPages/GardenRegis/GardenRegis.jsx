@@ -76,7 +76,7 @@ function GardenRegis(){
 
         setAccept(true)
         setDataSend({
-            sender: user.name,
+            sender: user.account,
             device: [
                 {
                     name: 'Do am',
