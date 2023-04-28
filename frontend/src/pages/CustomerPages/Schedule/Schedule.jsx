@@ -80,7 +80,7 @@ const Schedule = () => {
                 ...schedule,
                 owner:user.account
             })
-            navigate(`../${user.account}/controlPump`)
+            navigate(`../${user.account}/controlPump/${user.garden_id}`)
         }
     }
     return (

@@ -300,18 +300,5 @@ exports.deleteAll = (req,res) => {
   .catch(err => console.log(err))
 }
 
-// exports.controlAutoPump1 = (res,req) => {
-//   res.status(200).send("Success")
-//   console.log("aaa")
-//   // const status = req.params['value']
-//   // console.log(status)
-//   // const value = false;
-//   // if(value === 'true'){
-//   //     Observable.subscribe(autoPump)
-//   // }
-//   // else if(value === 'false'){
-//   //     Observable.unsubscribe(autoPump);
-//   // }
-  
-// }
+
 
