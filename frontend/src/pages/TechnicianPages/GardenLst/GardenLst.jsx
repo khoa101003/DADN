@@ -83,7 +83,7 @@ function GardenLst() {
             {/* <SideBar position="garden" account={params.account} /> */}
             <div className="left col-2"></div>
             <div className='col-8'>
-                <h1 className={cx('title')}>Danh sách mảnh vườn</h1>
+                <h1 className={cx('title')}>Danh sách ngôi nhà</h1>
                 <Row className=' mx-5 my-4'>
                     {gardens.map((garden, index) =>
                         <Garden key={index} gar={garden} />

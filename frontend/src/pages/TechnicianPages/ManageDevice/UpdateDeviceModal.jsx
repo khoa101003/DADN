@@ -20,12 +20,12 @@ function UpdateDeviceModal(props) {
     const [piece, setPiece] = useState(props.device.garPiece)
     const [x, setX] = useState(props.device.coordinates.x);
     const [y, setY] = useState(props.device.coordinates.y);
-    const [min, setMin] = useState(sensor.includes(type) ? props.device.threshold.min: null);
-    const [max, setMax] = useState(sensor.includes(type) ? props.device.threshold.min: null)
+    const [min, setMin] = useState(sensor.includes(type) ? props.device.threshold.min : null);
+    const [max, setMax] = useState(sensor.includes(type) ? props.device.threshold.min : null)
     const [water, setWater] = useState((type == "pump") ? props.device.water : null);
     const [time, setTime] = useState((type == "led") ? props.device.time : null);
 
-    
+
     let content
     if (sensor.includes(type)) {
 
@@ -80,7 +80,7 @@ function UpdateDeviceModal(props) {
         // alert('handle update user ne');
         // alert('piece ne ' + piece)
         if (!piece) {
-            alert('Khu vườn sở hữu không được để trống')
+            alert('Ngôi nhà sở hữu không được để trống')
         } else if (!x || !y) {
             alert('Vị trí của thiêt bị không được để trống')
         } else {
@@ -160,7 +160,7 @@ function UpdateDeviceModal(props) {
                         />
                     </div> */}
                     <div className="d-flex my-3 align-items-center">
-                        Khu vườn sở hữu:
+                        Ngôi nhà sở hữu:
                         <input
                             type="text"
                             className="form-control w-25 mx-3"

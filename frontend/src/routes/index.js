@@ -29,7 +29,7 @@ import DeviceType from "../pages/TechnicianPages/DeviceType/DeviceType.jsx"
 import ManageDevice from "../pages/TechnicianPages/ManageDevice/ManageDevice.jsx"
 const routes = [
     //Navigate page
-    {path: '/', component: NavigateCus},
+    { path: '/', component: NavigateCus },
     //Authorize
     { path: '/login-as', component: LoginAs },
     { path: '/login/:role', component: Login },
@@ -39,8 +39,8 @@ const routes = [
     { path: '/:account', component: GardenList },
     { path: '/:account/garden-detail/:id', component: GardenDetail },
 
-    {path: '/:account/garden-regis', component: GardenRegis},
-    {path: '/:account/garden-mod/:id', component: GardenModify},
+    { path: '/:account/garden-regis', component: GardenRegis },
+    { path: '/:account/garden-mod/:id', component: GardenModify },
 
     { path: '/:account/SensorHistory/:garden_id', component: SensorHistory },
     { path: '/:account/SensorInfoPage/:garden_id', component: SensorInfoPage },

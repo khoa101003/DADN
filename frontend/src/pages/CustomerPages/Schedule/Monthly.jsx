@@ -5,7 +5,7 @@ import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
 const Monthly = (props) => {
 
-    const [show,setShow] = useState(false);
+    const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
@@ -16,7 +16,7 @@ const Monthly = (props) => {
     };
     const handleSubmit = () => {
         // console.log(typeof date[0])
-        const listDate = date.map((item) =>(new Date(item)));
+        const listDate = date.map((item) => (new Date(item)));
         props.onChange(listDate);
         setShow(false);
     }
@@ -26,28 +26,28 @@ const Monthly = (props) => {
     }
     return (
         <>
-        <div className="d-grid gap-2">
+            <div className="d-grid gap-2">
                 <Button variant="light" size="lg" onClick={handleShow}>Hàng tháng</Button>
-        </div>
-        <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton><p>Lịch tưới theo tháng</p></Modal.Header>
-            <Modal.Body>
-                <Row> 
-                    <p>Chọn ngày lặp lại theo tháng:</p>                
-                    <DatePicker 
-                        minDate={new Date()}
-                        value={date} 
-                        onChange={handleChange}
-                        multiple
+            </div>
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header closeButton><p>Lịch quạt theo tháng</p></Modal.Header>
+                <Modal.Body>
+                    <Row>
+                        <p>Chọn ngày lặp lại theo tháng:</p>
+                        <DatePicker
+                            minDate={new Date()}
+                            value={date}
+                            onChange={handleChange}
+                            multiple
                         />
-                </Row> 
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant='secondary' onClick={handleCancel}>Đặt lại</Button>   
-                <Button onClick={handleSubmit}>Lưu</Button>
-            </Modal.Footer>
-        </Modal>
-    </>
+                    </Row>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={handleCancel}>Đặt lại</Button>
+                    <Button onClick={handleSubmit}>Lưu</Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 };
 

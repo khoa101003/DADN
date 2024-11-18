@@ -2,8 +2,8 @@ const { response } = require('express')
 const Garden_piece = require('../models/garden_piece.model')
 
 exports.getGardenPName = async (id) => {
-    const name = await Garden_piece.find({'id' : id})
-        .then(piece =>  {
+    const name = await Garden_piece.find({ 'id': id })
+        .then(piece => {
             return piece[0].name
         })
         .catch(err => console.log(err))
@@ -44,7 +44,9 @@ exports.handleRequest = (req, res) => {
         Garden_piece.findOne({})
             .sort({ id: 'desc' })
             .then(latest => {
-                data.id = latest.id + 1;
+                if (latest != null)
+                    data.id = latest.id + 1;
+                else data.id = 1;
 
                 Garden_piece.insertMany([
                     {
@@ -73,7 +75,7 @@ exports.handleRequest = (req, res) => {
                 }
             }
         ).then(item => res.status(200).send(item))
-        .catch(err => res.status(400).send(err))
+            .catch(err => res.status(400).send(err))
     }
     // res.status(200).send('OK')
 }

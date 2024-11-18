@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap';
 
 const Weekly = (props) => {
-    const [day,setDay] = useState([]);
-    const [show,setShow] = useState(false);
+    const [day, setDay] = useState([]);
+    const [show, setShow] = useState(false);
     const handleShow = () => {
         setShow(true);
     }
@@ -14,12 +14,12 @@ const Weekly = (props) => {
     }
     const handleChange = (e) => {
         const value = e.target.value;
-        if(day.includes(value)){
-            setDay(day.filter(function(item) {
+        if (day.includes(value)) {
+            setDay(day.filter(function (item) {
                 return item !== value
             }))
         }
-        else{
+        else {
             day.push(value)
             setDay(day)
         }
@@ -43,9 +43,9 @@ const Weekly = (props) => {
                 <Button variant="light" size="lg" onClick={handleShow}>Hàng tuần</Button>
             </div>
             <Modal show={show} onHide={handleClose} centered>
-                <Modal.Header closeButton><p>Lịch tưới theo tuần</p></Modal.Header>
-                <Modal.Body>   
-                    <MDBCheckbox name='flexCheck' value='Mon' id='flexCheckDefault'  onChange={handleChange} label='Thứ hai' />
+                <Modal.Header closeButton><p>Lịch quạt theo tuần</p></Modal.Header>
+                <Modal.Body>
+                    <MDBCheckbox name='flexCheck' value='Mon' id='flexCheckDefault' onChange={handleChange} label='Thứ hai' />
                     <MDBCheckbox name='flexCheck' value='Tue' id='flexCheckChecked1' onChange={handleChange} label='Thứ ba' />
                     <MDBCheckbox name='flexCheck' value='Wed' id='flexCheckChecked2' onChange={handleChange} label='Thứ tư' />
                     <MDBCheckbox name='flexCheck' value='Thu' id='flexCheckChecked3' onChange={handleChange} label='Thứ năm' />
@@ -54,7 +54,7 @@ const Weekly = (props) => {
                     <MDBCheckbox name='flexCheck' value='Sun' id='flexCheckChecked6' onChange={handleChange} label='Chủ nhật' />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant='secondary' onClick={handleCancel}>Đặt lại</Button>   
+                    <Button variant='secondary' onClick={handleCancel}>Đặt lại</Button>
                     <Button onClick={handleSubmit}>Lưu</Button>
                 </Modal.Footer>
             </Modal>

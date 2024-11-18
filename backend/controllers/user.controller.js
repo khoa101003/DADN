@@ -19,8 +19,9 @@ exports.addRegister = (req, res) => {
     User.findOne({})
         .sort({ id: 'desc' })
         .then(latest => {
-            data.id = latest.id + 1;
-
+            if (latest != null)
+                data.id = latest.id + 1;
+            else data.id = 1;
             User.insertMany([
                 {
                     id: data.id,

@@ -26,11 +26,11 @@ function SideBar(props) {
     const [requestLogo, setRequestLogo] = useState(request);
     const [deviceLogo, setDeviceLogo] = useState(device);
     //position: sensor,garden,notify
-    useEffect(()=>{
-        if(props.position=="sensor") setUserLogo(active_user);
-        if(props.position=="garden") setRequestLogo(active_request);
-        if(props.position=="notify") setDeviceLogo(active_device);
-    },[])
+    useEffect(() => {
+        if (props.position == "sensor") setUserLogo(active_user);
+        if (props.position == "garden") setRequestLogo(active_request);
+        if (props.position == "notify") setDeviceLogo(active_device);
+    }, [])
     const navigate = useNavigate()
     function handleMangeUser() {
         navigate(`/${props.account}/ManageSensor`)
@@ -80,7 +80,7 @@ function SideBar(props) {
             <div className="my-5 mx-5">
                 <h6 className="d-flex align-items-center" onClick={handleManageRequest}>
                     <img src={requestLogo} className="pe-3 admin-request-icon"></img>
-                    Quản lý khu vườn
+                    Quản lý ngôi nhà
                 </h6>
             </div>
             <div className="my-5 mx-5">
@@ -90,7 +90,7 @@ function SideBar(props) {
                 </h6>
             </div>
             <hr className="w-75 mx-auto" />
-            <div className="logout text-center mt-5" style={logoutStyle} onClick={()=>navigate('/login-as')}>Đăng xuất</div>
+            <div className="logout text-center mt-5" style={logoutStyle} onClick={() => navigate('/login-as')}>Đăng xuất</div>
         </div>
     );
 }

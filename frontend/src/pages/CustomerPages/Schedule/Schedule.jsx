@@ -1,26 +1,26 @@
 import { useState } from 'react';
-import {Container, Row, Col, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import SideBar from '../../../components/GlobalStyles/SideBar';
 import Custom from './Custom';
 import Monthly from './Monthly';
 import Weekly from './Weekly';
 import { postSchedule } from '../../../api/schedule';
-import {useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const Schedule = () => {
     const navigate = useNavigate();
     const [schedule, setSchedule] = useState({
-        water:"",
-        time:"",
-        dates:[]
+        water: "",
+        time: "",
+        dates: []
     });
     const user = useParams();
     const handleChangeWeekly = (obj) => {
-        setSchedule((sche)=>({
+        setSchedule((sche) => ({
             ...sche,
-            type:"weekly",
-            dates:obj
+            type: "weekly",
+            dates: obj
         }))
     }
     const handleChangeMonthly = (obj) => {
@@ -29,56 +29,56 @@ const Schedule = () => {
         //     type:"monthly",
         //     ...obj
         // }))
-        setSchedule((sche)=>({
+        setSchedule((sche) => ({
             ...sche,
-            type:"monthly",
-            "dates":obj
+            type: "monthly",
+            "dates": obj
         }))
     }
     const handleChangeCustom = (obj) => {
         // setDate(() => ({
-            
+
         // }));
-        setSchedule((sche)=>({
+        setSchedule((sche) => ({
             ...sche,
-            type:"custom",
-            "dates":obj
+            type: "custom",
+            "dates": obj
         }))
     }
     const handleChangeTime = (e) => {
         // console.log(e.target.value);
         // setTime(e.target.value);
-        setSchedule((sche)=>({
+        setSchedule((sche) => ({
             ...sche,
-            "time":e.target.value,
+            "time": e.target.value,
         }))
     }
     const handleChangeWater = (e) => {
         // console.log(e.target.value);
         // setWater(e.target.value);
-        setSchedule((sche)=>({
+        setSchedule((sche) => ({
             ...sche,
-            "water":e.target.value,
+            "water": e.target.value,
         }))
     }
     const handleClick = () => {
         console.log(schedule.water)
-        if(schedule.time.length === 0){
+        if (schedule.time.length === 0) {
             alert("Thời gian không được bỏ trống")
         }
-        else if(schedule.water.length=== 0 ){
+        else if (schedule.water.length === 0) {
             alert("Lượng nước không được bỏ trống")
         }
-        else if(schedule.dates.length === 0){
-            alert("Ngày tưới không được bỏ trống")
+        else if (schedule.dates.length === 0) {
+            alert("Ngày quạt không được bỏ trống")
         }
-        else if(Number(schedule.water) < 0){
+        else if (Number(schedule.water) < 0) {
             alert("Lượng nước không thể âm")
         }
-        else{
+        else {
             postSchedule({
                 ...schedule,
-                owner:user.account
+                owner: user.account
             })
             navigate(`../${user.account}/controlPump/${user.garden_id}`)
         }
@@ -86,28 +86,28 @@ const Schedule = () => {
     return (
         <Container>
             <Row>
-                <SideBar position = "garden" account={user.account}/>
+                <SideBar position="garden" account={user.account} />
                 <Col>
-                    <h1>Thêm lịch tưới</h1>
+                    <h1>Thêm lịch quạt</h1>
                     <Form>
                         <Form.Group onChange={handleChangeTime}>
                             <Form.Label>Time</Form.Label>
                             <Form.Control size="lg" type="time" />
                         </Form.Group>
-                    
+
                         <Form.Group onChange={handleChangeWater}>
                             <Form.Label>Lượng nước</Form.Label>
                             <Form.Control size="lg" type="number" />
                         </Form.Group>
-                        
+
                         <Form.Label>Lặp lại</Form.Label>
                     </Form>
                     <div className="square border rounded">
-                        <Weekly onChange = {handleChangeWeekly} />
-                        <Monthly onChange = {handleChangeMonthly} />
-                        <Custom onChange = {handleChangeCustom} />                  
+                        <Weekly onChange={handleChangeWeekly} />
+                        <Monthly onChange={handleChangeMonthly} />
+                        <Custom onChange={handleChangeCustom} />
                     </div>
-                    <Button size = 'lg' className='my-2' onClick = {handleClick}> Lưu</Button>
+                    <Button size='lg' className='my-2' onClick={handleClick}> Lưu</Button>
                 </Col>
             </Row>
         </Container>
