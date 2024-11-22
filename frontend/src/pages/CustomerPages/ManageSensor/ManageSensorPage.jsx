@@ -205,7 +205,7 @@ function SensorInfoPage() {
         {
         sensorShow.slice(currentPage * sensorPerPage - 5, currentPage * sensorPerPage).map((sensor, i) => {
           if (sensor) {
-            return <SensorInfo key={i} type={sensor.type} name={sensor.name} gardenID={sensor.garPiece} install_date={sensor.install_date} status={sensor.status} />
+            return <SensorInfo key={i} type={sensor.type} name={sensor.name} homeID={sensor.garPiece} install_date={sensor.install_date} status={sensor.status} />
           }
           else {
             return <Row key={i} className='my-3' style={{height : '24px'}}></Row>

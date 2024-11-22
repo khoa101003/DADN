@@ -3,7 +3,7 @@ import { Container, Modal, Row, Col, Button } from "react-bootstrap";
 import { markReadNotification, deleteNotification } from "../../../api/notificationApi";
 
 
-function Notification({ id, type, urgent, isReadN, measure, threshold, time, gardenName, x, y, onDelete }) {
+function Notification({ id, type, urgent, isReadN, measure, threshold, time, homeName, x, y, onDelete }) {
     const [visible, setVisiable] = useState(true)
 
     // Confirm modal
@@ -121,7 +121,7 @@ function Notification({ id, type, urgent, isReadN, measure, threshold, time, gar
                                     {threshold_msg}
                                 </Col>}
                                 <Col sm={6} className="p-2">
-                                    Ngôi nhà: {gardenName}
+                                    Ngôi nhà: {homeName}
                                 </Col>
                                 {type !== "Harvest" && type !== "Device" && <Col sm={6} className="p-2">
                                     {measure_msg}

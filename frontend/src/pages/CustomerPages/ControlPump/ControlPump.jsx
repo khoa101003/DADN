@@ -130,17 +130,17 @@ const ControlPump = () => {
         setData([])
         setShow(false)
     }
-    const returnGardenDetail = () => {
-        navigate(`/${user.account}/garden-detail/${user.garden_id}`)
+    const returnHomeDetail = () => {
+        navigate(`/${user.account}/home-detail/${user.home_id}`)
     }
 
     return (
         <Container>
             <Row>
-                <SideBar position="garden" account={user.account} />
+                <SideBar position="home" account={user.account} />
 
                 <Col className="mx-2">
-                    <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
+                    <i className="fa-solid fa-arrow-left" onClick={returnHomeDetail}></i>
                     <h1>Quản lý quạt</h1>
                     <Row className={cx('box')}>
                         <Col xs={3} className={cx('center')}>
@@ -163,7 +163,7 @@ const ControlPump = () => {
                         </Col>
                         <Col xs={9} className={cx('center')}>
                             <RowSchedule schedule={data} />
-                            <Link className={cx('px-5')} to={{ pathname: `/${user.account}/schedule/${user.garden_id}` }}><Button size="lg">Thêm lịch</Button></Link>
+                            <Link className={cx('px-5')} to={{ pathname: `/${user.account}/schedule/${user.home_id}` }}><Button size="lg">Thêm lịch</Button></Link>
                             <Button size="lg" variant="secondary" onClick={() => setShow(true)}>Xóa tất cả</Button>
                         </Col>
 
@@ -189,7 +189,7 @@ const ControlPump = () => {
                             </div>
                             <div className={cx(`${!pumpMoisture ? 'opacity-25' : ''}`, 'center')} >
                                 <h2>{soil}%</h2>
-                                <Button onClick={() => { navigate(`../${user.account}/InputValue/${user.garden_id}`, { state: { prevPath: location.pathname } }) }}>Thiết Lập</Button>
+                                <Button onClick={() => { navigate(`../${user.account}/InputValue/${user.home_id}`, { state: { prevPath: location.pathname } }) }}>Thiết Lập</Button>
                             </div>
                         </Col>
                         <Col className={cx('box', 'sm-box')}>

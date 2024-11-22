@@ -6,7 +6,7 @@ import white_request from "../../../assets/request-white.png";
 import DeleteRequest from "./DeleteRequest"
 import UpdateRequest from './UpdateRequest';
 import CreateRequest from './CreateRequest';
-import { delPieceById, handleRequest } from '../../../api/garden_pieceApi'
+import { delPieceById, handleRequest } from '../../../api/home_pieceApi'
 import { hideRequest } from '../../../api/requestApi';
 function ViewRequestModal(props) {
     const [show, setShow] = useState(false);
@@ -20,17 +20,17 @@ function ViewRequestModal(props) {
     const typ = props.request.name
     let data = {}
     let content
-    if (typ == "Delete Garden") {
+    if (typ == "Delete Home") {
         content = <DeleteRequest request={props.request} />
-    } else if (typ == "Register Garden") {
+    } else if (typ == "Register Home") {
         content = <CreateRequest request={props.request} />
         data = {
             request: "add",
-            name: props.request.registerGarden.name,
-            type: props.request.registerGarden.type,
-            location: props.request.registerGarden.location,
-            owner: props.request.registerGarden.owner,
-            area: props.request.registerGarden.area,
+            name: props.request.registerHome.name,
+            type: props.request.registerHome.type,
+            location: props.request.registerHome.location,
+            owner: props.request.registerHome.owner,
+            area: props.request.registerHome.area,
         }
         console.log('data ne');
         console.log(data);
@@ -39,12 +39,12 @@ function ViewRequestModal(props) {
         data = {
 
             type: "update",
-            id: props.request.registerGarden.id,
-            name: props.request.registerGarden.name,
-            type: props.request.registerGarden.type,
-            location: props.request.registerGarden.location,
-            owner: props.request.registerGarden.owner,
-            area: props.request.registerGarden.area,
+            id: props.request.registerHome.id,
+            name: props.request.registerHome.name,
+            type: props.request.registerHome.type,
+            location: props.request.registerHome.location,
+            owner: props.request.registerHome.owner,
+            area: props.request.registerHome.area,
         }
         console.log('data ne');
         console.log(data);
@@ -60,13 +60,13 @@ function ViewRequestModal(props) {
             hideRequest(flag)
             console.log('flag ne');
             console.log(flag);
-            if (typ == "Delete Garden") {
-                const isSuccess = delPieceById(props.request.registerGarden.id)
+            if (typ == "Delete Home") {
+                const isSuccess = delPieceById(props.request.registerHome.id)
                 if (isSuccess) {
                     alert('Xóa thành công')
                     location.reload();
                 }
-            } else if (typ == "Register Garden") {
+            } else if (typ == "Register Home") {
                 const isSuccess = handleRequest(data)
                 if (isSuccess) {
                     alert('Thêm thành công')
@@ -155,7 +155,7 @@ function ViewRequestModal(props) {
                         </div> */}
                         <hr className="w-75 mx-auto my-4" />
                         <div className="fw-bold">
-                            Ghi chú của khách hàng: {props.request.registerGarden.special}
+                            Ghi chú của khách hàng: {props.request.registerHome.special}
                         </div>
                     </div>
                 </Modal.Body>

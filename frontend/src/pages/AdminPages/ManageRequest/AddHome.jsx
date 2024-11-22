@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 
-function AddGarden() {
+function AddHome() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -130,4 +130,4 @@ function AddGarden() {
     );
 }
 
-export default AddGarden;
+export default AddHome;

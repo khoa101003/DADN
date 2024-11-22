@@ -1,13 +1,13 @@
 import { Row, Col } from "react-bootstrap";
-import { getPieceById } from "../../../api/garden_pieceApi";
+import { getPieceById } from "../../../api/home_pieceApi";
 import { useEffect, useState } from "react";
 
-function SensorInfo({type, name, gardenID, install_date, status}) {
-    const [ gardenName, setGardenName ] = useState('')
+function SensorInfo({type, name, homeID, install_date, status}) {
+    const [ homeName, setHomeName ] = useState('')
 
-    async function loadGardenName (id) {
-        const gardenPName = await getPieceById(id).then(res => res[0].name);
-        setGardenName(gardenPName)
+    async function loadHomeName (id) {
+        const homePName = await getPieceById(id).then(res => res[0].name);
+        setHomeName(homePName)
     }
 
     const icon_style = {
@@ -40,7 +40,7 @@ function SensorInfo({type, name, gardenID, install_date, status}) {
     const date = new Date(install_date)
 
     useEffect(() => {
-        loadGardenName(gardenID)
+        loadHomeName(homeID)
     }, [])
 
     return (
@@ -49,7 +49,7 @@ function SensorInfo({type, name, gardenID, install_date, status}) {
             <img src={icon_src} alt={icon_alt} style={icon_style}/>
           </Col>
           <Col md={{span: 3}}>{name}</Col>
-          <Col md={{span: 3}} className="justify-content-center">{gardenName}</Col>
+          <Col md={{span: 3}} className="justify-content-center">{homeName}</Col>
           <Col md={{span: 3}}>{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</Col>
           <Col md={{span: 2}}>{status === true ? "Bình thường" : "Đang bảo trì"}</Col>
         </Row>

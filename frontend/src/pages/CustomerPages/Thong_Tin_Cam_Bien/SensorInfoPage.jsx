@@ -33,7 +33,7 @@ function SensorInfoPage() {
 
   const loadData = async function () {
     const res = await getDeviceList(params.account).then((res) => {
-        return res.filter(elem => elem.garPiece === parseInt(params.garden_id))
+        return res.filter(elem => elem.garPiece === parseInt(params.home_id))
     })
 
     const newLastPage = Math.ceil(res.length / 5)
@@ -147,15 +147,15 @@ function SensorInfoPage() {
     loadData()
   }
 
-  const returnGardenDetail = () => {
-    navigate(`/${params.account}/garden-detail/${params.garden_id}`)
+  const returnHomeDetail = () => {
+    navigate(`/${params.account}/home-detail/${params.home_id}`)
   }
 
   return (
     <div className="row mx-auto container">
-      <SideBar position="garden" account={params.account} />
+      <SideBar position="home" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
-      <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
+      <i className="fa-solid fa-arrow-left" onClick={returnHomeDetail}></i>
         <h1 className="text-center">Thông tin cảm biến</h1>
         
         <h5>Tìm kiếm: </h5>

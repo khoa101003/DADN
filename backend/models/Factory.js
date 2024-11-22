@@ -1,21 +1,21 @@
 const Device = require('../models/device.model')
 const Record = require('../models/record.model')
-function Factory(garden_id, type) {
+function Factory(home_id, type) {
     // factory method
-    this.produce = function (garden_id, type) {
+    this.produce = function (home_id, type) {
         var device
         if (type == 'light sensor')
-            device = new LightSensor(garden_id, type)
+            device = new LightSensor(home_id, type)
         else if (type == 'temperature sensor')
-            device = new TemperatureSensor(garden_id, type)
+            device = new TemperatureSensor(home_id, type)
         else if (type == 'air humidity sensor')
-            device = new AirHumiditySensor(garden_id, type)
+            device = new AirHumiditySensor(home_id, type)
         else if (type == 'soil moisture sensor')
-            device = new SoilMoistureSensor(garden_id, type)
+            device = new SoilMoistureSensor(home_id, type)
         else if (type == 'light')
-            device = new Light(garden_id, type)
+            device = new Light(home_id, type)
         else if (type == 'pump')
-            device = new Pump(garden_id, type)
+            device = new Pump(home_id, type)
         else
             throw new Error("Device does not exist")
 
@@ -36,8 +36,8 @@ class LightSensor {
     startDate = []
     time = []
     isEmpty = false
-    constructor(garden_id, type) {
-        const data = Device.find({ "owner": garden_id, "type": type })
+    constructor(home_id, type) {
+        const data = Device.find({ "owner": home_id, "type": type })
         if (data.length < 1) {
             this.isEmpty = true
         }

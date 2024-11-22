@@ -9,7 +9,7 @@ const notificationSchema = new Schema({
     measure: Number,
     threshold: Number,
     time: Date,
-    gardenName: String,
+    homeName: String,
     coordinates: {
         x: Number,
         y: Number

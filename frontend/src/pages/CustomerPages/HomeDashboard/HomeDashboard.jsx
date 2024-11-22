@@ -1,5 +1,5 @@
 import classnames from 'classnames/bind'
-import styles from './GardenDashboard.module.scss'
+import styles from './HomeDashboard.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../../../components/GlobalStyles/SideBar';
@@ -25,7 +25,7 @@ const infor = {
     days: "10",
     hours: "60"
 }
-const GardenDashboard = () => {
+const HomeDashboard = () => {
 
     const [data, setData] = useState({});
     const [hour, setHour] = useState("")
@@ -75,16 +75,16 @@ const GardenDashboard = () => {
         }
     }, [])
 
-    const returnGardenDetail = () => {
-        navigate(`/${user.account}/garden-detail/${user.garden_id}`)
+    const returnHomeDetail = () => {
+        navigate(`/${user.account}/home-detail/${user.home_id}`)
     }
 
     return (
         <Container>
             <Row>
-                <SideBar position="garden" account={user.account} />
+                <SideBar position="home" account={user.account} />
                 <Col xs='8' >
-                    <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
+                    <i className="fa-solid fa-arrow-left" onClick={returnHomeDetail}></i>
                     <h1 className={cx('title')}>Giám sát ngôi nhà</h1>
                     <Row className='my-4'>
                         <Col>
@@ -175,7 +175,7 @@ const GardenDashboard = () => {
                         </Col>
                         <Col xs={{ span: 2, offset: 9 }} className='mb-3'>
                             {/* <Link to={{pathname:`../${user.account}/InputValue`, state: { prevPath: location.pathname }}}> */}
-                            <Button variant="success" onClick={() => { navigate(`../${user.account}/InputValue/${user.garden_id}`, { state: { prevPath: location.pathname } }) }}>Thiết Lập</Button>
+                            <Button variant="success" onClick={() => { navigate(`../${user.account}/InputValue/${user.home_id}`, { state: { prevPath: location.pathname } }) }}>Thiết Lập</Button>
                             {/* </Link>      */}
                         </Col>
                     </Row>
@@ -185,4 +185,4 @@ const GardenDashboard = () => {
     );
 };
 
-export default GardenDashboard;
+export default HomeDashboard;

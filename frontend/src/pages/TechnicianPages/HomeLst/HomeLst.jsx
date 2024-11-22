@@ -1,15 +1,15 @@
 import classnames from 'classnames/bind'
-import styles from './GardenLst.module.scss'
+import styles from './HomeLst.module.scss'
 import { Button, Container, Row, Col } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import SideBar from '../SideBar';
 import { useEffect, useState } from 'react';
 
-import { getPrivatePiece } from '../../../api/garden_pieceApi';
+import { getPrivatePiece } from '../../../api/home_pieceApi';
 
 
-const cx = classnames.bind(styles);
 import '../SearchUser/Search.css'
+const cx = classnames.bind(styles);
 //component style
 const ButtonStyled = {
     width: "100%",
@@ -18,7 +18,7 @@ const ButtonStyled = {
 }
 
 //fake data
-// const gardens = [
+// const homes = [
 //     {
 //         name: "Mảnh vườn 1"
 //     },
@@ -36,11 +36,11 @@ const ButtonStyled = {
 //     }
 // ]
 
-function GardenLst() {
-    const [gardens, setGardens] = useState([])
+function HomeLst() {
+    const [homes, setHomes] = useState([])
 
     const loadData = async () => {
-        return await getPrivatePiece(params.account).then((res) => setGardens(res))
+        return await getPrivatePiece(params.account).then((res) => setHomes(res))
     }
 
     useEffect(() => {
@@ -50,11 +50,11 @@ function GardenLst() {
 
 
 
-    const Garden = ({ gar }) => {
+    const Home = ({ gar }) => {
         // const dtail = gar       
         return (
             <Col xs='6' className=' my-3' onClick={() => detail(gar)}>
-                <div className={cx('garden')}>
+                <div className={cx('home')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 15 15"><path fill="green" fillRule="evenodd" d="M7 4.5A4.5 4.5 0 0 1 11.5 0H15v3.5A4.5 4.5 0 0 1 10.5 8H8v7H7v-4H4.5A4.5 4.5 0 0 1 0 6.5V3h3.5c1.414 0 2.675.652 3.5 1.671V4.5Zm1.146 1.646l3-3l.708.708l-3 3l-.708-.708Zm-2 3.708l-3-3l.708-.708l3 3l-.708.708Z" clipRule="evenodd" /></svg>
                     <p>{gar.name}</p>
                     {/* <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><path fill="blue" d="M6 22q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h8l6 6v3.1l-8 7.975V22H6Zm8 0v-2.125l5.15-5.175l2.15 2.1l-5.175 5.2H14Zm8.025-5.9L19.9 13.975l.7-.7q.3-.3.725-.3t.7.3l.7.725q.275.3.275.713t-.275.687l-.7.7ZM13 9h5l-5-5v5Z" /></svg>
@@ -69,7 +69,7 @@ function GardenLst() {
     const params = useParams()
 
     // const newRegis = () => {
-    //     navigate('/garden-regis')
+    //     navigate('/home-regis')
     // }
 
     const detail = (gar) => {
@@ -80,13 +80,13 @@ function GardenLst() {
     return (
 
         <div className='row mx-auto'>
-            {/* <SideBar position="garden" account={params.account} /> */}
+            {/* <SideBar position="home" account={params.account} /> */}
             <div className="left col-2"></div>
             <div className='col-8'>
                 <h1 className={cx('title')}>Danh sách ngôi nhà</h1>
                 <Row className=' mx-5 my-4'>
-                    {gardens.map((garden, index) =>
-                        <Garden key={index} gar={garden} />
+                    {homes.map((home, index) =>
+                        <Home key={index} gar={home} />
                     )}
                 </Row>
             </div>
@@ -95,4 +95,4 @@ function GardenLst() {
 
     )
 }
-export default GardenLst;
+export default HomeLst;

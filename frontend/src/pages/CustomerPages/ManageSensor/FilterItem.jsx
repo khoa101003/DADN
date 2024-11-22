@@ -6,14 +6,14 @@ import styles from './FilterItem.module.scss'
 const cx = classNames.bind(styles);
 
 const FilterItem = ({ filterItem, data }) => {
-    const gardens = [...new Set(data.map((Val) => Val.garden))];
+    const homes = [...new Set(data.map((Val) => Val.home))];
     const types = [...new Set(data.map((Val) => Val.name))];
     const status = [...new Set(data.map((Val) => Val.status))];
 
     const [filters, setFilter] = useState({});
     const handleReset = () => {
         document.getElementById("type").value = 'DEFAULT';
-        document.getElementById("garden").value = 'DEFAULT';
+        document.getElementById("home").value = 'DEFAULT';
         document.getElementById("status").value = 'DEFAULT';
         document.getElementById("row").value = document.getElementById("row").defaultValue;
         document.getElementById("time").value = new Date();
@@ -53,11 +53,11 @@ const FilterItem = ({ filterItem, data }) => {
                             })
                         }
                     </Form.Select>
-                    <Form.Select id='garden' className={cx('input-form')} onChange={handleChange}>
+                    <Form.Select id='home' className={cx('input-form')} onChange={handleChange}>
                         <option value="DEFAULT">Ngôi nhà</option>
                         {
-                            gardens.map((garden) => {
-                                return <option value={garden} key={garden}>{garden}</option>
+                            homes.map((home) => {
+                                return <option value={home} key={home}>{home}</option>
                             })
                         }
                     </Form.Select>

@@ -1,5 +1,5 @@
 import classnames from 'classnames/bind'
-import styles from './GardenRegis.module.scss'
+import styles from './HomeRegis.module.scss'
 import { Button, Container, Row, Col, Form, Modal } from 'react-bootstrap'
 import { Link,useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -8,7 +8,7 @@ import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import SideBar from '../../../components/GlobalStyles/SideBar';
 
 import { getUserbyAccount } from '../../../api/userApi';
-import { registerGardenRequest } from '../../../api/requestApi';
+import { registerHomeRequest } from '../../../api/requestApi';
 
 
 const cx = classnames.bind(styles);
@@ -22,7 +22,7 @@ const labelStyle = {
     // fontSize: "medium"
 }
 
-function GardenRegis(){
+function HomeRegis(){
     const params = useParams()
     const navigate = useNavigate()
 
@@ -103,7 +103,7 @@ function GardenRegis(){
                     quantity: light
                 }
             ],
-            registerGarden:
+            registerHome:
             {
                 name: name,
                 type: type, // Loai cay trong
@@ -137,7 +137,7 @@ function GardenRegis(){
 
     useEffect(()=>{
         if(sendReq){
-            const x = registerGardenRequest(dataSend);
+            const x = registerHomeRequest(dataSend);
             if(x){
                 setSuccess(true)
                 setSendReq(false)
@@ -221,7 +221,7 @@ function GardenRegis(){
             </Modal>
 
             <Row>
-                <SideBar position="garden" account={params.account}/>
+                <SideBar position="home" account={params.account}/>
                 <Col xs='9'>
                     <Form className='mt-5 mb-2' onSubmit={e=>handleSubmit(e)}>
                         <Form.Group as={Row} className="mb-3" controlId="gname">
@@ -365,4 +365,4 @@ function GardenRegis(){
     )
 }
 
-export default GardenRegis;
+export default HomeRegis;

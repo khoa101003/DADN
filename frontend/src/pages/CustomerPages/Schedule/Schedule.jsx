@@ -80,13 +80,13 @@ const Schedule = () => {
                 ...schedule,
                 owner: user.account
             })
-            navigate(`../${user.account}/controlPump/${user.garden_id}`)
+            navigate(`../${user.account}/controlPump/${user.home_id}`)
         }
     }
     return (
         <Container>
             <Row>
-                <SideBar position="garden" account={user.account} />
+                <SideBar position="home" account={user.account} />
                 <Col>
                     <h1>Thêm lịch quạt</h1>
                     <Form>

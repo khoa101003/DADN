@@ -16,7 +16,7 @@ const Request = new Schema({
             quantity: Number
         }
     ],
-    registerGarden: Object
+    registerHome: Object
 
 });
 

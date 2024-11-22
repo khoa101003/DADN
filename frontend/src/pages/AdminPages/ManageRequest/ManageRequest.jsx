@@ -1,8 +1,8 @@
 import RequestRow from "./RequestRow";
 import data from "../requestData.js";
-import AddGarden from "./AddGarden";
-import UpdateGarden from "./UpdateGarden";
-import DeleteGarden from "./DeleteGarden";
+import AddHome from "./AddHome";
+import UpdateHome from "./UpdateHome";
+import DeleteHome from "./DeleteHome";
 import SideBar from "../../../components/GlobalStyles/AdminSideBar";
 import "../Admin.css";
 import { useState, useEffect } from 'react';
@@ -67,13 +67,13 @@ function ManageRequest() {
                 <h1 className="text-center fw-bold">Yêu cầu của khách hàng</h1>
                 {/* <div className="row my-5">
                     <div className="col-4 text-center">
-                        < AddGarden />
+                        < AddHome />
                     </div>
                     <div className="col-4 text-center">
-                        < DeleteGarden />
+                        < DeleteHome />
                     </div>
                     <div className="col-4 text-center">
-                        < UpdateGarden />
+                        < UpdateHome />
                     </div>
                 </div> */}
                 <table className="table align-middle mx-auto">

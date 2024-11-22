@@ -5,7 +5,7 @@ const { getUserMail } = require('./user.controller');
 const transporter = nodemailer.createTransport({
    service: "gmail",
    auth: {
-    user: "smartgardenabc@gmail.com",
+    user: "smarthomeabc@gmail.com",
     pass: "eognbntaaoecrkok"
    }
 });
@@ -20,7 +20,7 @@ const getNotification = (req, res) => {
         })
 }
 
-const createNotification = async (typeN, userIDN, urgentN, measureN, thresholdN, timeN, gardenNameN, xN, yN) => {
+const createNotification = async (typeN, userIDN, urgentN, measureN, thresholdN, timeN, homeNameN, xN, yN) => {
     const title = typeN === 'Soil Humidity' ? 'độ ẩm đất'
         : typeN === 'Air Humidity' ? 'độ ẩm không khí'
         : 'nhiệt độ';
@@ -45,7 +45,7 @@ const createNotification = async (typeN, userIDN, urgentN, measureN, thresholdN,
             <td>Nhiệt độ đo được: ${measureN}</td>
         </tr>
         <tr>
-            <td>Mảnh vườn: ${gardenNameN}</td>
+            <td>Mảnh vườn: ${homeNameN}</td>
             <td>Nhiệt độ ngưỡng: ${thresholdN}</td>
         </tr>
         <tr>
@@ -73,7 +73,7 @@ const createNotification = async (typeN, userIDN, urgentN, measureN, thresholdN,
         measure: measureN,
         threshold: thresholdN,
         time: timeN,
-        gardenName: gardenNameN,
+        homeName: homeNameN,
         coordinates: {
             x: xN,
             y: yN

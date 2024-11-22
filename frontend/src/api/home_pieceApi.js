@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:3030/api/garden-piece'
+const URL = 'http://localhost:3030/api/home-piece'
 export const getPieceList = async () =>{
     return await axios.get(`${URL}`)
         .then((res) => res.data)

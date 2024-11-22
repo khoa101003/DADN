@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-function DeleteGarden() {
+function UpdateHome() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -12,7 +12,7 @@ function DeleteGarden() {
     return (
         <>
             <Button variant="dark" onClick={handleShow} className="btn-lg mx-2">
-                Xóa mảnh vườn
+                Cập nhật mảnh vườn
             </Button>
 
             <Modal
@@ -23,7 +23,7 @@ function DeleteGarden() {
             >
                 <Modal.Header className="bg-dark" closeButton>
                     <Modal.Title className="d-flex align-items-center text-white">
-                        Xóa mảnh vườn
+                        Cập nhật mảnh vườn
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -35,14 +35,14 @@ function DeleteGarden() {
                             placeholder="Nhập tên tài khoản hoặc số điện thoại"
                         />
                     </div>
-                    <div className="d-flex my-3 align-items-center">
+                    {/* <div className="d-flex my-3 align-items-center">
                         Tên mảnh vườn:
                         <input
                             type="text"
                             className="form-control w-50 mx-3"
                             placeholder="Nhập tên mảnh vườn cần xóa"
                         />
-                    </div>
+                    </div> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="dark" onClick={handleAddRequest} size="lg">
@@ -54,7 +54,7 @@ function DeleteGarden() {
                 </Modal.Footer>
             </Modal>
         </>
-    );
+    );    
 }
 
-export default DeleteGarden;
+export default UpdateHome;

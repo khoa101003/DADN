@@ -3,11 +3,11 @@
     "$oid": "64479dce115a8b5dc0da12a8"
   },
   "status": true,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 4,
     "owner": "phongong"
   },
@@ -21,11 +21,11 @@
     "$oid": "64479e56115a8b5dc0da142e"
   },
   "status": true,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 4,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -40,11 +40,11 @@
     "$oid": "64479e59115a8b5dc0da150e"
   },
   "status": true,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 4,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -59,11 +59,11 @@
     "$oid": "64479f27115a8b5dc0da162d"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "giaukiien",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 2,
     "name": "Mảnh vườn a",
     "owner": "giaukiien"
@@ -78,11 +78,11 @@
     "$oid": "6447a2b9115a8b5dc0da205e"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -97,11 +97,11 @@
     "$oid": "6447eb9c496f5b90677014e5"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -116,11 +116,11 @@
     "$oid": "6447ebba496f5b9067701706"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -135,11 +135,11 @@
     "$oid": "6447eda3496f5b90677032e6"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -154,9 +154,9 @@
     "$oid": "6447ff7b496f5b9067704d0d"
   },
   "status": true,
-  "name": "Register Garden",
+  "name": "Register Home",
   "sender": "phongong",
-  "description": "Register garden request",
+  "description": "Register home request",
   "device": [
     {
       "name": "Do am",
@@ -194,7 +194,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "name": "asc",
     "type": "Bưởi",
     "location": "Thủ đức",
@@ -212,9 +212,9 @@
     "$oid": "64480112496f5b9067704f29"
   },
   "status": false,
-  "name": "Modify Garden",
+  "name": "Modify Home",
   "sender": "Phong Dương",
-  "description": "Modify garden request",
+  "description": "Modify home request",
   "device": [
     {
       "name": "Do am",
@@ -252,7 +252,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "type": "Chuối",
@@ -271,9 +271,9 @@
     "$oid": "6448014e496f5b9067704f83"
   },
   "status": false,
-  "name": "Modify Garden",
+  "name": "Modify Home",
   "sender": "Phong Dương",
-  "description": "Modify garden request",
+  "description": "Modify home request",
   "device": [
     {
       "name": "Do am",
@@ -311,7 +311,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "type": "Chuối",
@@ -330,11 +330,11 @@
     "$oid": "64481376121f1dbb71001331"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -349,11 +349,11 @@
     "$oid": "644813a9121f1dbb71001a37"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -368,9 +368,9 @@
     "$oid": "644813fe121f1dbb71001aa3"
   },
   "status": false,
-  "name": "Register Garden",
+  "name": "Register Home",
   "sender": "Phong Dương",
-  "description": "Register garden request",
+  "description": "Register home request",
   "device": [
     {
       "name": "Do am",
@@ -408,7 +408,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "name": "Mảnh vườn 3",
     "type": "Cam",
     "location": "Thủ đức",
@@ -426,9 +426,9 @@
     "$oid": "644814a6121f1dbb71002002"
   },
   "status": false,
-  "name": "Modify Garden",
+  "name": "Modify Home",
   "sender": "Phong Dương",
-  "description": "Modify garden request",
+  "description": "Modify home request",
   "device": [
     {
       "name": "Do am",
@@ -466,7 +466,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 5",
     "type": "Chuối",
@@ -485,11 +485,11 @@
     "$oid": "6449051747b15fc6550a1545"
   },
   "status": false,
-  "name": "Delete Garden",
+  "name": "Delete Home",
   "sender": "phongong",
-  "description": "Delete garden request",
+  "description": "Delete home request",
   "device": [],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "owner": "phongong"
@@ -505,9 +505,9 @@
   },
   "status": true,
   "isHidden": true,
-  "name": "Register Garden",
+  "name": "Register Home",
   "sender": "Phong Dương",
-  "description": "Register garden request",
+  "description": "Register home request",
   "device": [
     {
       "name": "Do am",
@@ -545,7 +545,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "name": "ciao belle",
     "type": "Nho",
     "location": "KTXXTK",
@@ -563,9 +563,9 @@
   },
   "status": true,
   "isHidden": false,
-  "name": "Modify Garden",
+  "name": "Modify Home",
   "sender": "Phong Dương",
-  "description": "Modify garden request",
+  "description": "Modify home request",
   "device": [
     {
       "name": "Do am",
@@ -603,7 +603,7 @@
       }
     }
   ],
-  "registerGarden": {
+  "registerHome": {
     "id": 1,
     "name": "Mảnh vườn 1",
     "type": "Cam",

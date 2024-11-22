@@ -1,5 +1,5 @@
 import classnames from 'classnames/bind'
-import styles from './GardenModify.module.scss'
+import styles from './HomeModify.module.scss'
 import { Button, Container, Row, Col, Form, Modal } from 'react-bootstrap'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import SideBar from '../../../components/GlobalStyles/SideBar';
 
-import { modifyGardenRequest } from '../../../api/requestApi';
+import { modifyHomeRequest } from '../../../api/requestApi';
 import { getUserbyAccount } from '../../../api/userApi';
-import { getPieceById } from '../../../api/garden_pieceApi'
+import { getPieceById } from '../../../api/home_pieceApi'
 
 const cx = classnames.bind(styles);
 
@@ -21,7 +21,7 @@ const labelStyle = {
     // fontSize: "medium"
 }
 
-function GardenModify(){
+function HomeModify(){
     const params = useParams()
 
     const navigate = useNavigate()
@@ -104,7 +104,7 @@ function GardenModify(){
                     quantity: light
                 }
             ],
-            registerGarden:
+            registerHome:
             {
                 id: parseInt(params.id),
                 name: name,
@@ -153,7 +153,7 @@ function GardenModify(){
 
     useEffect(()=>{
         if(sendReq){
-            const x = modifyGardenRequest(dataSend);
+            const x = modifyHomeRequest(dataSend);
             if(x){
                 setSuccess(true)
                 setSendReq(false)
@@ -239,7 +239,7 @@ function GardenModify(){
             </Modal>
 
             <Row>
-                <SideBar position="garden" account={params.account}/>
+                <SideBar position="home" account={params.account}/>
                 <Col xs='9'>
                     
                     <Form className='mt-5' onSubmit={e=>handleSubmit(e)}>
@@ -384,4 +384,4 @@ function GardenModify(){
     )
 }
 
-export default GardenModify;
+export default HomeModify;

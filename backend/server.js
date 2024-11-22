@@ -19,7 +19,7 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-require('./route/garden.route')(app)
+require('./route/home.route')(app)
 // require('./route/axios.route')(app)
 require('./route/notification.route')(app)
 require('./route/user.route')(app)
@@ -29,7 +29,7 @@ require('./route/record.route')(app, io)
 require('./route/schedule.route')(app)
 require('./route/static_record.route')(app)
 require('./route/device.route')(app)
-require('./route/garden_piece.route')(app)
+require('./route/home_piece.route')(app)
 require('./route/request.route')(app)
 require('./route/Factory.route')(app)
 require('./route/controlObserver.route')(app)

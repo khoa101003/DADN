@@ -12,22 +12,22 @@ import soil from "../assets/soil.png"
 import air from "../assets/air.png"
 import light from "../assets/light.png"
 import pump from "../assets/pump.png"
-window.TYPE = 0;
-import { getPieceList } from "../../../api/garden_pieceApi"
+import { getPieceList } from "../../../api/home_pieceApi"
 import { useState, useEffect } from 'react';
+window.TYPE = 0;
 
 function DeviceType() {
 
     const nav = useNavigate()
     const params = useParams()
-    const [garden, setGarden] = useState([])
+    const [home, setHome] = useState([])
     const loadName = async () => {
         try {
             const garList = await getPieceList(params.account)
             const target = garList.filter(elem => elem.id == params.gar_id)
             console.log('target ne');
             console.log(target);
-            setGarden(target[0])
+            setHome(target[0])
         } catch (err) {
             console.log(err)
         }
@@ -40,8 +40,8 @@ function DeviceType() {
         console.log("value")
         console.log(e.target.getAttribute("value"))
 
-        TYPE = e.target.getAttribute("value")
-        nav(`/tech/${params.account}/${params.gar_id}/${TYPE}`)
+        window.TYPE = e.target.getAttribute("value")
+        nav(`/tech/${params.account}/${params.gar_id}/${window.TYPE}`)
         // console.log("demo");
         // console.log(document.getElementById('demo'));
     }
@@ -52,7 +52,7 @@ function DeviceType() {
         <div className="row">
             <div className="left col-2"></div>
             <div className="col-8">
-                <div className='fs-2 text-center mt-5'>{params.account}/{garden.name}</div>
+                <div className='fs-2 text-center mt-5'>{params.account}/{home.name}</div>
                 <div className="text-white text-center">
                     {/* <input type="text" className="form-control w-100 mx-auto" id="account" placeholder="Nhập số điện thoại hoặc tài khoản khách hàng"></input>
                     <div className="btn btn-success my-5" >Tìm kiếm <i className="fa-solid fa-magnifying-glass  ms-5 fs-3"></i></div> */}

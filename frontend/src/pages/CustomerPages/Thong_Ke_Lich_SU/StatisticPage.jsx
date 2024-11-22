@@ -123,12 +123,12 @@ function StatisticPage() {
   }
  
   const returnToHistory = () => {
-    navigate(`/${params.account}/SensorHistory/${params.garden_id}`)
+    navigate(`/${params.account}/SensorHistory/${params.home_id}`)
   }
 
   return (
     <div className="row mx-auto container">
-      <SideBar position="garden" account={params.account} />
+      <SideBar position="home" account={params.account} />
       <div className='col-xl-9 col-md-9 mt-5 mx-auto'>
         <i className="fa-solid fa-arrow-left" onClick={returnToHistory}></i>
         <h1 className="text-center">Thống kê lịch sử</h1>

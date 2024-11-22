@@ -24,13 +24,18 @@ import axios from 'axios';
 //         })
 // }
 
-const URL = 'https://io.adafruit.com/api/v2/hongphat03/feeds';
+const URL = 'https://io.adafruit.com/api/v2/zabaoqt/feeds';
 export const getCurValueTemp = async () => {
-  const temp = await axios.get(`${URL}/nhiet-do`).then(res => res.data['last_value']).catch((err) => (err))
-  const humidity = await axios.get(`${URL}/do-am`).then(res => res.data['last_value']).catch((err) => (err))
-  const soil = await axios.get(`${URL}/do-am-dat`).then(res => res.data['last_value']).catch((err) => (err))
-  const light = await axios.get(`${URL}/anh-sang`).then(res => res.data['last_value']).catch((err) => (err))
-  const pump = await axios.get(`${URL}/maybom`).then(res => res.data['last_value']).catch((err) => (err))
+  const headers = {
+             'Content-Type': 'application/json',
+             'Authorization': 'JWT fefege...',
+             'X-AIO-Key':'aio_gHJQ81n2LRpNiM9YYKd2MfvJgUoz'
+    }
+  const temp = await axios.get(`${URL}/temp`, {headers: headers}).then(res => res.data['last_value']).catch((err) => (err))
+  const humidity = await axios.get(`${URL}/humidity`, {headers: headers}).then(res => res.data['last_value']).catch((err) => (err))
+  const soil = await axios.get(`${URL}/do-am-dat`, {headers: headers}).then(res => res.data['last_value']).catch((err) => (err))
+  const light = await axios.get(`${URL}/illuminance`, {headers: headers}).then(res => res.data['last_value']).catch((err) => (err))
+  const pump = await axios.get(`${URL}/fan`, {headers: headers}).then(res => res.data['last_value']).catch((err) => (err))
   const data = {
     "temp":temp,
     "humidity":humidity,

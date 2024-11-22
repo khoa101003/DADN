@@ -3,15 +3,15 @@ const Request = require('../models/request.model')
 const mongoose = require("mongoose");
 const Types = mongoose.Types;
 const ObjectId = Types.ObjectId;
-exports.registerGarden = (req, res) => {
+exports.registerHome = (req, res) => {
     data = req.body
     Request.insertMany([
         {
             status: false,
             isHidden: false,
-            name: 'Register Garden',
+            name: 'Register Home',
             sender: data.sender,
-            description: 'Register garden request',
+            description: 'Register home request',
             device: [
                 {
                     name: data.device[0].name,
@@ -34,20 +34,20 @@ exports.registerGarden = (req, res) => {
                     quantity: data.device[4].quantity
                 }
             ],
-            registerGarden: data.registerGarden
+            registerHome: data.registerHome
         }
     ])
 }
 
-exports.modifyGarden = (req, res) => {
+exports.modifyHome = (req, res) => {
     data = req.body
     Request.insertMany([
         {
             status: false,
             isHidden: false,
-            name: 'Modify Garden',
+            name: 'Modify Home',
             sender: data.sender,
-            description: 'Modify garden request',
+            description: 'Modify home request',
             device: [
                 {
                     name: data.device[0].name,
@@ -70,22 +70,22 @@ exports.modifyGarden = (req, res) => {
                     quantity: data.device[4].quantity
                 }
             ],
-            registerGarden: data.registerGarden
+            registerHome: data.registerHome
         }
     ])
 }
 
-exports.deleteGarden = (req, res) => {
+exports.deleteHome = (req, res) => {
     data = req.body
     Request.insertMany([
         {
             status: false,
             isHidden: false,
-            name: 'Delete Garden',
+            name: 'Delete Home',
             sender: data.sender,
-            description: 'Delete garden request',
+            description: 'Delete home request',
             device: [],
-            registerGarden: data.registerGarden
+            registerHome: data.registerHome
         }
     ])
 }

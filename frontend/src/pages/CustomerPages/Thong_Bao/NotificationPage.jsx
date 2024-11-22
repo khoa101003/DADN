@@ -240,7 +240,7 @@ function NotificationPage() {
               if (notification) {
                 return <Notification key={notification._id} id={notification._id} type={notification.type} urgent={notification.urgent}
                 isReadN={notification.isRead} measure={notification.measure} threshold={notification.threshold}
-                time={notification.time} gardenName={notification.gardenName} x={notification.coordinates.x}
+                time={notification.time} homeName={notification.homeName} x={notification.coordinates.x}
                 y={notification.coordinates.y} onDelete={onDelete}/>
               }
               else {

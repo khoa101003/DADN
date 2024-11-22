@@ -25,10 +25,10 @@ function SideBar(props) {
     const [userLogo, setUserLogo] = useState(user);
     const [requestLogo, setRequestLogo] = useState(request);
     const [deviceLogo, setDeviceLogo] = useState(device);
-    //position: sensor,garden,notify
+    //position: sensor,home,notify
     useEffect(() => {
         if (props.position == "sensor") setUserLogo(active_user);
-        if (props.position == "garden") setRequestLogo(active_request);
+        if (props.position == "home") setRequestLogo(active_request);
         if (props.position == "notify") setDeviceLogo(active_device);
     }, [])
     const navigate = useNavigate()

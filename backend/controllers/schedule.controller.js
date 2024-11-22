@@ -25,21 +25,67 @@ exports.postSchedule = (req, res) => {
   // schedule.collection.insertOne(data)
 }
 
+exports.turnOnAuto = (ctrl) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT fefege...',
+    'X-AIO-Key': 'aio_gHJQ81n2LRpNiM9YYKd2MfvJgUoz'
+  }
+  const data2 = {
+    "datum":
+    {
+      "value": 0
+    }
+  }
+  axios.post('https://io.adafruit.com/api/v2/zabaoqt/feeds/manual/data', data2, {
+    headers: headers
+  })
+    .then((response) => {
+      // console.log("OK")
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 
+}
+exports.turnOffAuto = (ctrl) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT fefege...',
+    'X-AIO-Key': 'aio_gHJQ81n2LRpNiM9YYKd2MfvJgUoz'
+  }
+  const data2 = {
+    "datum":
+    {
+      "value": 1
+    }
+  }
+  axios.post('https://io.adafruit.com/api/v2/zabaoqt/feeds/manual/data', data2, {
+    headers: headers
+  })
+    .then((response) => {
+       console.log("turn off auto OK")
+    })
+    .catch((error) => {
+      console.log("turn off auto not OK")
+      console.log(error)
+    })
+
+}
 // send request turn on pump
 exports.turnOn = (ctrl) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key': 'aio_aMbk25klg0NSmAZpEH9DuJ6wu4Sl'
+    'X-AIO-Key': 'aio_gHJQ81n2LRpNiM9YYKd2MfvJgUoz'
   }
   const data2 = {
     "datum":
     {
-      "value": "ON"
+      "value": 1
     }
   }
-  axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom/data', data2, {
+  axios.post('https://io.adafruit.com/api/v2/zabaoqt/feeds/led/data', data2, {
     headers: headers
   })
     .then((response) => {
@@ -71,7 +117,7 @@ exports.turnOn = (ctrl) => {
                 {
                   index: index,
                   controller: ctrl,
-                  value: "ON"
+                  value: 51
                 }
               ]
             })
@@ -81,7 +127,7 @@ exports.turnOn = (ctrl) => {
             list.push({
               index: index,
               controller: ctrl,
-              value: "ON"
+              value: 100
             })
             controller.collection.updateOne({ type: "pump" }, {
               $set: {
@@ -96,10 +142,11 @@ exports.turnOn = (ctrl) => {
 }
 
 exports.turnOff = (ctrl) => {
+  console.log("bat dau tat quat OK")
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': 'JWT fefege...',
-    'X-AIO-Key': 'aio_aMbk25klg0NSmAZpEH9DuJ6wu4Sl'
+    'X-AIO-Key': 'aio_gHJQ81n2LRpNiM9YYKd2MfvJgUoz'
   }
   const data2 = {
     "datum":
@@ -107,16 +154,18 @@ exports.turnOff = (ctrl) => {
       "value": "OFF"
     }
   }
-  axios.post('https://io.adafruit.com/api/v2/hongphat03/feeds/maybom/data', data2, {
+  axios.post('https://io.adafruit.com/api/v2/zabaoqt/feeds/led/data', {"value":0}, {
     headers: headers
   })
     .then((response) => {
-      // console.log("OK")
+      
+      console.log("tat quat OK")
     })
     .catch((error) => {
       console.log(error)
     })
 
+  console.log(record)
   record.collection.findOne(
     {
       type: 'pump'
@@ -163,11 +212,12 @@ exports.turnOff = (ctrl) => {
 }
 
 exports.manualPump = (req, res) => {
+  console.log("manualPump OK")
   const status = req.params['status']
   const user = req.params['user']
   if (status === 'true') this.turnOn(user)
   else if (status === 'false') this.turnOff(user)
-  res.send("OK")
+  res.send("not OK")
 }
 exports.schedulePump = () => {
   schedule.find({})

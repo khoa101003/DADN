@@ -1,6 +1,6 @@
 const { createNotification } = require('./notification.controller')
 const { getThresholdById, getDevicesByID } = require('./device.controller')
-const { getGardenPName } = require('./garden_piece.controller')
+const { getHomePName } = require('./home_piece.controller')
 const axios = require('axios')
 
 
@@ -37,7 +37,7 @@ module.exports.checkThreshold = async (context) => {
         const newValue = context['new-value']
 
         const device = await getDevicesByID(dt.id)
-        const gardenName = await getGardenPName(device.garPiece)
+        const homeName = await getHomePName(device.garPiece)
         const {min, max} = await getThresholdById(dt.id)
         if (newValue.value < min || newValue.value > max) {
 
@@ -65,7 +65,7 @@ module.exports.checkThreshold = async (context) => {
           const type = dt.type === 'air' ? "Air Humidity"
                   : dt.type === 'temp' ? "Temperature" 
                   : "Soil Humidity";
-          await createNotification(type, dt.owner, false, newValue.value, threshold, newValue.log_time, gardenName, device.coordinates.x, device.coordinates.y)
+          await createNotification(type, dt.owner, false, newValue.value, threshold, newValue.log_time, homeName, device.coordinates.x, device.coordinates.y)
           if (io.sockets.adapter.rooms.has(`notify-${dt.owner}`)) {
             io.to(`notify-${dt.owner}`).emit('newNotify')
           }

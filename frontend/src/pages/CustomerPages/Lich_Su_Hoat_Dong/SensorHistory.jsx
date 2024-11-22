@@ -54,8 +54,8 @@ function SensorHistory() {
     const loadDevice = async () => {
         try {
             let deviceList = await getDeviceList(params.account)
-            deviceList = deviceList.filter(elem => elem.garPiece == params.garden_id)
-            // alert('gar_id ne ' + params.garden_id)
+            deviceList = deviceList.filter(elem => elem.garPiece == params.home_id)
+            // alert('gar_id ne ' + params.home_id)
             setDevice(deviceList)
             // deviceName = deviceList.map(device => <Dropdown.Item href="">{device.name}</Dropdown.Item>)
         } catch (err) {
@@ -146,16 +146,16 @@ function SensorHistory() {
         }
     }
 
-    const returnGardenDetail = () => {
-        navigate(`/${params.account}/garden-detail/${params.garden_id}`)
+    const returnHomeDetail = () => {
+        navigate(`/${params.account}/home-detail/${params.home_id}`)
     }
 
     return (
         <div className="row mx-auto container">
-            <SideBar position="garden" account={params.account}/>
+            <SideBar position="home" account={params.account}/>
             <div className='col-xl-9 col-md-9 mt-3 px-5 mx-auto'>
                 <a href="" className={cx("return")}>
-                    <i className="fa-solid fa-arrow-left" onClick={returnGardenDetail}></i>
+                    <i className="fa-solid fa-arrow-left" onClick={returnHomeDetail}></i>
                 </a>
                 <h1 className="text-center">Lịch sử hoạt động</h1>
 

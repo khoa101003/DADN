@@ -13,7 +13,7 @@ const data1 = [
     {
         id: "1",
         type: "DHT20",
-        garden: "Khu A",
+        home: "Khu A",
         coordinates:{
             x:1,
             y:2
@@ -24,7 +24,7 @@ const data1 = [
     {
         id: "2",
         type: "Độ ẩm đất",
-        garden: "Khu A",
+        home: "Khu A",
         coordinates:{
             x:1,
             y:2
@@ -35,7 +35,7 @@ const data1 = [
     {
         id: "3",
         type: "Độ ẩm đất",
-        garden: "Khu B",
+        home: "Khu B",
         coordinates:{
             x:1,
             y:2
@@ -46,7 +46,7 @@ const data1 = [
     {
         id: "4",
         type: "Ánh sáng",
-        garden: "Khu C",
+        home: "Khu C",
         coordinates:{
             x:1,
             y:2
@@ -57,7 +57,7 @@ const data1 = [
     {
         id: "5",
         type: "Ánh sáng",
-        garden: "Khu C",
+        home: "Khu C",
         coordinates:{
             x:1,
             y:2
